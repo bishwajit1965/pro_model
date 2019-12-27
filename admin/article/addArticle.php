@@ -51,6 +51,9 @@
             // Instantiate classes
             $category = new Category;
             $tag = new Tag;
+            // Tables
+            $tableCategory = 'tbl_category';
+            $tableTag = 'tbl_tag';
 
             // Will display validation message if any
             Session::init();
@@ -74,7 +77,31 @@
                         <div class="form-group">
                             <label for="title">Category</label>
                             <select name="category_name" class="form-control">
-                                <option value="">One</option>
+                                <option value="">Select Category</option>}
+                                <?php
+                                $order_by = ['order_by' => 'category_id DESC'];
+                                /*
+                                $selectCond = ['select' => 'name'];
+                                $whereCond = [
+                                'where' => ['id' => '1', 'email' => 'bishwajit@gmail.com'],
+                                'return_type' => 'single'
+                                ];
+                                $limit = ['start' => '2', 'limit' =>'4'];
+                                $limit = ['limit' => '4'];
+                                There is problem in $whereCond
+                                $whereCond = [
+                                'where' => ['id' => '2', 'email' => 'bishwajit@gmail.com'],
+                                'return_type' => 'single'
+                                ];
+                                */
+                                $categoryData = $category->select($tableCategory, $order_by);
+                                if (!empty($categoryData)) {
+                                    $i = 1;
+                                    foreach ($categoryData as $category) { ?>
+                                        <option value="<?=$category->category_id;?>"><?=$category->category_name;?></option>
+                                    <?php }
+                                }?>
+
                             </select>
                         </div>
                     </div>
@@ -82,7 +109,31 @@
                         <div class="form-group">
                             <label for="title">Tag</label>
                             <select name="tag_name" class="form-control">
-                                <option value="">One</option>
+                                <option value="">Select Tag</option>}
+                                option
+                                <?php
+                                 $order_by = ['order_by' => 'tag_id DESC'];
+                                /*
+                                $selectCond = ['select' => 'name'];
+                                $whereCond = [
+                                'where' => ['id' => '1', 'email' => 'bishwajit@gmail.com'],
+                                'return_type' => 'single'
+                                ];
+                                $limit = ['start' => '2', 'limit' =>'4'];
+                                $limit = ['limit' => '4'];
+                                There is problem in $whereCond
+                                $whereCond = [
+                                'where' => ['id' => '2', 'email' => 'bishwajit@gmail.com'],
+                                'return_type' => 'single'
+                                ];
+                                */
+                                $tagData = $tag->select($tableTag, $order_by);
+                                if (!empty($tagData)) {
+                                    $i = 1;
+                                    foreach ($tagData as $tag) { ?>
+                                        <option value="<?= $tag->tag_id;?>"><?= $tag->tag_name;?></option>
+                                    <?php }
+                                } ?>
                             </select>
                         </div>
                         <div class="form-group">

@@ -56,39 +56,8 @@ switch ($accessor) {
             }
         }
         break;
-    case 'select':
-        if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
-            if ($_REQUEST['action'] == 'verify') {
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    if (isset($_POST['submit'])) {
-                        if (isset($_POST['submit'])) {
-                            if (isset($_POST['order_id']) && isset($_POST['pro_price']) && isset($_POST['ordered_on']) && isset($_POST['status'])) {
-                                // Verifies and matches all the fields then updates
-                                $order_id = $cart->validate($_POST['order_id']);
-                                $pro_price = $cart->validate($_POST['pro_price']);
-                                $ordered_on = $cart->validate($_POST['ordered_on']);
-                                $ordered_status = $cart->validate($_POST['status']);
-                                // Revoke staus in orders table
-                                $statusUpdated = $cart->revokeOrderStatus($tableOrders, $order_id, $pro_price, $ordered_on, $ordered_status);
-                                // validation messages and page redirects
-                                if ($statusUpdated) {
-                                    $message = '<div class="alert alert-success alert-dismissible " role="alert">
-                                    <strong> WOW !</strong> Ordered status has been rovoked successfully !!!
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>';
-                                    Session::set('message', $message);
-                                    $home_url = 'inbox.php';
-                                    $cart->redirect("$home_url");
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        break;
+
+
     case 'update':
         if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
             if ($_REQUEST['action'] == 'verify') {
