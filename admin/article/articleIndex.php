@@ -43,13 +43,25 @@
                     <?php
                     // Will load vendor autoloader
                     require_once('../app/start.php');
-                    use Codecourse\Repositories\Session as Session;
+
                     use Codecourse\Repositories\Article as Article;
+                    use Codecourse\Repositories\Category as Category;
                     use Codecourse\Repositories\Helpers as Helpers;
+                    use Codecourse\Repositories\Session as Session;
+                    use Codecourse\Repositories\Tag as Tag;
 
+                    // Classses instantiated
                     $article = new Article;
+                    $category = new Category;
                     $helpers = new Helpers;
+                    $tag = new Tag;
 
+                    // Tables to be operated upon
+                    $table = 'tbl_articles';
+                    $tableCategory = 'tbl_category';
+                    $tableTag = 'tbl_tag';
+
+                    // Display validation message if any
                     Session::init();
                     $message = Session::get('message');
                     if (!empty($message)) {
@@ -64,18 +76,20 @@
                                     <th>Id</th>
                                     <th>Title</th>
                                     <th>Author</th>
-                                    <th>Created at</th>
                                     <th>Photo</th>
                                     <th>Status</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
-                                    <th>Will publish on</th>
+                                    <th>Category</th>
+                                    <th>Tag</th>
+                                    <th>Created</th>
+                                    <th>Updated</th>
+                                    <th>Will publ</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 $table = 'tbl_articles';
+
                                 $order_by = ['order_by' => 'category_id DESC'];
                                 /*
                                 $selectCond = ['select' => 'name'];
@@ -99,14 +113,53 @@
                                     <td><?=$i++;?></td>
                                     <td><?=$article->title;?></td>
                                     <td><?=$article->author;?></td>
-                                    <td><?=$helpers->dateFormat($article->created_at);?></td>
                                     <td>
                                         <?php if (!empty($article->photo)) : ?>
-                                            <img src="<?=$article->photo;?>" style="width:60px;height:60px;" class="img-rounded img-thumbnail" alt="Article photo">
+                                            <img src="<?=$article->photo;?>" style="width:80px;height:50px;" class="img-rounded img-thumbnail" alt="Article photo">
                                         <?php else : ?>
                                                 <img src="../images/avatar/avatar.jpg" style="width:60px;height:60px;" class="img-rounded img-thumbnail" alt="Avatar">
                                         <?php endif ?>
                                     </td>
+                                    <td>
+                                        <?php
+                                        if ($article->status == '0') {
+                                            echo 'Published';
+                                        } elseif ($article->status == '1') {
+                                            echo 'Coming soon';
+                                        } elseif ($article->status == '2') {
+                                            echo 'Draft';
+                                        } else {
+                                            echo 'Undefined';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $categoryData = $category->select($tableCategory);
+                                        if (!empty($categoryData)) {
+                                            foreach ($categoryData as $category) {
+                                                if ($category->category_id == $article->category_id) {
+                                                    echo $category->category_name;
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $tagData = $tag->select($tableTag);
+                                        if (!empty($tagData)) {
+                                            $i = 1;
+                                            foreach ($tagData as $tag) {
+                                                if ($tag->tag_id == $article->tag_id) {
+                                                    echo $tag->tag_name;
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                    </td>
+
+
                                     <td>
                                         <?php if ($article->status == '0') {
                                             echo 'Published';
@@ -125,7 +178,7 @@
                                     <td>
                                         <a href="editarticle.php?edit_id=<?=$article->article_id;?>" class="btn btn-xs btn-success btn-block"><i class="fa fa-edit"></i> Edit</a>
 
-                                        <form style="display:inline;" action="processArticle.php" method="post" accept-charset="utf-8">
+                                        <form style="margin-top:3px;" action="processArticle.php" method="post" accept-charset="utf-8">
                                             <input type="hidden" name="action" value="verify">
                                             <input type="hidden" name="article_id" value="<?=$article->article_id;?>">
 
@@ -138,15 +191,16 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Id</th>
+                                   <th>Id</th>
                                     <th>Title</th>
                                     <th>Author</th>
-                                    <th>Created at</th>
                                     <th>Photo</th>
                                     <th>Status</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
-                                    <th>Will publish on</th>
+                                    <th>Category</th>
+                                    <th>Tag</th>
+                                    <th>Created</th>
+                                    <th>Updated</th>
+                                    <th>Will publ</th>
                                     <th>Actions</th>
                                 </tr>
                             </tfoot>

@@ -113,6 +113,16 @@ switch ($accessor) {
                                 Session::set('message', $message);
                                 $home_url = 'addArticle.php';
                                 $article->redirect("$home_url");
+                            } elseif (!isset($status)) {
+                                $message = '<div class="alert alert-danger alert-dismissible " role="alert">
+                                <strong> WOW !</strong> Status  field is left blank !!!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
+                                Session::set('message', $message);
+                                $home_url = 'addArticle.php';
+                                $article->redirect("$home_url");
                             } else {
                                 $insertedData = $article->insert($table, $fields);
                                 move_uploaded_file($file_temp, $photo);
@@ -197,34 +207,102 @@ switch ($accessor) {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit'])) {
                         if (isset($_POST['submit'])) {
-                            $id = $_POST['tag_id'];
-                            $tag_name = $helpers->validate($_POST['tag_name']);
-                            $fields = [
-                                'tag_name' => $tag_name
-                            ];
-                            $condition = ['tag_id' => $id];
-                            $updateStatus = $tag->updateWithoutPhoto($table, $fields, $condition);
-                            // validation messages and page redirects
-                            if ($updateStatus) {
-                                $message = '<div class="alert alert-success alert-dismissible " role="alert">
-                                <strong> WOW !!!</strong> Category has been updated successfully !!!
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>';
-                                Session::set('message', $message);
-                                $home_url = 'tagIndex.php';
-                                $tag->redirect("$home_url");
+                            if (isset($_POST['article_id'])) {
+                                $id = $_POST['article_id'];
+                            }
+                            // Insertable field with validation
+                            $title = $helpers->validate($_POST['title']);
+                            $body = $helpers->validate($_POST['body']);
+                            $author = $helpers->validate($_POST['author']);
+                            $category_id = $helpers->validate($_POST['category_id']);
+                            $tag_id = $helpers->validate($_POST['tag_id']);
+                            $status = $helpers->validate($_POST['status']);
+                            $published_on = $helpers->validate($_POST['published_on']);
+                            // Photo
+                            $permitted = ['jpg', 'jpeg', 'png', 'gif'];
+                            $file_name = $_FILES['photo']['name'];
+                            $file_size = $_FILES['photo']['size'];
+                            $file_temp = $_FILES['photo']['tmp_name'];
+                            $div = explode('.', $file_name);
+                            $file_ext = strtolower(end($div));
+                            $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
+                            $photo = "uploads/" . $unique_image;
+
+                            if (!empty($file_name)) {
+                                // Insertable data associative array
+                                $fields = [
+                                    'title' => $title,
+                                    'body' => $body,
+                                    'author' => $author,
+                                    'category_id' => $category_id,
+                                    'tag_id' => $tag_id,
+                                    'status' => $status,
+                                    'published_on' => $published_on,
+                                    'photo' => $photo
+                                ];
+                                $condition = [
+                                    'article_id' => $id
+                                ];
+                                // $whereCond = ['where' => ['article_id' => $id]];
+                                $updateStatus = $article->update($table, $id, $fields, $condition);
+                                move_uploaded_file($file_temp, $photo);
+                                // validation messages and page redirects
+                                if ($updateStatus) {
+                                    $message = '<div class="alert alert-success alert-dismissible " role="alert">
+                                    <strong> WOW !!!</strong> Article has been updated successfully !!!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'articleIndex.php';
+                                    $article->redirect("$home_url");
+                                } else {
+                                    $message = '<div class="alert alert-warning alert-dismissible " role="alert">
+                                    <strong> WARNING !!!</strong> Article has not been updated successfully. No data has been provided !!!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'articleIndex.php';
+                                    $article->redirect("$home_url");
+                                }
                             } else {
-                                $message = '<div class="alert alert-warning alert-dismissible " role="alert">
-                                <strong> WARNING !!!</strong> Tag has not been updated successfully. No data has been provided !!!
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>';
-                                Session::set('message', $message);
-                                $home_url = 'tagIndex.php';
-                                $tag->redirect("$home_url");
+                                // Insertable data associative array
+                                $fields = [
+                                    'title' => $title,
+                                    'body' => $body,
+                                    'author' => $author,
+                                    'category_id' => $category_id,
+                                    'tag_id' => $tag_id,
+                                    'status' => $status,
+                                    'published_on' => $published_on
+                                ];
+                                $condition = ['article_id' => $id];
+                                $updateStatus = $article->updateWithoutPhoto($table, $fields, $condition);
+                                // validation messages and page redirects
+                                if ($updateStatus) {
+                                    $message = '<div class="alert alert-success alert-dismissible " role="alert">
+                                    <strong> WOW !!!</strong> Article has been updated successfully with previously uploaded photo !!!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'articleIndex.php';
+                                    $article->redirect("$home_url");
+                                } else {
+                                    $message = '<div class="alert alert-warning alert-dismissible " role="alert">
+                                    <strong> WARNING !!!</strong> Article has not been updated successfully. No data has been provided !!!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'articleIndex.php';
+                                    $article->redirect("$home_url");
+                                }
                             }
                         }
                     }
@@ -242,6 +320,12 @@ switch ($accessor) {
                             'article_id' => $id
                         ];
                         $whereCond = ['where' => ['article_id' => '$id']];
+                        if (isset($_POST['article_id'])) {
+                            $id = $_POST['article_id'];
+                        }
+                        $condition = [
+                            'article_id' => $id
+                        ];
                         $deleteStatus = $article->deleteDataWithFolderPhoto($table, $id, $condition);
                         // validation messages and page redirects
                         if ($deleteStatus) {

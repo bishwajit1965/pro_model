@@ -52,6 +52,7 @@ class Core
             if (array_key_exists('order_by', $data)) {
                 $sql .= ' ORDER BY '.$data['order_by'];
             }
+
             if (array_key_exists('start', $data) && array_key_exists('limit', $data)) {
                 $sql .= ' LIMIT '.$data['start'].','.$data['limit'];
             } elseif (array_key_exists('start', $data) && array_key_exists('limit', $data)) {
@@ -65,7 +66,6 @@ class Core
                     $query->bindValue(":$key", $value);
                 }
             }
-
             $query->execute();
             if (array_key_exists('return_type', $data)) {
                 switch ($data['return_type']) {
@@ -84,7 +84,6 @@ class Core
                     $value = $query->fetchAll(PDO::FETCH_OBJ);
                 }
             }
-
             return !empty($value) ? $value : false;
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -142,9 +141,9 @@ class Core
     {
         try {
             // Delete photo from uploads folder
-            $query = "SELECT photo FROM $table WHERE id = :id";
+            $query = "SELECT photo FROM $table WHERE article_id = :id";
             $stmt = $this->pdo->prepare($query);
-            $stmt->execute([':id' => $_GET['edit_id']]);
+            $stmt->execute([':id' => $_GET['aeticle_id']]);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
             while ($photo_data = $stmt->fetch(PDO::FETCH_OBJ)) {
