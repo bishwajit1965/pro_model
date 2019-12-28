@@ -47,9 +47,13 @@
 
                 use Codecourse\Repositories\Session as Session;
                 use Codecourse\Repositories\Tag as Tag;
+                use Codecourse\Repositories\Category as Category;
+
+                // Instantiate Category
+                $category = new Category;
+                $tag = new Tag;
 
                 // Will display validation message if any
-                $tag = new Tag;
                 Session::init();
                 $message = Session::get('message');
                 if (!empty($message)) {
@@ -70,6 +74,26 @@
                     <div class="form-group">
                         <label for="tag_name">Tag</label>
                         <input type="text" name="tag_name" class="form-control" value="<?=$getTagData->tag_name;?>" placeholder="Tag name">
+                    </div>
+                    <div class="form-group">
+                        <select name="category_id" class="form-control">
+                            <option value="">Select Category</option>
+                            <?php
+                            $table = 'tbl_category';
+                            $order_by = ['order_by' => 'category_id DESC'];
+                            $categoryData = $category->select($table, $order_by);
+                            if (!empty($categoryData)) {
+                                $i = 1;
+                                foreach ($categoryData as $category) { ?>
+                                <option
+                                    <?php if ($category->category_id == $getTagData->category_id) : ?>
+                                        selected = "selected"
+                                    <?php endif ?> value="<?= $category->category_id;?>"><?= $category->category_name;?>
+                                </option>
+                                <?php }
+                            }
+                            ?>
+                        </select>
                     </div>
                     <input type="hidden" name="action" value="verify">
                     <input type="hidden" name="tag_id" value="<?= $getTagData->tag_id; ?>">

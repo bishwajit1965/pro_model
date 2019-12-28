@@ -247,9 +247,9 @@ class Core
     {
         try {
            // Delete photo from uploads folder
-            $query = "SELECT photo FROM $table WHERE id = :id";
+            $query = "SELECT photo FROM $table WHERE article_id = :id";
             $stmt = $this->pdo->prepare($query);
-            $stmt->execute([':id' => $_GET['delete_id']]);
+            $stmt->execute([':id' => $_GET['id']]);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
             while ($photo_data = $stmt->fetch(PDO::FETCH_OBJ)) {

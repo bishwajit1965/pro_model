@@ -51,9 +51,13 @@
             // Instantiate classes
             $category = new Category;
             $tag = new Tag;
-            // Tables
+
+            // Tables will be dealt with
             $tableCategory = 'tbl_category';
             $tableTag = 'tbl_tag';
+
+            // User epecific session
+            $user_session = session_id();
 
             // Will display validation message if any
             Session::init();
@@ -63,6 +67,7 @@
                 Session::set('message', null);
             }
             ?>
+
             <form action="processArticle.php" method="post" enctype="multipart/form-data" accept-charset="utf-8">
                 <div class="row">
                     <div class="col-sm-4">
@@ -76,7 +81,7 @@
                         </div>
                         <div class="form-group">
                             <label for="title">Category</label>
-                            <select name="category_name" class="form-control">
+                            <select name="category_id" class="form-control">
                                 <option value="">Select Category</option>}
                                 <?php
                                 $order_by = ['order_by' => 'category_id DESC'];
@@ -108,7 +113,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="title">Tag</label>
-                            <select name="tag_name" class="form-control">
+                            <select name="tag_id" class="form-control">
                                 <option value="">Select Tag</option>}
                                 option
                                 <?php
@@ -139,11 +144,10 @@
                         <div class="form-group">
                             <label for="title">Status</label>
                             <select name="status" class="form-control">
-                                <option value="">Select post status</option>
+                                <option>Select post status</option>
                                 <option value="0">Publish</option>
                                 <option value="1">Coming soon</option>
-                                <option value="2">Unpublish</option>
-                                <option value="3">Draft</option>
+                                <option value="2">Draft</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -153,17 +157,18 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="title">Publish on</label>
+                            <label for="title">Will publish on</label>
                             <input type="datetime-local" name="published_on" class="form-control" value="">
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" name="title" class="form-control" value="" placeholder="Category name">
                         </div>
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" name="title" class="form-control" value="" placeholder="Category name">
-                        </div>
+                        </div> -->
+                        <input type="hidden" name="user_session" value="<?= $user_session;?>">
                     </div>
                 </div>
                 <div class="form-group">

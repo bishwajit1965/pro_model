@@ -45,11 +45,19 @@
                     require_once('../app/start.php');
                     use Codecourse\Repositories\Session as Session;
                     use Codecourse\Repositories\Tag as Tag;
+                    use Codecourse\Repositories\Category as Category;
                     use Codecourse\Repositories\Helpers as Helpers;
 
+                    // Instantiate classes
+                    $category = new Category;
                     $tag = new Tag;
                     $helpers = new Helpers;
 
+                    // Tables
+                    $table = 'tbl_tag';
+                    $tableCategory = 'tbl_category';
+
+                    // Will disolay validation messages
                     Session::init();
                     $message = Session::get('message');
                     if (!empty($message)) {
@@ -63,13 +71,13 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Tag name</th>
+                                    <th>Category name</th>
                                     <th>Created at</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $table = 'tbl_tag';
                                 $order_by = ['order_by' => 'tag_id DESC'];
                                 /*
                                 $selectCond = ['select' => 'name'];
@@ -92,6 +100,14 @@
                                 <tr>
                                     <td><?=$i++;?></td>
                                     <td><?=$tag->tag_name;?></td>
+                                    <td>
+                                        <?php $categoryData = $category->select($tableCategory); ?>
+                                        <?php foreach ($categoryData as $value) : ?>
+                                            <?php if ($tag->category_id == $value->category_id) {
+                                                echo $value->category_name;
+                                            } ?>
+                                        <?php endforeach ?>
+                                    </td>
                                     <td><?=$helpers->dateFormat($tag->created_at);?></td>
                                     <td>
                                         <a href="edittag.php?edit_id=<?=$tag->tag_id;?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>
@@ -111,6 +127,7 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Tag name</th>
+                                    <th>Category name</th>
                                     <th>Created at</th>
                                     <th>Actions</th>
                                 </tr>

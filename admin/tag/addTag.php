@@ -46,6 +46,10 @@
                 require_once('../app/start.php');
 
                 use Codecourse\Repositories\Session as Session;
+                use Codecourse\Repositories\Category as Category;
+
+                // Instantiate Category
+                $category = new Category;
 
                 // Will display validation message if any
                 Session::init();
@@ -59,6 +63,22 @@
                     <div class="form-group">
                         <label for="category_name">Tag</label>
                         <input type="text" name="tag_name" class="form-control" value="" placeholder="Tag name">
+                    </div>
+                    <div class="form-group">
+                        <select name="category_id" class="form-control">
+                            <option value="">Select Category</option>
+                            <?php
+                            $table = 'tbl_category';
+                            $order_by = ['order_by' => 'category_id DESC'];
+                            $categoryData = $category->select($table, $order_by);
+                            if (!empty($categoryData)) {
+                                $i = 1;
+                                foreach ($categoryData as $category) { ?>
+                                <option value="<?= $category->category_id;?>"><?= $category->category_name;?></option>
+                                <?php }
+                            }
+                            ?>
+                        </select>
                     </div>
                     <input type="hidden" name="action" value="verify">
                     <button type="submit" name="submit" value="insert" class="btn btn-sm btn-primary"><i class="fa fa-upload"></i> Add Tag</button>

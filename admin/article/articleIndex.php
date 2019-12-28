@@ -63,13 +63,19 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Title</th>
+                                    <th>Author</th>
                                     <th>Created at</th>
+                                    <th>Photo</th>
+                                    <th>Status</th>
+                                    <th>Created at</th>
+                                    <th>Updated at</th>
+                                    <th>Will publish on</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $table = 'tbl_article';
+                                $table = 'tbl_articles';
                                 $order_by = ['order_by' => 'category_id DESC'];
                                 /*
                                 $selectCond = ['select' => 'name'];
@@ -91,16 +97,39 @@
                                     foreach ($articleData as $article) { ?>
                                 <tr>
                                     <td><?=$i++;?></td>
-                                    <td><?=$article->article_name;?></td>
+                                    <td><?=$article->title;?></td>
+                                    <td><?=$article->author;?></td>
                                     <td><?=$helpers->dateFormat($article->created_at);?></td>
                                     <td>
-                                        <a href="editarticle.php?edit_id=<?=$article->article_id;?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>
+                                        <?php if (!empty($article->photo)) : ?>
+                                            <img src="<?=$article->photo;?>" style="width:60px;height:60px;" class="img-rounded img-thumbnail" alt="Article photo">
+                                        <?php else : ?>
+                                                <img src="../images/avatar/avatar.jpg" style="width:60px;height:60px;" class="img-rounded img-thumbnail" alt="Avatar">
+                                        <?php endif ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($article->status == '0') {
+                                            echo 'Published';
+                                        } elseif ($article->status == '1') {
+                                               echo 'Coming soon';
+                                        } elseif ($article->status == '2') {
+                                                echo 'Draft';
+                                        } else {
+                                            echo 'Undefined';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td><?=$helpers->dateFormat($article->created_at);?></td>
+                                    <td><?=$helpers->dateFormat($article->updated_at);?></td>
+                                    <td><?=$helpers->dateFormat($article->published_on);?></td>
+                                    <td>
+                                        <a href="editarticle.php?edit_id=<?=$article->article_id;?>" class="btn btn-xs btn-success btn-block"><i class="fa fa-edit"></i> Edit</a>
 
                                         <form style="display:inline;" action="processArticle.php" method="post" accept-charset="utf-8">
                                             <input type="hidden" name="action" value="verify">
                                             <input type="hidden" name="article_id" value="<?=$article->article_id;?>">
 
-                                            <button type="submit" name="submit" value="delete" class="btn btn-xs btn-danger" onClick="return confirm('Do you really want to delete this data ?');"><i class="fa fa-trash"></i> Delete </button>
+                                            <button type="submit" name="submit" value="delete" class="btn btn-xs btn-danger btn-block" onClick="return confirm('Do you really want to delete this data ?');"><i class="fa fa-trash"></i> Delete </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -111,7 +140,13 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Title</th>
+                                    <th>Author</th>
                                     <th>Created at</th>
+                                    <th>Photo</th>
+                                    <th>Status</th>
+                                    <th>Created at</th>
+                                    <th>Updated at</th>
+                                    <th>Will publish on</th>
                                     <th>Actions</th>
                                 </tr>
                             </tfoot>
