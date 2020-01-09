@@ -11,7 +11,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Aricle index
+                Header index
                 <small>it all starts here</small>
             </h1>
             <ol class="breadcrumb">
@@ -26,7 +26,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <!-- <h3 class="box-title">Category index</h3> -->
-                    <a href="addArticle.php" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add article</a>
+                    <a href="addHeader.php" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add header</a>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i>
@@ -42,22 +42,16 @@
                     // Will load vendor autoloader
                     require_once('../app/start.php');
 
-                    use Codecourse\Repositories\Article as Article;
-                    use Codecourse\Repositories\Category as Category;
+                    use Codecourse\Repositories\Header as Header;
                     use Codecourse\Repositories\Helpers as Helpers;
                     use Codecourse\Repositories\Session as Session;
-                    use Codecourse\Repositories\Tag as Tag;
 
                     // Classses instantiated
-                    $article = new Article;
-                    $category = new Category;
+                    $header = new Header;
                     $helpers = new Helpers;
-                    $tag = new Tag;
 
                     // Tables to be operated upon
-                    $table = 'tbl_articles';
-                    $tableCategory = 'tbl_category';
-                    $tableTag = 'tbl_tag';
+                    $table = 'tbl_header';
 
                     // Display validation message if any
                     Session::init();
@@ -73,20 +67,17 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Photo</th>
-                                    <th>Status</th>
-                                    <th>Category</th>
-                                    <th>Tag</th>
-                                    <th>Created</th>
-                                    <th>Updated</th>
-                                    <th>Will publ</th>
+                                    <th>Site slogan</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Header background</th>
+                                    <th>Site Created</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $order_by = ['order_by' => 'category_id DESC'];
+                                $order_by = ['order_by' => 'id DESC'];
                                 /*
                                 $selectCond = ['select' => 'name'];
                                 $whereCond = [
@@ -101,66 +92,31 @@
                                 'return_type' => 'single'
                                 ];
                                 */
-                                $articleData = $article->select($table, $order_by);
-                                if (!empty($articleData)) {
+                                $headerData = $header->select($table, $order_by);
+                                if (!empty($headerData)) {
                                     $i = 1;
-                                    foreach ($articleData as $article) { ?>
+                                    foreach ($headerData as $header) { ?>
                                         <tr>
                                             <td><?= $i++; ?></td>
-                                            <td><?= $helpers->textShorten($article->title, 40); ?></td>
-                                            <td><?= $article->author; ?></td>
+                                            <td><?= $helpers->textShorten($header->title, 40); ?></td>
+                                            <td><?= $header->slogan; ?></td>
+                                            <td><?= $header->email; ?></td>
+                                            <td><?= $header->phone; ?></td>
                                             <td>
-                                                <?php if (!empty($article->photo)) : ?>
-                                                    <img src="<?= $article->photo; ?>" style="width:80px;height:50px;" class="img-rounded img-thumbnail" alt="Article photo">
+                                                <?php if (!empty($header->photo)) : ?>
+                                                    <img src="<?= $header->photo; ?>" style="width:80px;height:50px;" class="img-rounded img-thumbnail" alt="Header photo">
                                                 <?php else : ?>
                                                     <img src="../images/avatar/avatar.jpg" style="width:60px;height:60px;" class="img-rounded img-thumbnail" alt="Avatar">
                                                 <?php endif ?>
                                             </td>
-                                            <td>
-                                                <?php
-                                                if ($article->status == '0') {
-                                                    echo 'Published';
-                                                } elseif ($article->status == '1') {
-                                                    echo 'Coming soon';
-                                                } elseif ($article->status == '2') {
-                                                    echo 'Draft';
-                                                } elseif ($article->status == '3') {
-                                                    echo 'Unpublished';
-                                                } else {
-                                                    echo 'Undefined';
-                                                } ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $categoryData = $category->select($tableCategory);
-                                                if (!empty($categoryData)) {
-                                                    foreach ($categoryData as $value) {
-                                                        if ($value->category_id == $article->category_id) {
-                                                            echo $value->category_name;
-                                                        }
-                                                    }
-                                                } ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $tagData = $tag->select($tableTag);
-                                                if (!empty($tagData)) {
-                                                    foreach ($tagData as $value) {
-                                                        if ($value->tag_id == $article->tag_id) {
-                                                            echo $value->tag_name;
-                                                        }
-                                                    }
-                                                } ?>
-                                            </td>
-                                            <td><?= $helpers->dateFormat($article->created_at); ?></td>
-                                            <td><?= $helpers->dateFormat($article->updated_at); ?></td>
-                                            <td><?= $helpers->dateFormat($article->published_on); ?></td>
-                                            <td>
-                                                <a href="editarticle.php?edit_id=<?= $article->id; ?>" class="btn btn-xs btn-success btn-block"><i class="fa fa-edit"></i> Edit</a>
 
-                                                <form style="margin-top:3px;" action="processArticle.php" method="post" accept-charset="utf-8">
+                                            <td><?= $helpers->dateFormat($header->created_at); ?></td>
+                                            <td>
+                                                <a href="editHeader.php?edit_id=<?= $header->id; ?>" class="btn btn-xs btn-success btn-block"><i class="fa fa-edit"></i> Edit</a>
+
+                                                <form style="margin-top:3px;" action="processHeader.php" method="post" accept-charset="utf-8">
                                                     <input type="hidden" name="action" value="verify">
-                                                    <input type="hidden" name="id" value="<?= $article->id; ?>">
+                                                    <input type="hidden" name="header_id" value="<?= $header->id; ?>">
 
                                                     <button type="submit" name="submit" value="delete" class="btn btn-xs btn-danger btn-block" onClick="return confirm('Do you really want to delete this data ?');"><i class="fa fa-trash"></i> Delete </button>
                                                 </form>
@@ -173,14 +129,11 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Photo</th>
-                                    <th>Status</th>
-                                    <th>Category</th>
-                                    <th>Tag</th>
-                                    <th>Created</th>
-                                    <th>Updated</th>
-                                    <th>Will publ</th>
+                                    <th>Site slogan</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Header background</th>
+                                    <th>Site Created</th>
                                     <th>Actions</th>
                                 </tr>
                             </tfoot>

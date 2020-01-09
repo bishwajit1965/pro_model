@@ -36,27 +36,28 @@ class Core
     public function select($table, $data = [])
     {
         try {
+            $this->pdo->beginTransaction();
             $sql = 'SELECT ';
             $sql .= array_key_exists('select', $data) ? $data['select'] : '*';
-            $sql .= ' FROM '.$table;
+            $sql .= ' FROM ' . $table;
             if (array_key_exists('where', $data)) {
                 $sql .= ' WHERE ';
                 $i = 0;
                 foreach ($data['where'] as $key => $value) {
                     $add = ($i > 0) ? ' AND ' : '';
-                    $sql .= "$add"."$key=:$key";
+                    $sql .= "$add" . "$key=:$key";
                     ++$i;
                 }
             }
 
             if (array_key_exists('order_by', $data)) {
-                $sql .= ' ORDER BY '.$data['order_by'];
+                $sql .= ' ORDER BY ' . $data['order_by'];
             }
 
             if (array_key_exists('start', $data) && array_key_exists('limit', $data)) {
-                $sql .= ' LIMIT '.$data['start'].','.$data['limit'];
+                $sql .= ' LIMIT ' . $data['start'] . ',' . $data['limit'];
             } elseif (array_key_exists('start', $data) && array_key_exists('limit', $data)) {
-                $sql .= ' LIMIT '.$data['limit'];
+                $sql .= ' LIMIT ' . $data['limit'];
             }
 
             $query = $this->pdo->prepare($sql);
@@ -66,6 +67,7 @@ class Core
                     $query->bindValue(":$key", $value);
                 }
             }
+
             $query->execute();
             if (array_key_exists('return_type', $data)) {
                 switch ($data['return_type']) {
@@ -84,8 +86,10 @@ class Core
                     $value = $query->fetchAll(PDO::FETCH_OBJ);
                 }
             }
+            $this->pdo->commit();
             return !empty($value) ? $value : false;
         } catch (PDOException $e) {
+            $this->pdo->rollBack();
             echo $e->getMessage();
         }
     }
@@ -103,12 +107,13 @@ class Core
     public function insert($table, $data)
     {
         try {
+            $this->pdo->beginTransaction();
             if (!empty($data) && is_array($data)) {
                 $keys = '';
                 $values = '';
                 $keys = implode(',', array_keys($data));
-                $values = ':'.implode(', :', array_keys($data));
-                $sql = 'INSERT INTO '.$table.'('.$keys.') VALUES ('.$values.')';
+                $values = ':' . implode(', :', array_keys($data));
+                $sql = 'INSERT INTO ' . $table . '(' . $keys . ') VALUES (' . $values . ')';
                 $query = $this->pdo->prepare($sql);
                 foreach ($data as $key => $value) {
                     $query->bindValue(":$key", $value);
@@ -116,12 +121,14 @@ class Core
                 $insertedData = $query->execute();
                 if ($insertedData) {
                     $lastId = $this->pdo->lastInsertId();
+                    $this->pdo->commit();
                     return $lastId;
                 } else {
                     return false;
                 }
             }
         } catch (PDOException $e) {
+            $this->pdo->rollBack();
             echo $e->getMessage();
         }
     }
@@ -140,10 +147,11 @@ class Core
     public function update($table, $id, $data, $cond)
     {
         try {
+            $this->pdo->beginTransaction();
             // Delete photo from uploads folder
-            $query = "SELECT photo FROM $table WHERE article_id = :id";
+            $query = "SELECT photo FROM $table WHERE id = :id";
             $stmt = $this->pdo->prepare($query);
-            $stmt->execute([':id' => $_GET['aeticle_id']]);
+            $stmt->execute([':id' => $_GET['id']]);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
             while ($photo_data = $stmt->fetch(PDO::FETCH_OBJ)) {
@@ -157,7 +165,7 @@ class Core
                 $i = 0;
                 foreach ($data as $key => $value) {
                     $add = ($i > 0) ? ' , ' : '';
-                    $keyValue .= "$add"."$key=:$key";
+                    $keyValue .= "$add" . "$key=:$key";
                     ++$i;
                 }
                 if (!empty($cond) && is_array($cond)) {
@@ -165,11 +173,11 @@ class Core
                     $i = 0;
                     foreach ($cond as $key => $value) {
                         $add = ($i > 0) ? ' AND ' : '';
-                        $whereCond .= "$add"."$key=:$key";
+                        $whereCond .= "$add" . "$key=:$key";
                         ++$i;
                     }
                 }
-                $sql = 'UPDATE '.$table.' SET '.$keyValue.$whereCond;
+                $sql = 'UPDATE ' . $table . ' SET ' . $keyValue . $whereCond;
                 $query = $this->pdo->prepare($sql);
                 foreach ($data as $key => $value) {
                     $query->bindValue(":$key", $value);
@@ -178,11 +186,13 @@ class Core
                     $query->bindValue(":$key", $value);
                 }
                 $update = $query->execute();
+                $this->pdo->commit();
                 return $update ? $query->rowCount() : false;
             } else {
                 return false;
             }
         } catch (PDOException $e) {
+            $this->pdo->rollBack();
             echo $e->getMessage();
         }
     }
@@ -191,13 +201,14 @@ class Core
     public function updateWithoutPhoto($table, $data, $cond)
     {
         try {
+            $this->pdo->beginTransaction();
             if (!empty($data) && is_array($data)) {
                 $keyValue = '';
                 $whereCond = '';
                 $i = 0;
                 foreach ($data as $key => $value) {
                     $add = ($i > 0) ? ' , ' : '';
-                    $keyValue .= "$add"."$key=:$key";
+                    $keyValue .= "$add" . "$key=:$key";
                     ++$i;
                 }
                 if (!empty($cond) && is_array($cond)) {
@@ -205,11 +216,11 @@ class Core
                     $i = 0;
                     foreach ($cond as $key => $value) {
                         $add = ($i > 0) ? ' AND ' : '';
-                        $whereCond .= "$add"."$key=:$key";
+                        $whereCond .= "$add" . "$key=:$key";
                         ++$i;
                     }
                 }
-                $sql = 'UPDATE '.$table.' SET '.$keyValue.$whereCond;
+                $sql = 'UPDATE ' . $table . ' SET ' . $keyValue . $whereCond;
                 $query = $this->pdo->prepare($sql);
 
                 foreach ($data as $key => $value) {
@@ -220,11 +231,13 @@ class Core
                     $query->bindValue(":$key", $value);
                 }
                 $update = $query->execute();
+                $this->pdo->commit();
                 return $update ? $query->rowCount() : false;
             } else {
                 return false;
             }
         } catch (PDOException $e) {
+            $this->pdo->rollBack();
             echo $e->getMessage();
         }
     }
@@ -232,9 +245,12 @@ class Core
     // Redirecting URL to the desired page
     public function redirect($home_url)
     {
-        header("Location: $home_url");
+        try {
+            header("Location: $home_url");
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
-
     // Delete data from database
     /*
     $sql = 'DELETE FROM tableName WHERE id = :id';
@@ -245,8 +261,9 @@ class Core
     public function deleteDataWithFolderPhoto($table, $id, $data)
     {
         try {
-           // Delete photo from uploads folder
-            $query = "SELECT photo FROM $table WHERE article_id = :id";
+            $this->pdo->beginTransaction();
+            // Delete photo from uploads folder
+            $query = "SELECT photo FROM $table WHERE id = :id";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([':id' => $_GET['id']]);
             $stmt->bindValue(':id', $id);
@@ -260,7 +277,7 @@ class Core
                 $i = 0;
                 foreach ($data as $key => $value) {
                     $add = ($i > 0) ? ' AND ' : '';
-                    $whereCond .= "$add"."$key=:$key";
+                    $whereCond .= "$add" . "$key=:$key";
                     ++$i;
                 }
             }
@@ -270,22 +287,25 @@ class Core
                 $query->bindValue(":$key", $value);
             }
             $delete = $query->execute();
+            $this->pdo->commit();
             return $delete ? true : false;
         } catch (PDOException $e) {
+            $this->pdo->rollBack();
             echo $e->getMessage();
         }
     }
 
     // Delete only data
-    public function delete($table, $id, $data)
+    public function delete($table, $data)
     {
         try {
+            $this->pdo->beginTransaction();
             if (!empty($data) && is_array($data)) {
                 $whereCond .= ' WHERE ';
                 $i = 0;
                 foreach ($data as $key => $value) {
                     $add = ($i > 0) ? ' AND ' : '';
-                    $whereCond .= "$add"."$key=:$key";
+                    $whereCond .= "$add" . "$key=:$key";
                     ++$i;
                 }
             }
@@ -295,8 +315,10 @@ class Core
                 $query->bindValue(":$key", $value);
             }
             $delete = $query->execute();
+            $this->pdo->commit();
             return $delete ? true : false;
         } catch (PDOException $e) {
+            $this->pdo->rollBack();
             echo $e->getMessage();
         }
     }

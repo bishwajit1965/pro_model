@@ -26,7 +26,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <!-- <h3 class="box-title">Category index</h3> -->
-                    <a href="addTag.php" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add Tag</a>
+                    <a href="addSocialMedia.php" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add social media</a>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i>
@@ -43,18 +43,15 @@
                     require_once('../app/start.php');
 
                     use Codecourse\Repositories\Session as Session;
-                    use Codecourse\Repositories\Tag as Tag;
-                    use Codecourse\Repositories\Category as Category;
+                    use Codecourse\Repositories\SocialMedia as SocialMedia;
                     use Codecourse\Repositories\Helpers as Helpers;
 
                     // Instantiate classes
-                    $category = new Category;
-                    $tag = new Tag;
+                    $socialMedia = new SocialMedia();
                     $helpers = new Helpers;
 
                     // Tables
-                    $table = 'tbl_tag';
-                    $tableCategory = 'tbl_category';
+                    $table = 'tbl_social_media';
 
                     // Will disolay validation messages
                     Session::init();
@@ -69,15 +66,15 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Tag name</th>
-                                    <th>Category name</th>
+                                    <th>Social media name</th>
                                     <th>Created at</th>
+                                    <th>Updated at</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $order_by = ['order_by' => 'tag_id DESC'];
+                                $order_by = ['order_by' => 'id DESC'];
                                 /*
                                 $selectCond = ['select' => 'name'];
                                 $whereCond = [
@@ -92,28 +89,22 @@
                                 'return_type' => 'single'
                                 ];
                                 */
-                                $tagData = $tag->select($table, $order_by);
-                                if (!empty($tagData)) {
+                                $socialMediaData = $socialMedia->select($table, $order_by);
+                                if (!empty($socialMediaData)) {
                                     $i = 1;
-                                    foreach ($tagData as $tag) { ?>
+                                    foreach ($socialMediaData as $mediaData) { ?>
                                         <tr>
                                             <td><?= $i++; ?></td>
-                                            <td><?= $tag->tag_name; ?></td>
-                                            <td>
-                                                <?php $categoryData = $category->select($tableCategory); ?>
-                                                <?php foreach ($categoryData as $value) : ?>
-                                                    <?php if ($tag->category_id == $value->category_id) {
-                                                        echo $value->category_name;
-                                                    } ?>
-                                                <?php endforeach ?>
-                                            </td>
-                                            <td><?= $helpers->dateFormat($tag->created_at); ?></td>
-                                            <td>
-                                                <a href="edittag.php?edit_id=<?= $tag->tag_id; ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>
+                                            <td><?= $mediaData->name; ?></td>
 
-                                                <form style="display:inline;" action="processTag.php" method="post" accept-charset="utf-8">
+                                            <td><?= $helpers->dateFormat($mediaData->created_at); ?></td>
+                                            <td><?= $helpers->dateFormat($mediaData->updated_at); ?></td>
+                                            <td>
+                                                <a href="editSocialMedia.php?edit_id=<?= $mediaData->id; ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>
+
+                                                <form action="processSocialMedia.php" style="display:inline;"  method="post" accept-charset="utf-8">
                                                     <input type="hidden" name="action" value="verify">
-                                                    <input type="hidden" name="tag_id" value="<?= $tag->tag_id; ?>">
+                                                    <input type="hidden" name="id" value="<?= $mediaData->id; ?>">
 
                                                     <button type="submit" name="submit" value="delete" class="btn btn-xs btn-danger" onClick="return confirm('Do you really want to delete this data ?');"><i class="fa fa-trash"></i> Delete </button>
                                                 </form>
@@ -125,9 +116,9 @@
                             <tfoot>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Tag name</th>
-                                    <th>Category name</th>
+                                    <th>Social media name</th>
                                     <th>Created at</th>
+                                    <th>Updated at</th>
                                     <th>Actions</th>
                                 </tr>
                             </tfoot>

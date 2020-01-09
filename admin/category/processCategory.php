@@ -2,8 +2,8 @@
 require_once '../app/start.php';
 
 use Codecourse\Repositories\Category as Category;
-use Codecourse\Repositories\Session as Session;
 use Codecourse\Repositories\Helpers as Helpers;
+use Codecourse\Repositories\Session as Session;
 
 $category = new Category();
 $helpers = new Helpers();
@@ -108,7 +108,7 @@ switch ($accessor) {
                         $condition = [
                             'category_id' => $id
                         ];
-                        $deleteStatus = $category->delete($table, $id, $condition);
+                        $deleteStatus = $category->delete($table, $condition);
                         // validation messages and page redirects
                         if ($deleteStatus) {
                             $message = '<div class="alert alert-success alert-dismissible " role="alert">

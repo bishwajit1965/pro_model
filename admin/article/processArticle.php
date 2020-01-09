@@ -2,8 +2,8 @@
 require_once '../app/start.php';
 
 use Codecourse\Repositories\Article as Article;
-use Codecourse\Repositories\Session as Session;
 use Codecourse\Repositories\Helpers as Helpers;
+use Codecourse\Repositories\Session as Session;
 
 $article = new Article();
 $helpers = new Helpers();
@@ -25,6 +25,7 @@ switch ($accessor) {
                         }
                         // Insertable field with validation
                         $title = $helpers->validate($_POST['title']);
+                        $description = $helpers->validate($_POST['description']);
                         $body = $helpers->validate($_POST['body']);
                         $author = $helpers->validate($_POST['author']);
                         $category_id = $helpers->validate($_POST['category_id']);
@@ -41,9 +42,10 @@ switch ($accessor) {
                         $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
                         $photo = "uploads/" . $unique_image;
                         if (!empty($file_name)) {
-                             // Insertable data associative array
+                            // Insertable data associative array
                             $fields = [
                                 'title' => $title,
+                                'description' => $description,
                                 'body' => $body,
                                 'author' => $author,
                                 'category_id' => $category_id,
@@ -55,7 +57,17 @@ switch ($accessor) {
                             ];
                             if (empty($title)) {
                                 $message = '<div class="alert alert-danger alert-dismissible " role="alert">
-                                <strong> WOW !</strong> Title field is left blank 1234!!!
+                                <strong> WOW !</strong> Title field is left blank !!!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
+                                Session::set('message', $message);
+                                $home_url = 'addArticle.php';
+                                $article->redirect("$home_url");
+                            } elseif (empty($description)) {
+                                $message = '<div class="alert alert-danger alert-dismissible " role="alert">
+                                <strong> WOW !</strong> Article description field is left blank !!!
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
@@ -113,16 +125,6 @@ switch ($accessor) {
                                 Session::set('message', $message);
                                 $home_url = 'addArticle.php';
                                 $article->redirect("$home_url");
-                            } elseif (!isset($status)) {
-                                $message = '<div class="alert alert-danger alert-dismissible " role="alert">
-                                <strong> WOW !</strong> Status  field is left blank !!!
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>';
-                                Session::set('message', $message);
-                                $home_url = 'addArticle.php';
-                                $article->redirect("$home_url");
                             } else {
                                 $insertedData = $article->insert($table, $fields);
                                 move_uploaded_file($file_temp, $photo);
@@ -142,6 +144,7 @@ switch ($accessor) {
                             // Insertable data associative array
                             $fields = [
                                 'title' => $title,
+                                'description' => $description,
                                 'body' => $body,
                                 'author' => $author,
                                 'category_id' => $category_id,
@@ -152,7 +155,17 @@ switch ($accessor) {
                             ];
                             if (empty($title)) {
                                 $message = '<div class="alert alert-danger alert-dismissible " role="alert">
-                                <strong> WOW !</strong> Title field is left blank 555555!!!
+                                <strong> WOW !</strong> Title field is left blank !!!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
+                                Session::set('message', $message);
+                                $home_url = 'addArticle.php';
+                                $article->redirect("$home_url");
+                            } elseif (empty($description)) {
+                                $message = '<div class="alert alert-danger alert-dismissible " role="alert">
+                                <strong> WOW !</strong> Article description field is left blank !!!
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
@@ -207,11 +220,12 @@ switch ($accessor) {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit'])) {
                         if (isset($_POST['submit'])) {
-                            if (isset($_POST['article_id'])) {
-                                $id = $_POST['article_id'];
+                            if (isset($_POST['id'])) {
+                                $id = $_POST['id'];
                             }
                             // Insertable field with validation
                             $title = $helpers->validate($_POST['title']);
+                            $description = $helpers->validate($_POST['description']);
                             $body = $helpers->validate($_POST['body']);
                             $author = $helpers->validate($_POST['author']);
                             $category_id = $helpers->validate($_POST['category_id']);
@@ -232,6 +246,7 @@ switch ($accessor) {
                                 // Insertable data associative array
                                 $fields = [
                                     'title' => $title,
+                                    'description' => $description,
                                     'body' => $body,
                                     'author' => $author,
                                     'category_id' => $category_id,
@@ -241,12 +256,12 @@ switch ($accessor) {
                                     'photo' => $photo
                                 ];
                                 $condition = [
-                                    'article_id' => $id
+                                    'id' => $id
                                 ];
-                                // $whereCond = ['where' => ['article_id' => $id]];
+                                // Will update data with photo
                                 $updateStatus = $article->update($table, $id, $fields, $condition);
                                 move_uploaded_file($file_temp, $photo);
-                                // validation messages and page redirects
+                                // Validation messages and page redirects
                                 if ($updateStatus) {
                                     $message = '<div class="alert alert-success alert-dismissible " role="alert">
                                     <strong> WOW !!!</strong> Article has been updated successfully !!!
@@ -272,6 +287,7 @@ switch ($accessor) {
                                 // Insertable data associative array
                                 $fields = [
                                     'title' => $title,
+                                    'description' => $description,
                                     'body' => $body,
                                     'author' => $author,
                                     'category_id' => $category_id,
@@ -279,7 +295,7 @@ switch ($accessor) {
                                     'status' => $status,
                                     'published_on' => $published_on
                                 ];
-                                $condition = ['article_id' => $id];
+                                $condition = ['id' => $id];
                                 $updateStatus = $article->updateWithoutPhoto($table, $fields, $condition);
                                 // validation messages and page redirects
                                 if ($updateStatus) {
@@ -315,16 +331,16 @@ switch ($accessor) {
             if ($_REQUEST['action'] == 'verify') {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit'])) {
-                        $id = $_POST['article_id'];
+                        $id = $_POST['id'];
                         $condition = [
-                            'article_id' => $id
+                            'id' => $id
                         ];
-                        $whereCond = ['where' => ['article_id' => '$id']];
-                        if (isset($_POST['article_id'])) {
-                            $id = $_POST['article_id'];
+                        $whereCond = ['where' => ['id' => '$id']];
+                        if (isset($_POST['id'])) {
+                            $id = $_POST['id'];
                         }
                         $condition = [
-                            'article_id' => $id
+                            'id' => $id
                         ];
                         $deleteStatus = $article->deleteDataWithFolderPhoto($table, $id, $condition);
                         // validation messages and page redirects
