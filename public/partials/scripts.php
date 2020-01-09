@@ -1,28 +1,87 @@
- <!-- Optional JavaScript -->
+<!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SriBU7jwiUiFBV7Um0wmwj1yYfoRSJoZ+n" cnoegr1.slim.min.jntegrity="sha384-J6qa4849blE2+poT4WnyyhKh38F5S-Q6E9RHviFIfZmwj1yYfoRSoZn" cn oss E2+poT4WnyyhK5S-Q6E9RHviFIfZmwj1yYfoRSoZI ist/up oript9zlaIy s Vv Mcas"mor ipt>
+    < siptc =: /ackpath.brigipcot44.dns/n = ftriapminha / 71 uAoa < Scky
 
-<script src="../lib/js/scrolltop.js"></script>
+    s <
+        i
 
-<!-- Sticky navbar -->
-<script>
-    window.onscroll = function () {
-        myFunction()
-    };
+    script r script r lln = inc pt > wions.
+    "></uniocr <
 
-    var navbar = document.getElementById("navbar");
-    var sticky = navbar.offsetTop;
-
-    function myFunction() {
-        if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky")
-        } else {
-            navbar.classList.remove("sticky");
+    >
+    - > .4 .1 / jborttenjbHaEWldl "
+        -- = "a   ck n 
+    scrv.j >
+        ript > y = sat / t / un3erbaEldMcr sr ootx.js "3Ogw jbootgwktvaUTtm3<Wldris
+    a "a
+    r = d ayd "navb");
+    ndos
+    i);
+    ndos
+    avby
+    scr >
+        --
+    n = vbacument.geBav
+    r.ff
+    etTop;
+    f
+    etTop;
+    ( > s {
+            icky) = window.pageYOf-- >
+        >
+        c <
+        f / avb /
+        .csa.atiky) <
+    f / avb /
+        .catiky("s     
         }
+    e = a = anon e {
+            y) <
+        f / avb /
+        .catiky("s     
+        }
+    e = a = ano / o
+    y snciomyFnavbar.classList.remove("sticky");
+    nction() {}
+    i
     }
-</script>
-</body>
+    } <
+    }
+    ri navbarri navbar ipt src = "
 
-</html>
+    i. / j <
+        ipt >
+        <
+        !--/Stsckycr
+
+        -- >
+        avar
+
+    tp
+
+    top / pp "p.jsrcollt
+    src = "../js/
+
+    i
+
+    pt
+
+
+        -
+        >
+        <
+        scr
+
+    ipt >
+        - >
+        <
+        s -
+        >
+        <
+        scr
+
+    ipt >
+        - >
+        <
+        scr
