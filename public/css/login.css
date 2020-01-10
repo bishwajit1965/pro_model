@@ -1,0 +1,42 @@
+.container {
+    margin-top: 3%;
+}
+
+body {
+    background-color: ;
+}
+
+hr {
+    border: 3px solid #55c8ff;
+    border-radius: 3px;
+
+}
+
+.register-form h3,
+.login-form h3 {
+    text-shadow: 1px 2px 3px #181616;
+    color: #FFF;
+}
+
+.register-form,
+.login-form {
+    border-radius: 15px;
+    background-color: #145c80e7;
+    opacity: 1;
+}
+
+.login-form a {
+    color: #c0c0c0
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+    border-radius: 15px;
+}
+
+.login-form,
+.register-form {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

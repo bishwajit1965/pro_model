@@ -29,12 +29,10 @@
                     <a href="articleIndex.php" class="btn btn-sm btn-primary"><i class="fa fa-list"></i> Article
                         Index</a>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                            title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i>
                         </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
-                            title="Remove">
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
                             <i class="fa fa-times"></i>
                         </button>
                     </div>
@@ -68,21 +66,18 @@
                         Session::set('message', null);
                     }
                     ?>
-                    <form action="processArticle.php" method="post" enctype="multipart/form-data"
-                        accept-charset="utf-8">
+                    <form action="processArticle.php" method="post" enctype="multipart/form-data" accept-charset="utf-8">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="title">Post Title</label>
-                                    <input type="text" name="title" class="form-control" value=""
-                                        placeholder="Insert title">
+                                    <input type="text" name="title" class="form-control" value="" placeholder="Insert title">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="title">Post short description</label>
-                                    <input type="text" name="description" class="form-control" value=""
-                                        placeholder="Insert description">
+                                    <input type="text" name="description" class="form-control" value="" placeholder="Insert description">
                                 </div>
                             </div>
                         </div>
@@ -90,8 +85,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="author">Post Author</label>
-                                    <input type="text" name="author" class="form-control" value=""
-                                        placeholder="Insert author">
+                                    <input type="text" name="author" class="form-control" value="" placeholder="Insert author">
                                 </div>
                                 <div class="form-group">
                                     <label for="title">Post Category</label>
@@ -117,8 +111,8 @@
                                         if (!empty($categoryData)) {
                                             $i = 1;
                                             foreach ($categoryData as $category) { ?>
-                                        <option value="<?= $category->category_id; ?>"><?= $category->category_name; ?>
-                                        </option>
+                                                <option value="<?= $category->category_id; ?>"><?= $category->category_name; ?>
+                                                </option>
                                         <?php }
                                         } ?>
 
@@ -129,7 +123,7 @@
                                 <div class="form-group">
                                     <label for="title">Post Tag</label>
                                     <select name="tag_id" class="form-control">
-                                        <option value="">Select Tag</option>}
+                                        <option value="">Select Tag</option>
                                         option
                                         <?php
                                         $order_by = ['order_by' => 'tag_id DESC'];
@@ -151,7 +145,7 @@
                                         if (!empty($tagData)) {
                                             $i = 1;
                                             foreach ($tagData as $tag) { ?>
-                                        <option value="<?= $tag->tag_id; ?>"><?= $tag->tag_name; ?></option>
+                                                <option value="<?= $tag->tag_id; ?>"><?= $tag->tag_name; ?></option>
                                         <?php }
                                         } ?>
                                     </select>
@@ -191,8 +185,7 @@
                             <textarea id="editor1" name="body" rows="5" cols=""></textarea>
                         </div>
                         <input type="hidden" name="action" value="verify">
-                        <button type="submit" name="submit" value="insert" class="btn btn-sm btn-primary"><i
-                                class="fa fa-upload"></i> Add article</button>
+                        <button type="submit" name="submit" value="insert" class="btn btn-sm btn-primary"><i class="fa fa-upload"></i> Add article</button>
                     </form>
                     <!-- Code above -->
                 </div>

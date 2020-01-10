@@ -1,0 +1,329 @@
+#active {
+    background-color: #3a3a3a;
+    color: #FFF;
+    font-weight: 700;
+    padding: 8px 15px;
+    border-radius: 8px;
+    border-bottom: 3px solid #0080ff;
+}
+
+#heading {
+    font-size: 42px;
+    font-weight: bold;
+    text-shadow: 1px 2px 3px rgb(0, 0, 0);
+    color: #F10;
+}
+
+.header-area {
+    background-color: #000;
+    /* background-image: url(../img/background/web-banner.jpg); */
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #FFF;
+}
+
+.social-links>a>i {
+    color: #FFF;
+    font-size: 26px;
+}
+
+.img-class {
+    width: 100%;
+    height: 315px;
+}
+
+.cart-img {
+    width: ;
+    height: 140px;
+    margin-bottom: -16px;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+}
+
+.input-group ::placeholder {
+    color: red;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+::placeholder {
+    color: red;
+}
+
+/* Edge */
+::-webkit-input-placeholder {
+    color: red;
+    font-weight: bold;
+}
+
+s {
+    color: red;
+    font-weight: bold;
+}
+
+.cart-add-link a {
+    font-size: 12px;
+}
+
+.card-body p {
+    line-height: 16px;
+    font-size: 16px;
+    margin-bottom: 2px;
+    color: #888;
+    font-weight: 500;
+}
+
+.price-rating-description {
+    line-height: 13px;
+    font-size: 13px;
+    margin-bottom: 2px;
+    color: #777;
+    font-weight: 500;
+}
+
+.container-fluid {
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    width: 100%;
+
+}
+
+.cart-add-link {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.social-links {
+    font-size: 24px;
+}
+
+h1::first-letter {
+    font-size: 150%;
+    color: #8A2BE2;
+    padding-top: 20px;
+}
+
+h2::first-letter {
+    font-size: 160%;
+    color: #DA0A0A;
+    text-shadow: 1px 2px 3px rgba(255, 255, 255, 0.589);
+    line-height: 30px;
+    padding-top: 15px;
+}
+
+h3::first-letter {
+    font-size: 155%;
+    color: #DA0A0A;
+    text-shadow: 1px 2px 3px rgba(255, 255, 255, 0.589);
+    line-height: 40px;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Allura', cursive;
+    font-weight: 800;
+    line-height: 26px;
+    color:
+}
+
+ul>li>a {
+    text-transform: uppercase;
+}
+
+/** Category & sub category links
+ * =============================*/
+.category ul,
+.panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+.category ul>li,
+.panel ul>li {
+    background-color: #DDD;
+    border-bottom: 1px solid #999;
+    border-top: 1px solid #FFF;
+}
+
+.category ul>li:last-child,
+.panel ul>li:last-child {
+    border-bottom: 0px solid #999;
+}
+
+.category ul>li:first-child {
+    border-top: 0px solid #999;
+}
+
+.category ul>li>a,
+.panel ul>li.a {
+    font-size: 15px;
+    font-weight: 500;
+    color: #494141;
+    text-decoration: none;
+    display: block;
+    padding: 3px 12px;
+}
+
+.category ul>li>a:hover {
+    background-color: #3190dd;
+    color: #FFF;
+    text-align: center;
+}
+
+/** Brands Items
+ * ==================**/
+.brands ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.brands ul>li {
+    background-color: #DDD;
+    border-bottom: 1px solid #999;
+    border-top: 1px solid #FFF;
+}
+
+.brands ul>li:last-child {
+    border-bottom: 0px solid #999;
+}
+
+.brands ul>li:first-child {
+    border-top: 0px solid #999;
+}
+
+.brands ul>li>a {
+    font-size: 15px;
+    font-weight: 500;
+    color: #494141;
+    text-decoration: none;
+    display: block;
+    padding: 3px 12px;
+}
+
+.brands ul>li>a:hover {
+    background-color: #1a84db;
+    color: #FFF;
+    text-align: cent
+}
+
+/* Accordion
+* ==================*/
+.accordion-heading {
+    font-size: 25px;
+    margin-top: 5px;
+    font-weight: 800;
+    margin-bottom: 3px;
+}
+
+.accordion {
+    background-color: #DDD;
+    color: #444;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    border-bottom: 1px solid#999;
+    border-top: 1px solid#FFF;
+}
+
+.accordion:last-child {
+    border-bottom: 0px solid#999;
+}
+
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 10px;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.486);
+    overflow: hidden;
+}
+
+.red ::placeholder {
+    color: red;
+}
+
+/* Top footer area
+======================= */
+.top-footer :hover {
+    background-color: #2a2a2a;
+    color: #DDD;
+}
+
+.footer-text>h6 {
+    border-bottom: 2px solid#2e2e2e;
+    font-size: 16px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.fab {
+    font-size: 26px;
+}
+
+/* Footer area
+=================== */
+.top-social-links>.footer-area>a {
+    color: #FFF;
+}
+
+/* Sticky navbar
+===================== */
+.navbar {
+    z-index: 999;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky+.content {
+    padding-top: 60px;
+}
+
+/* Image zoom effect
+=================== */
+* {
+    box-sizing: border-box;
+}
+
+/* Just add this class to a div containg the image */
+.zoom {
+    padding: 1px;
+    background-color: #DDD;
+    transition: transform .2s;
+    width: 50px;
+    height: 52px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.zoom:hover {
+    -ms-transform: scale(5.5);
+    /* IE 9 */
+    -webkit-transform: scale(5.5);
+    /* Safari 3-8 */
+    transform: scale(5.5);
+}
+
+/* Image zoom effect ends
+======================== */

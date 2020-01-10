@@ -1,0 +1,15 @@
+@media (min-width: 576px) {
+  .card {}
+
+  .card-title {
+    font-size: 14px;
+  }
+
+  .cart-items input {
+    display: block;
+  }
+}
+
+@media (min-width: 320px) {
+  .log-in {display: block;}
+}
