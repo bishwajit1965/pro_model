@@ -11,7 +11,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Aricle index
+                Article index
                 <small>it all starts here</small>
             </h1>
             <ol class="breadcrumb">
@@ -39,16 +39,16 @@
                 <div class="box-body">
                     <!-- Code below -->
                     <?php
-                    // Will load vendor autoloader
+                    // Will load vendor autoLoader
                     require_once('../app/start.php');
 
-                    use Codecourse\Repositories\Article as Article;
-                    use Codecourse\Repositories\Category as Category;
-                    use Codecourse\Repositories\Helpers as Helpers;
-                    use Codecourse\Repositories\Session as Session;
-                    use Codecourse\Repositories\Tag as Tag;
+                    use CodeCourse\Repositories\Article as Article;
+                    use CodeCourse\Repositories\Category as Category;
+                    use CodeCourse\Repositories\Helpers as Helpers;
+                    use CodeCourse\Repositories\Session as Session;
+                    use CodeCourse\Repositories\Tag as Tag;
 
-                    // Classses instantiated
+                    // Classes instantiated
                     $article = new Article;
                     $category = new Category;
                     $helpers = new Helpers;

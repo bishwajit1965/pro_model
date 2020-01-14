@@ -43,9 +43,9 @@
                     // Will load vendor autoloader
                     require_once('../app/start.php');
 
-                    use Codecourse\Repositories\Session as Session;
-                    use Codecourse\Repositories\Category as Category;
-                    use Codecourse\Repositories\Tag as Tag;
+                    use CodeCourse\Repositories\Session as Session;
+                    use CodeCourse\Repositories\Category as Category;
+                    use CodeCourse\Repositories\Tag as Tag;
 
                     // Instantiate classes
                     $category = new Category;
@@ -55,7 +55,7 @@
                     $tableCategory = 'tbl_category';
                     $tableTag = 'tbl_tag';
 
-                    // User epecific session
+                    // User specific session
                     $user_session = session_id();
 
                     // Will display validation message if any

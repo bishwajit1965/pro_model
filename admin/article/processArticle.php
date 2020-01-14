@@ -1,9 +1,9 @@
 <?php
 require_once '../app/start.php';
 
-use Codecourse\Repositories\Article as Article;
-use Codecourse\Repositories\Helpers as Helpers;
-use Codecourse\Repositories\Session as Session;
+use CodeCourse\Repositories\Article as Article;
+use CodeCourse\Repositories\Helpers as Helpers;
+use CodeCourse\Repositories\Session as Session;
 
 $article = new Article();
 $helpers = new Helpers();
@@ -11,7 +11,7 @@ Session::init();
 // Table
 $table = 'tbl_articles';
 
-// Accessor to swith CRUD options in switch
+// Accessor to switch CRUD options in switch
 $accessor = $_POST['submit'];
 switch ($accessor) {
     case 'insert':

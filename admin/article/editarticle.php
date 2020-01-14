@@ -40,14 +40,14 @@
                 <div class="box-body">
                     <!-- Code below -->
                     <?php
-                    // Will load vendor autoloader
+                    // Will load vendor autoLoader
                     require_once('../app/start.php');
 
-                    use Codecourse\Repositories\Session as Session;
-                    use Codecourse\Repositories\Article as Article;
-                    use Codecourse\Repositories\Category as Category;
-                    use Codecourse\Repositories\Tag as Tag;
-                    use Codecourse\Repositories\Helpers as Helpers;
+                    use CodeCourse\Repositories\Session as Session;
+                    use CodeCourse\Repositories\Article as Article;
+                    use CodeCourse\Repositories\Category as Category;
+                    use CodeCourse\Repositories\Tag as Tag;
+                    use CodeCourse\Repositories\Helpers as Helpers;
 
                     // Instantiate Category
                     $article = new Article;

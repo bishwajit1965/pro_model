@@ -1,5 +1,7 @@
 <?php
-namespace Codecourse\Repositories;
+
+namespace CodeCourse\Repositories;
+
 class Header extends Core
 {
 }

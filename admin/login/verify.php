@@ -1,7 +1,8 @@
 <?php
 
 require_once '../app/start.php';
-use Codecourse\Repositories\User as User;
+
+use CodeCourse\Repositories\User as User;
 
 $user = new User();
 
@@ -25,18 +26,18 @@ if (isset($_GET['id']) && isset($_GET['code'])) {
             $stmt->bindparam(":status", $statusY);
             $stmt->bindparam(":uID", $id);
             $stmt->execute();
-            $msg ="<div class='alert alert-success'>
+            $msg = "<div class='alert alert-success'>
                    <button class='close' data-dismiss='alert'>&times;</button>
                       <strong>WoW !</strong>  Your Account is Now Activated : <a href='index.php'>Login here</a>
                   </div>";
         } else {
-            $msg ="<div class='alert alert-error'>
+            $msg = "<div class='alert alert-error'>
                   <button class='close' data-dismiss='alert'>&times;</button>
                       <strong>sorry !</strong>  Your Account is allready Activated : <a href='index.php'>Login here</a>
                   </div>";
         }
     } else {
-        $msg ="<div class='alert alert-error'>
+        $msg = "<div class='alert alert-error'>
                <button class='close' data-dismiss='alert'>&times;</button>
                <strong>sorry !</strong>  No Account Found : <a href='signup.php'>Signup here</a>
               </div>";
@@ -46,28 +47,31 @@ if (isset($_GET['id']) && isset($_GET['code'])) {
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Confirm Registration</title>
-        <!-- Bootstrap -->
-        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="bower_components/bootstrap/dist/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="assets/styles.css" rel="stylesheet" media="screen">
-         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
+
+<head>
+    <title>Confirm Registration</title>
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="assets/styles.css" rel="stylesheet" media="screen">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script src="../../public/views/js/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
-    <body id="login">
-        <div class="container">
-            <?php
-            if (isset($msg)) {
-                echo $msg;
-            }
+    <script src="../../public/views/js/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
 
-?>
-        </div> <!-- /container -->
+<body id="login">
+    <div class="container">
+        <?php
+        if (isset($msg)) {
+            echo $msg;
+        }
+
+        ?>
+    </div> <!-- /container -->
     <script src="vendors/jquery-1.9.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    </body>
+</body>
+
 </html>

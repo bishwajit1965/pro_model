@@ -1,8 +1,8 @@
 <?php
 
-namespace Codecourse\Repositories;
+namespace CodeCourse\Repositories;
 
-use Codecourse\Repositories\Database as Database;
+use CodeCourse\Repositories\Database as Database;
 use PDO;
 use PDOException;
 
@@ -58,7 +58,6 @@ class User
                 if ($userRow['userStatus'] == 'Y') {
                     if ($userRow['userPass'] == md5($upass)) {
                         $_SESSION['userSession'] = $userRow['userID'];
-
                         return true;
                     } else {
                         header('Location: ../../../login/index.php?error');
@@ -97,7 +96,7 @@ class User
 
     public function send_mail($email, $message, $subject)
     {
-        //require_once 'mailer/class.phpmailer.php';
+        //require_once 'mailer/class.phpMailer.php';
         $mail = new PHPMailer();
         $mail->IsSMTP();
         $mail->SMTPDebug = 1;

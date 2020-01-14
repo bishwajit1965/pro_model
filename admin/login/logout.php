@@ -3,8 +3,9 @@
 // session_start();
 
 require_once '../app/start.php';
-use Codecourse\Repositories\User as User;
-use Codecourse\Repositories\Session as Session;
+
+use CodeCourse\Repositories\User as User;
+use CodeCourse\Repositories\Session as Session;
 
 Session::init();
 

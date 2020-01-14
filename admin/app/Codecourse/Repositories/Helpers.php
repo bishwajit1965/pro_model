@@ -1,5 +1,6 @@
 <?php
-namespace Codecourse\Repositories;
+
+namespace CodeCourse\Repositories;
 
 class Helpers
 {
@@ -29,7 +30,7 @@ class Helpers
     public function title()
     {
         $path = $_SERVER['SCRIPT_FILENAME'];
-        $title= basename($path, '.php');
+        $title = basename($path, '.php');
         if ($title == 'index') {
             $title = 'home';
         } elseif ($title == 'contact') {

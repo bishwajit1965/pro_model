@@ -11,7 +11,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="nivo-slider/jquery.nivo.slider.js"></script>
 <!-- Scroll top -->
-<script src="js/scrolltop.js"></script>
+<script src="../js/scrollTopPages.js"></script>
 <!-- Google Map -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogGV7rIQusJkmarj7c_5EHEyHAmu3emU&callback=myMap" type="text/javascript"></script>
 
@@ -108,3 +108,7 @@
 <!-- /Google Map for Location -->
 
 <?php ob_flush(); ?>
+
+</body>
+
+</html>

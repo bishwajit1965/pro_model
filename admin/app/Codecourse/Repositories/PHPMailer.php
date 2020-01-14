@@ -1,7 +1,8 @@
 <?php
-namespace Codecourse\Repositories;
 
-//use Codecourse\Repositories\SMTP;
+namespace CodeCourse\Repositories;
+
+//use CodeCourse\Repositories\SMTP;
 
 /* class.phpmailer.php
 .---------------------------------------------------------------------------.
@@ -43,6 +44,7 @@ namespace Codecourse\Repositories;
  *
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
+
 if (version_compare(PHP_VERSION, '5.0.0', '<')) {
     exit("Sorry, this version of PHPMailer will only run on PHP version 5 or greater!\n");
 }
@@ -1127,7 +1129,7 @@ class PHPMailer
                     // If the encoded char was found at pos 0, it will fit
                     // otherwise reduce maxLength to start of the encoded char
                     $maxLength = ($encodedCharPos == 0) ? $maxLength :
-                    $maxLength - ($lookBack - $encodedCharPos);
+                        $maxLength - ($lookBack - $encodedCharPos);
                     $foundSplitPos = true;
                 } elseif ($dec >= 192) {
                     // First byte of a multi byte character
@@ -1624,7 +1626,7 @@ class PHPMailer
             case '8bit':
                 $encoded = $this->FixEOL($str);
                 //Make sure it ends with a line break
-                if (substr($encoded, -(strlen($this->LE))) != $this->LE) {
+                if (substr($encoded, - (strlen($this->LE))) != $this->LE) {
                     $encoded .= $this->LE;
                 }
                 break;
@@ -1666,8 +1668,8 @@ class PHPMailer
                 break;
             case 'comment':
                 $x = preg_match_all('/[()"]/', $str, $matches);
-            // Fall-through
-            // no break
+                // Fall-through
+                // no break
             case 'text':
             default:
                 $x += preg_match_all('/[\000-\010\013\014\016-\037\177-\377]/', $str, $matches);
@@ -1878,7 +1880,7 @@ class PHPMailer
                 break;
             case 'comment':
                 $encoded = preg_replace("/([\(\)\"])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
-            // no break
+                // no break
             case 'text':
             default:
                 // Replace every high ascii, control =, ? and _ characters
@@ -2472,9 +2474,9 @@ class PHPMailer
         $DKIMb64 = base64_encode(pack('H*', sha1($body))); // Base64 of packed binary SHA-1 hash of body
         $ident = ($this->DKIM_identity == '') ? '' : ' i=' . $this->DKIM_identity . ';';
         $dkimhdrs = 'DKIM-Signature: v=1; a=' . $DKIMsignatureType . '; q=' . $DKIMquery . '; l=' . $DKIMlen . '; s=' . $this->DKIM_selector . ";\r\n" .
-        "\tt=" . $DKIMtime . '; c=' . $DKIMcanonicalization . ";\r\n" .
-        "\th=From:To:Subject;\r\n" .
-        "\td=" . $this->DKIM_domain . ';' . $ident . "\r\n" .
+            "\tt=" . $DKIMtime . '; c=' . $DKIMcanonicalization . ";\r\n" .
+            "\th=From:To:Subject;\r\n" .
+            "\td=" . $this->DKIM_domain . ';' . $ident . "\r\n" .
             "\tz=$from\r\n" .
             "\t|$to\r\n" .
             "\t|$subject;\r\n" .

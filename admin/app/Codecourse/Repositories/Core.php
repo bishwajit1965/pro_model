@@ -1,8 +1,8 @@
 <?php
 
-namespace Codecourse\Repositories;
+namespace CodeCourse\Repositories;
 
-use Codecourse\Repositories\Database as Database;
+use CodeCourse\Repositories\Database as Database;
 use PDO;
 use PDOException;
 

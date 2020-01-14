@@ -1,6 +1,6 @@
 <?php
 
-namespace Codecourse\Repositories;
+namespace CodeCourse\Repositories;
 
 class helpers
 {
@@ -11,10 +11,10 @@ class helpers
 
     public function textShorten($text, $limit = 400)
     {
-        $text = $text.' ';
+        $text = $text . ' ';
         $text = substr($text, 0, $limit);
         $text = substr($text, 0, strrpos($text, ' '));
-        $text = $text.'.....';
+        $text = $text . '.....';
 
         return $text;
     }

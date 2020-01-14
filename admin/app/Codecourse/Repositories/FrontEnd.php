@@ -1,7 +1,8 @@
 <?php
-namespace Codecourse\Repositories;
 
-// use Codecourse\Repositories\Database as Database;
+namespace CodeCourse\Repositories;
+
+use CodeCourse\Repositories\Database as Database;
 use PDO;
 use PDOException;
 
@@ -25,7 +26,7 @@ class FrontEnd extends Core
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
-                    $articleData[] = $data;
+                    #1dac10de$articleData[] = $data;
                 }
                 $this->pdo->commit();
                 return !empty($articleData) ? $articleData : false;
@@ -51,11 +52,11 @@ class FrontEnd extends Core
             return $query2;
         } catch (PDOException $e) {
             $this->pdo->rollBack();
-            echo $e->getMessage();  
+            echo $e->getMessage();
         }
     }
 
-    public function paginglink($table, $records_per_page)
+    public function pagingLink($table, $records_per_page)
     {
         try {
             $this->pdo->beginTransaction();
@@ -65,8 +66,7 @@ class FrontEnd extends Core
             $stmt->execute();
             $this->pdo->commit();
             $total_no_of_records = $stmt->rowCount();
-            if ($total_no_of_records > 0) {
-                ?>
+            if ($total_no_of_records > 0) { ?>
                 <ul class="pagination">
                     <?php
                     $total_no_of_pages = ceil($total_no_of_records / $records_per_page);
@@ -93,11 +93,21 @@ class FrontEnd extends Core
                         echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $total_no_of_pages . "'>Last</a></li>";
                     } ?>
                 </ul>
-            <?php
+<?php
             }
         } catch (PDOException $e) {
             $this->pdo->rollBack();
             echo $e->getMessage();
         }
+    }
+    /**
+     * Will redirect header as desired
+     *
+     * @param [type] $home_url
+     * @return void
+     */
+    public function redirect($home_url)
+    {
+        header("Location: $home_url");
     }
 }

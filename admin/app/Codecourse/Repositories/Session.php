@@ -1,6 +1,6 @@
 <?php
 
-namespace Codecourse\Repositories;
+namespace CodeCourse\Repositories;
 
 class Session
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Codecourse\Repositories;
+namespace CodeCourse\Repositories;
 
 // Will load database and helpers class
-use Codecourse\Repositories\Database as Database;
-use Codecourse\Repositories\Helpers as Helpers;
+use CodeCourse\Repositories\Database as Database;
+use CodeCourse\Repositories\Helpers as Helpers;
 
 // use PDO;
 // use PDOException;

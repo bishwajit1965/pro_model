@@ -1,5 +1,6 @@
 <?php
-namespace Codecourse\Repositories;
+
+namespace CodeCourse\Repositories;
 
 /*~ class.pop3.php
 .---------------------------------------------------------------------------.
