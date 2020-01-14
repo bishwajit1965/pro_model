@@ -1,6 +1,7 @@
 <?php
-// Class loadere
+// Class loader
 require_once '../../admin/app/start.php';
+
 // Class included
 use CodeCourse\Repositories\FrontEnd as FrontEnd;
 use CodeCourse\Repositories\Session as Session;

@@ -1,7 +1,7 @@
 {
-    "autoload":{
-        "psr-4":{
-                "Codecourse\\": "app/Codecourse"
+    "autoload": {
+        "psr-4": {
+            "CodeCourse\\": "app/CodeCourse"
         }
-    }       
+    }
 }

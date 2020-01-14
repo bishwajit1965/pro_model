@@ -26,7 +26,7 @@ class FrontEnd extends Core
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
-                    #1dac10de$articleData[] = $data;
+                    $articleData[] = $data;
                 }
                 $this->pdo->commit();
                 return !empty($articleData) ? $articleData : false;

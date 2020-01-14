@@ -1,9 +1,9 @@
 <?php
 require_once '../app/start.php';
 
-use Codecourse\Repositories\Helpers as Helpers;
-use Codecourse\Repositories\Session as Session;
-use Codecourse\Repositories\SocialMedia as SocialMedia;
+use CodeCourse\Repositories\Helpers as Helpers;
+use CodeCourse\Repositories\Session as Session;
+use CodeCourse\Repositories\SocialMedia as SocialMedia;
 
 $socialMedia = new SocialMedia();
 $helpers = new Helpers();

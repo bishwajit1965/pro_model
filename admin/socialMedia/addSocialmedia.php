@@ -29,12 +29,10 @@
                     <a href="socialMediaIndex.php" class="btn btn-sm btn-primary">
                         <i class="fa fa-list"></i> Social media Index</a>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"
-                        data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i>
                         </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"
-                        data-toggle="tooltip" title="Remove">
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
                             <i class="fa fa-times"></i>
                         </button>
                     </div>
@@ -46,8 +44,8 @@
                         // Will load vendor autoloader
                         require_once('../app/start.php');
 
-                        use Codecourse\Repositories\Session as Session;
-                        use Codecourse\Repositories\SocialMedia as SocialMedia;
+                        use CodeCourse\Repositories\Session as Session;
+                        use CodeCourse\Repositories\SocialMedia as SocialMedia;
 
                         // Instantiate Category
                         $socialMedia = new SocialMedia;
@@ -63,8 +61,7 @@
                         <form action="processSocialMedia.php" method="post" accept-charset="utf-8">
                             <div class="form-group">
                                 <label for="name">Social media name</label>
-                                <input type="text" name="name" class="form-control" value=""
-                                placeholder="Social media name">
+                                <input type="text" name="name" class="form-control" value="" placeholder="Social media name">
                             </div>
                             <input type="hidden" name="action" value="verify">
                             <button type="submit" name="submit" value="insert" class="btn btn-sm btn-primary">

@@ -1,9 +1,9 @@
 <?php
 require_once '../app/start.php';
 
-use Codecourse\Repositories\Header as Header;
-use Codecourse\Repositories\Helpers as Helpers;
-use Codecourse\Repositories\Session as Session;
+use CodeCourse\Repositories\Header as Header;
+use CodeCourse\Repositories\Helpers as Helpers;
+use CodeCourse\Repositories\Session as Session;
 
 $header = new Header();
 $helpers = new Helpers();

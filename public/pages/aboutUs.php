@@ -45,7 +45,7 @@
             require_once '../../admin/app/start.php';
 
             // Use the classes needed
-            use Codecourse\Repositories\FrontEnd as FrontEnd;
+            use CodeCourse\Repositories\FrontEnd as FrontEnd;
 
             $frontEnd = new FrontEnd();
             // Table to be operated upon

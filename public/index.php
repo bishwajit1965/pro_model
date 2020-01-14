@@ -26,7 +26,7 @@ if (isset($path)) {
     <script src="https://kit.fontawesome.com/1b551efcfa.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet">
     <!-- Custom style sheets -->
-    <link r#5bac10desheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/responsive.css" rel="stylesheet" href="css/responsive.css">
@@ -83,10 +83,6 @@ if (isset($path)) {
             </p>
         </div>
     </div>
-    <?php
-    $path = $_SERVER['SCRIPT_FILENAME'];
-    $current_page = basename($path, '.php');
-    ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
         <a class="navbar-brand" href="#">Navba </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +94,7 @@ if (isset($path)) {
                 <li class="nav-item">
                     <a class="nav-link" <?php if ($current_page == 'index') {
                                             echo 'id="active"';
-                                        } ?> href="../../public/index.php">Home <span class="sr-only">(current)</span></a>
+                                        } ?> href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" <?php if ($current_page == 'aboutUs') {
@@ -146,9 +142,9 @@ if (isset($path)) {
                 require_once '../admin/app/start.php';
 
                 // Use the classes needed
-                use Codecourse\Repositories\FrontEnd as FrontEnd;
-                use Codecourse\Repositories\Session as Session;
-                use Codecourse\Repositories\Helpers as Helpers;
+                use CodeCourse\Repositories\FrontEnd as FrontEnd;
+                use CodeCourse\Repositories\Session as Session;
+                use CodeCourse\Repositories\Helpers as Helpers;
 
                 $frontEnd = new FrontEnd();
                 $helpers = new Helpers();

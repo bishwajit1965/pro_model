@@ -42,10 +42,10 @@
                     // Will load vendor autoloader
                     require_once('../app/start.php');
 
-                    use Codecourse\Repositories\Session as Session;
-                    use Codecourse\Repositories\Tag as Tag;
-                    use Codecourse\Repositories\Category as Category;
-                    use Codecourse\Repositories\Helpers as Helpers;
+                    use CodeCourse\Repositories\Session as Session;
+                    use CodeCourse\Repositories\Tag as Tag;
+                    use CodeCourse\Repositories\Category as Category;
+                    use CodeCourse\Repositories\Helpers as Helpers;
 
                     // Instantiate classes
                     $category = new Category;
@@ -56,7 +56,7 @@
                     $table = 'tbl_tag';
                     $tableCategory = 'tbl_category';
 
-                    // Will disolay validation messages
+                    // Will display validation messages
                     Session::init();
                     $message = Session::get('message');
                     if (!empty($message)) {

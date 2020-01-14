@@ -43,7 +43,7 @@
                         // Will load vendor autoloader
                         require_once('../app/start.php');
 
-                        use Codecourse\Repositories\Session as Session;
+                        use CodeCourse\Repositories\Session as Session;
 
                         // Will display validation message if any
                         Session::init();

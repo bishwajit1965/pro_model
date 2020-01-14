@@ -1,9 +1,9 @@
 <?php
 require_once '../app/start.php';
 
-use Codecourse\Repositories\Category as Category;
-use Codecourse\Repositories\Helpers as Helpers;
-use Codecourse\Repositories\Session as Session;
+use CodeCourse\Repositories\Category as Category;
+use CodeCourse\Repositories\Helpers as Helpers;
+use CodeCourse\Repositories\Session as Session;
 
 $category = new Category();
 $helpers = new Helpers();
@@ -35,7 +35,7 @@ switch ($accessor) {
                         } else {
                             // Insertable data associative array
                             $fields = [
-                            'category_name' => $category_name
+                                'category_name' => $category_name
                             ];
                             $insertedData = $category->insert($table, $fields);
                             // validation messages and page redirects

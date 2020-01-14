@@ -42,9 +42,9 @@
                     // Will load vendor autoloader
                     require_once('../app/start.php');
 
-                    use Codecourse\Repositories\Session as Session;
-                    use Codecourse\Repositories\SocialMedia as SocialMedia;
-                    use Codecourse\Repositories\Helpers as Helpers;
+                    use CodeCourse\Repositories\Session as Session;
+                    use CodeCourse\Repositories\SocialMedia as SocialMedia;
+                    use CodeCourse\Repositories\Helpers as Helpers;
 
                     // Instantiate classes
                     $socialMedia = new SocialMedia();
@@ -102,7 +102,7 @@
                                             <td>
                                                 <a href="editSocialMedia.php?edit_id=<?= $mediaData->id; ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>
 
-                                                <form action="processSocialMedia.php" style="display:inline;"  method="post" accept-charset="utf-8">
+                                                <form action="processSocialMedia.php" style="display:inline;" method="post" accept-charset="utf-8">
                                                     <input type="hidden" name="action" value="verify">
                                                     <input type="hidden" name="id" value="<?= $mediaData->id; ?>">
 

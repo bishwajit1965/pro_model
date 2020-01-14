@@ -16,7 +16,7 @@ if (isset($path)) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Project Model || <?= $current_page; ?> page </title>
+    <title>Project Model || <?= ucfirst($current_page); ?> page </title>
     <!-- Favicon -->
     <link rel="icon" href="../img/favicon/favicon1.ico" type="image/x-icon" />
 

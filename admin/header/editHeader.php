@@ -43,8 +43,8 @@
                     // Will load vendor autoloader
                     require_once('../app/start.php');
 
-                    use Codecourse\Repositories\Session as Session;
-                    use Codecourse\Repositories\Header as Header;
+                    use CodeCourse\Repositories\Session as Session;
+                    use CodeCourse\Repositories\Header as Header;
 
                     $header = new Header();
 

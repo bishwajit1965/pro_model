@@ -1,9 +1,9 @@
 <?php
 require_once '../app/start.php';
 
-use Codecourse\Repositories\Tag as Tag;
-use Codecourse\Repositories\Session as Session;
-use Codecourse\Repositories\Helpers as Helpers;
+use CodeCourse\Repositories\Tag as Tag;
+use CodeCourse\Repositories\Session as Session;
+use CodeCourse\Repositories\Helpers as Helpers;
 
 $tag = new Tag();
 $helpers = new Helpers();
@@ -46,8 +46,8 @@ switch ($accessor) {
                         } else {
                             // Insertable data associative array
                             $fields = [
-                            'tag_name' => $tag_name,
-                            'category_id' => $category_id
+                                'tag_name' => $tag_name,
+                                'category_id' => $category_id
                             ];
                             $insertedData = $tag->insert($table, $fields);
                             // validation messages and page redirects
