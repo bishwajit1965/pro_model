@@ -58,7 +58,9 @@
     color: red;
 }
 
+
 /* Edge */
+
 ::-webkit-input-placeholder {
     color: red;
     font-weight: bold;
@@ -92,7 +94,6 @@ s {
 .container-fluid {
     /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     width: 100%;
-
 }
 
 .cart-add-link {
@@ -120,7 +121,7 @@ h2::first-letter {
 h3::first-letter {
     font-size: 155%;
     color: #DA0A0A;
-    text-shadow: 1px 2px 3px rgba(255, 255, 255, 0.589);
+    text-shadow: 1px 2px 3px #ffffff96;
     line-height: 40px;
 }
 
@@ -133,12 +134,21 @@ h3 {
     color:
 }
 
+#navbar>a {
+    text-transform: uppercase;
+    color: #ffffff96;
+    font-weight: 500;
+    font-size: 18px;
+}
+
 ul>li>a {
     text-transform: uppercase;
 }
 
+
 /** Category & sub category links
  * =============================*/
+
 .category ul,
 .panel ul {
     margin: 0;
@@ -179,8 +189,10 @@ ul>li>a {
     text-align: center;
 }
 
+
 /** Brands Items
  * ==================**/
+
 .brands ul {
     margin: 0;
     padding: 0;
@@ -216,8 +228,10 @@ ul>li>a {
     text-align: cent
 }
 
+
 /* Accordion
 * ==================*/
+
 .accordion-heading {
     font-size: 25px;
     margin-top: 5px;
@@ -260,8 +274,10 @@ ul>li>a {
     color: red;
 }
 
+
 /* Top footer area
 ======================= */
+
 .top-footer :hover {
     background-color: #2a2a2a;
     color: #DDD;
@@ -278,14 +294,18 @@ ul>li>a {
     font-size: 26px;
 }
 
+
 /* Footer area
 =================== */
+
 .top-social-links>.footer-area>a {
     color: #FFF;
 }
 
+
 /* Sticky navbar
 ===================== */
+
 .navbar {
     z-index: 999;
 }
@@ -300,13 +320,17 @@ ul>li>a {
     padding-top: 60px;
 }
 
+
 /* Image zoom effect
 =================== */
+
 * {
     box-sizing: border-box;
 }
 
+
 /* Just add this class to a div containg the image */
+
 .zoom {
     padding: 1px;
     background-color: #DDD;
@@ -324,6 +348,7 @@ ul>li>a {
     /* Safari 3-8 */
     transform: scale(5.5);
 }
+
 
 /* Image zoom effect ends
 ======================== */

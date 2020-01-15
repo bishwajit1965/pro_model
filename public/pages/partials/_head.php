@@ -1,6 +1,5 @@
 <?php
 ob_start();
-include_once '../../admin/app/start.php';
 
 // Detects file name
 $path = $_SERVER['SCRIPT_FILENAME'];
