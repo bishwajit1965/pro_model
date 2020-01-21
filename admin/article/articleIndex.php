@@ -40,7 +40,7 @@
                     <!-- Code below -->
                     <?php
                     // Will load vendor autoLoader
-                    require_once('../app/start.php');
+                    require_once '../app/start.php';
 
                     use CodeCourse\Repositories\Article as Article;
                     use CodeCourse\Repositories\Category as Category;

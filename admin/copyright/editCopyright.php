@@ -11,7 +11,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Edit Category
+                Edit Copyright
                 <small>it all starts here</small>
             </h1>
             <ol class="breadcrumb">
@@ -26,7 +26,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <!-- <h3 class="box-title">Add category</h3> -->
-                    <a href="categoryIndex.php" class="btn btn-sm btn-primary"><i class="fa fa-list"></i> Category Index</a>
+                    <a href="copyrightIndex.php" class="btn btn-sm btn-primary"><i class="fa fa-list"></i> Copyright Index</a>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i>
@@ -41,13 +41,13 @@
                     <div class="col-sm-6 col-sm-offset-3">
                         <?php
                         // Will load vendor autoloader
-                        require_once('../app/start.php');
+                        require_once '../app/start.php';
 
                         use CodeCourse\Repositories\Session as Session;
-                        use CodeCourse\Repositories\Category as Category;
+                        use CodeCourse\Repositories\Copyright as Copyright;
 
                         // Will display validation message if any
-                        $category = new Category;
+                        $copyright = new Copyright;
                         Session::init();
                         $message = Session::get('message');
                         if (!empty($message)) {
@@ -57,21 +57,21 @@
                         ?>
                         <?php
                         $id = $_GET['edit_id'];
-                        $table = 'tbl_category';
+                        $table = 'tbl_copyright';
                         $whereCond = [
-                            'where' => ['category_id' => $id],
+                            'where' => ['id' => $id],
                             'return_type' => 'single',
                         ];
-                        $getCategoryData = $category->select($table, $whereCond);
-                        if (!empty($getCategoryData)) { ?>
-                            <form action="processCategory.php" method="post" accept-charset="utf-8">
+                        $getCopyrightData = $copyright->select($table, $whereCond);
+                        if (!empty($getCopyrightData)) { ?>
+                            <form action="processCopyright.php" method="post" accept-charset="utf-8">
                                 <div class="form-group">
-                                    <label for="category_name">Category</label>
-                                    <input type="text" name="category_name" class="form-control" value="<?= $getCategoryData->category_name; ?>" placeholder="Category name">
+                                    <label for="copyright_text">Copyright</label>
+                                    <input type="text" name="copyright_text" class="form-control" value="<?= $getCopyrightData->copyright_text; ?>" placeholder="Copyright text">
                                 </div>
                                 <input type="hidden" name="action" value="verify">
-                                <input type="hidden" name="category_id" value="<?= $getCategoryData->category_id; ?>">
-                                <button type="submit" name="submit" value="update" class="btn btn-sm btn-primary"><i class="fa fa-upload"></i> Edit Category</button>
+                                <input type="hidden" name="id" value="<?= $getCopyrightData->id; ?>">
+                                <button type="submit" name="submit" value="update" class="btn btn-sm btn-primary"><i class="fa fa-upload"></i> Edit Copyright</button>
                             </form>
                         <?php } ?>
                     </div>

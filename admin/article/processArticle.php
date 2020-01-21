@@ -339,9 +339,6 @@ switch ($accessor) {
                         if (isset($_POST['id'])) {
                             $id = $_POST['id'];
                         }
-                        $condition = [
-                            'id' => $id
-                        ];
                         $deleteStatus = $article->deleteDataWithFolderPhoto($table, $id, $condition);
                         // validation messages and page redirects
                         if ($deleteStatus) {

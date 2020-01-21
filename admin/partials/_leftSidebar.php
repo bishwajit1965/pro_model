@@ -51,6 +51,18 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
+                    <span>Copyright Options</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../copyright/copyrightIndex.php"><i class="fa fa-circle-o"></i> Copyright Index</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
                     <span>Header Options</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -58,6 +70,18 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="../header/headerIndex.php"><i class="fa fa-circle-o"></i> Header Index</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>Logo Options</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../logo/logoIndex.php"><i class="fa fa-circle-o"></i> Logo Index</a></li>
                 </ul>
             </li>
             <li class="treeview">

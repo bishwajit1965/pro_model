@@ -4,7 +4,6 @@ namespace CodeCourse\Repositories;
 
 // Will load database and helpers class
 use CodeCourse\Repositories\Database as Database;
-use CodeCourse\Repositories\Helpers as Helpers;
 
 // use PDO;
 // use PDOException;

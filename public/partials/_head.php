@@ -6,11 +6,11 @@ $path = $_SERVER['SCRIPT_FILENAME'];
 if (isset($path)) {
     $current_page = basename($path, '.php');
 }
+// Class loader
+require_once '../admin/app/start.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -25,9 +25,9 @@ if (isset($path)) {
     <!-- Font awesome kit-->
     <script src="https://kit.fontawesome.com/1b551efcfa.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="../css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="../css/custom.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
     <style>
         .color {
             color: #FFF;

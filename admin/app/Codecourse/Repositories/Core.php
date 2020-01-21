@@ -10,7 +10,12 @@ class Core
 {
     // Database connection constructor
     private $pdo;
-
+    /**
+     * Database connection constructor
+     *
+     * @param [type] variable
+     * @return variable
+     */
     public function __construct()
     {
         $database = new Database();
@@ -33,6 +38,13 @@ class Core
     header("Location:add_student.php?error");
     }
     */
+
+    /**
+     * Will fetch data as desired
+     *
+     * @table[type] $table
+     * @return$data
+     */
     public function select($table, $data = [])
     {
         try {
@@ -71,15 +83,15 @@ class Core
             $query->execute();
             if (array_key_exists('return_type', $data)) {
                 switch ($data['return_type']) {
-                    case 'count':
-                        $value = $query->rowCount();
-                        break;
-                    case 'single':
-                        $value = $query->fetch(PDO::FETCH_OBJ);
-                        break;
-                    default:
-                        $value = '';
-                        break;
+                case 'count':
+                    $value = $query->rowCount();
+                    break;
+                case 'single':
+                    $value = $query->fetch(PDO::FETCH_OBJ);
+                    break;
+                default:
+                    $value = '';
+                    break;
                 }
             } else {
                 if ($query->rowCount() > 0) {
@@ -90,7 +102,7 @@ class Core
             return !empty($value) ? $value : false;
         } catch (PDOException $e) {
             $this->pdo->rollBack();
-            echo $e->getMessage();
+            echo 'ERROR !!! '.$e->getMessage();
         }
     }
 
@@ -242,13 +254,16 @@ class Core
         }
     }
 
-    // Redirecting URL to the desired page
+    /**
+     * Will redirect to th desired url
+     *
+     * @home_url [param] $home_url
+     * @return void
+     */
     public function redirect($home_url)
     {
-        try {
+        if (isset($home_url)) {
             header("Location: $home_url");
-        } catch (PDOException $e) {
-            echo $e->getMessage();
         }
     }
     // Delete data from database
@@ -317,6 +332,52 @@ class Core
             $delete = $query->execute();
             $this->pdo->commit();
             return $delete ? true : false;
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            echo $e->getMessage();
+        }
+    }
+    /**
+     * Search data from databse
+     * @table [type] variable
+     * @search [type] variable
+     * @return $searchedData
+     */
+    public function searchData($table, $search)
+    {
+        try {
+            $this->pdo->beginTransaction();
+            $query = "SELECT * FROM $table WHERE title LIKE '%$search%' OR body LIKE '%$search%' AND published_on <= Now() AND status = 0";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+            $this->pdo->commit();
+            if ($stmt->rowCount() > 0) {
+                while ($searchResult = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $searchedData[] = $searchResult;
+                }
+                return isset($searchedData) ? $searchedData : false;
+            }
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            echo $e->getMessage();
+        }
+    }
+    /**
+     * Will fetch number of rows
+     *
+     * @table[type] variable
+     * @return $rows
+     */
+    public function numberOfRows($table)
+    {
+        try {
+            $this->pdo->beginTransaction();
+            $query = "SELECT FOUND_ROWS() FROM $table";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $this->pdo->commit();
+            $foundRows = $stmt->rowCount();
+            return $foundRows ? true : false;
         } catch (PDOException $e) {
             $this->pdo->rollBack();
             echo $e->getMessage();

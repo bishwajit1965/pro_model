@@ -13,7 +13,7 @@
         <div class="social-site-heading bg-secondary p-1 text-white">
             <h4>Social site links</h4>
         </div>
-        <form action="../pages/processFrontEnd.php" method="post">
+        <form action="processFrontEnd.php" method="post">
             <div class="btn-group d-flex flex-row justify-content-between" role="group" aria-label="Basic example">
                 <button type="submit" class="btn btn-primary" name="submit" value="category" style="width:33.3%;">Category</button>
                 <button type="submit" class="btn btn-success" name="submit" value="tag" style="width:33.3%;">Tags</button>
@@ -22,7 +22,7 @@
             </div>
         </form>
         <?php
-        include_once '../../admin/app/start.php';
+        require_once '../admin/app/start.php';
 
         // Class included
         use CodeCourse\Repositories\FrontEnd as FrontEnd;

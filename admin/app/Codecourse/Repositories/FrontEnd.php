@@ -93,7 +93,7 @@ class FrontEnd extends Core
                         echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $total_no_of_pages . "'>Last</a></li>";
                     } ?>
                 </ul>
-<?php
+                <?php
             }
         } catch (PDOException $e) {
             $this->pdo->rollBack();

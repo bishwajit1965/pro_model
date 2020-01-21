@@ -1,23 +1,23 @@
 <!-- Head area -->
-<?php include_once 'partials/_head.php'; ?>
+<?php require_once 'partials/_head.php'; ?>
 <!-- /Head area -->
 
 <!-- Top header area -->
-<?php include_once 'partials/_topHeader.php'; ?>
+<?php require_once 'partials/_topHeader.php'; ?>
 <!-- /Top header area -->
 
 <!-- Header area -->
-<?php include_once 'partials/_header.php'; ?>
+<?php require_once 'partials/_header.php'; ?>
 <!-- /Header area -->
 
 <!-- Nab bar area -->
-<?php include_once 'partials/_navBar.php'; ?>
+<?php require_once 'partials/_navBar.php'; ?>
 <!-- /Nab bar area -->
 
 <!-- Middle content area -->
 <div class="container-fluid">
     <div class="row">
-        <?php include_once 'partials/_leftSideBar.php'; ?>
+        <?php require_once 'partials/_leftSideBar.php'; ?>
         <div class="col-sm-6 main-content" style="overflow:auto;">
             <h1>Master Template</h1>
             <p>
@@ -33,7 +33,7 @@
 
             <?php
             // Load classes
-            require_once '../../admin/app/start.php';
+            require_once '../admin/app/start.php';
 
             // Use the classes needed
             use CodeCourse\Repositories\FrontEnd as FrontEnd;
@@ -47,9 +47,9 @@
             $articles = $frontEnd->frontEndDataAndPagination($articleData);
             foreach ($articles as $article) {
             ?>
-                <h1><?= $article->title; ?></h1>
-                <h4> <?= $article->description; ?></h4>
-                <p><?= htmlspecialchars_decode($article->body); ?></p>
+            <h1><?php echo  $article->title; ?></h1>
+            <h4><?php echo  $article->description; ?></h4>
+            <p><?php echo  htmlspecialchars_decode($article->body); ?></p>
             <?php
             }
             ?>
@@ -64,20 +64,20 @@
             <!-- /Pagination ends -->
         </div>
         <!-- Right side bar -->
-        <?php include_once 'partials/_rightSideBar.php'; ?>
+        <?php require_once 'partials/_rightSideBar.php'; ?>
         <!-- /Right side bar -->
     </div>
 </div>
 <!-- /Middle content area -->
 
 <!-- Footer area -->
-<?php include_once 'partials/_footerArea.php'; ?>
+<?php require_once 'partials/_footerArea.php'; ?>
 <!-- /Footer area -->
 
 <!-- Footer bottom bar area -->
-<?php include_once 'partials/_footerBottomBar.php'; ?>
+<?php require_once 'partials/_footerBottomBar.php'; ?>
 <!-- /Footer bottom bar area -->
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<?php include_once 'partials/_scripts2.php'; ?>
+<?php require_once 'partials/_scripts2.php'; ?>
 <!-- /jQuery first, then Popper.js, then Bootstrap JS -->
