@@ -42,7 +42,7 @@ class FrontEnd extends Core
     {
         try {
             $this->pdo->beginTransaction();
-            $query = "SELECT * FROM $table WHERE published_on <= NOW() && status = 0";
+            $query = "SELECT * FROM $table WHERE published_on <= NOW() && status = 0 ORDER BY id DESC";
             $starting_position = 0;
             if (isset($_GET["page_no"])) {
                 $starting_position = ($_GET["page_no"] - 1) * $records_per_page;

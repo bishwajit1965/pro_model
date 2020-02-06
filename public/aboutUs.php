@@ -56,9 +56,9 @@
             $articles = $frontEnd->frontEndDataAndPagination($articleData);
             foreach ($articles as $article) {
             ?>
-                <h1><?= $article->title; ?></h1>
-                <h4> <?= $article->description; ?></h4>
-                <p><?= htmlspecialchars_decode($article->body); ?></p>
+                <h1><?php echo $article->title; ?></h1>
+                <h4> <?php echo $article->description; ?></h4>
+                <p><?php echo htmlspecialchars_decode($article->body); ?></p>
             <?php
             }
             ?>

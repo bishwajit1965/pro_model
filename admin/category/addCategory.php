@@ -1,10 +1,10 @@
-<?php include_once('../partials/_head.php'); ?>
+<?php require_once '../partials/_head.php'; ?>
 <!-- Site wrapper -->
 <div class="wrapper">
-    <?php include_once('../partials/_header.php'); ?>
+    <?php require_once '../partials/_header.php'; ?>
     <!-- =============================================== -->
     <!-- Left side column. contains the sidebar -->
-    <?php include_once '../partials/_leftSidebar.php'; ?>
+    <?php require_once '../partials/_leftSidebar.php'; ?>
     <!-- =============================================== -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -73,10 +73,10 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <?php include_once('../partials/_footer.php'); ?>
+    <?php require_once '../partials/_footer.php'; ?>
 </div>
 <!-- ./wrapper -->
-<?php include_once('../partials/_scripts.php'); ?>
+<?php require_once '../partials/_scripts.php'; ?>
 </body>
 
 </html>

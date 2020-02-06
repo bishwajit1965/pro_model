@@ -24,7 +24,7 @@ if (isset($path)) {
     <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon" />
     <!-- Font awesome kit-->
     <script src="https://kit.fontawesome.com/1b551efcfa.js"></script>
-    
+
     <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet">
     <!-- Custom style sheets -->
     <link rel="stylesheet" href="css/custom.css">
@@ -49,9 +49,17 @@ if (isset($path)) {
         .sticky+.main-content {
             padding-top: 60px;
         }
+
+        a {
+            color: #000;
+
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
     </style>
 </head>
-
 
 <body>
     <!-- Top header bar -->
@@ -68,6 +76,31 @@ if (isset($path)) {
 
     <!-- Main content area -->
     <div class="container-fluid">
+        <?php
+        // Load classes
+        require_once '../admin/app/start.php';
+
+        // Use the classes needed
+        use CodeCourse\Repositories\FrontEnd as FrontEnd;
+        use CodeCourse\Repositories\Session as Session;
+        use CodeCourse\Repositories\Helpers as Helpers;
+        use CodeCourse\Repositories\Category as Category;
+        use CodeCourse\Repositories\Core as Core;
+        use CodeCourse\Repositories\Tag as Tag;
+
+        // Classes instantiated
+        $category = new Category();
+        $core = new Core();
+        $tag = new Tag();
+        $frontEnd = new FrontEnd();
+        $helpers = new Helpers();
+        Session::init();
+
+        // Tables to be operated upon
+        $table = 'tbl_articles';
+        $table_category = 'tbl_category';
+        $table_tag = 'tbl_tag';
+        ?>
         <div class="row">
             <!-- Left side bar -->
             <?php require_once 'partials/_leftSideBar.php'; ?>
@@ -75,37 +108,25 @@ if (isset($path)) {
 
             <!-- Middle contant area -->
             <div class="col-sm-6 main-content" style="overflow:auto;">
+                <!-- Slider -->
+                <div class="row bg-secondary py-2 mt-1"></div>
+                <div class="row">
+                    <?php require_once 'partials/_slider.php'; ?>
+                </div>
+                <div class="row bg-secondary py-2"></div>
+                <!-- /Slider -->
+
                 <?php
-                // Load classes
-                require_once '../admin/app/start.php';
-
-                // Use the classes needed
-                use CodeCourse\Repositories\FrontEnd as FrontEnd;
-                use CodeCourse\Repositories\Session as Session;
-                use CodeCourse\Repositories\Helpers as Helpers;
-                use CodeCourse\Repositories\Category as Category;
-                use CodeCourse\Repositories\Tag as Tag;
-
-                // Classes instantiated
-                $category = new Category();
-                $tag = new Tag();
-                $frontEnd = new FrontEnd();
-                $helpers = new Helpers();
-                Session::init();
-
-                // Tables to be operated upon
-                $table = 'tbl_articles';
-                $table_category = 'tbl_category';
-                $table_tag = 'tbl_tag';
-
-                // Fetching data from database to display
-                $records_per_page = 2;
+                // Fetching data from database to display in index.php page
+                $records_per_page = 4;
                 $articleData = $frontEnd->paging($table, $records_per_page);
                 $articles = $frontEnd->frontEndDataAndPagination($articleData);
                 foreach ($articles as $article) {
-                    ?>
+                ?>
                     <div class="post">
-                        <h1><?php echo  $article->title; ?></h1>
+                        <a href="singlePost.php?post_id=<?php echo $article->id; ?>">
+                            <h1><?php echo  $article->title; ?></h1>
+                        </a>
                         <p>
                             <span style="color:#999;font-weight:600;"><strong> Author :</strong> <?php echo $article->author; ?> || </span>
                             <span style="color:#999;font-weight:600;"><strong> Published on :</strong> <?php echo $helpers->dateFormat($article->published_on); ?></span>
@@ -117,9 +138,9 @@ if (isset($path)) {
                                 if (!empty($categoryData)) {
                                     foreach ($categoryData as $categoryResult) {
                                         if ($categoryResult->category_id == $article->category_id) {
-                                            ?>
-                                            <a href="#" class="badge badge-primary"><?php echo $categoryResult->category_name; ?></a>
-                                            <?php
+                                ?>
+                                            <a href="#" class="badge badge-secondary"><?php echo $categoryResult->category_name; ?></a>
+                                <?php
                                         }
                                     }
                                 }
@@ -132,24 +153,24 @@ if (isset($path)) {
                                 if (!empty($tagData)) {
                                     foreach ($tagData as $tagResult) {
                                         if ($tagResult->tag_id == $article->tag_id) {
-                                            ?>
-                                            <a href="#" class="badge badge-primary"><?php echo $tagResult->tag_name; ?></a>
-                                            <?php
+                                ?>
+                                            <a href="#" class="badge badge-secondary"><?php echo $tagResult->tag_name; ?></a>
+                                <?php
                                         }
                                     }
                                 }
                                 ?>
                             </span>
                         </p>
-                        <p><img class="img-fluid img-thumbnail" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo"></p>
+                        <!-- <p><img class="img-fluid img-thumbnail" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo"></p> -->
 
-                        <p style="color:#999;font-weight:600;"><strong> Post synopsis :</strong> <?php echo $article->description; ?></p>
+                        <p style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;"><strong> Post synopsis :</strong> <?php echo $article->description; ?></p>
                         <p><?php echo htmlspecialchars_decode($helpers->textShorten($article->body, 320)); ?></p>
                         <p>
                             <a href="singlePost.php?post_id=<?php echo $article->id; ?>" class="btn btn-sm btn-primary"><i class="fas fa-book-open"></i> Read More</a>
                         </p>
                     </div>
-                    <?php
+                <?php
                 }
                 ?>
                 <!-- Pagination begins -->

@@ -70,6 +70,8 @@ class Core
                 $sql .= ' LIMIT ' . $data['start'] . ',' . $data['limit'];
             } elseif (array_key_exists('start', $data) && array_key_exists('limit', $data)) {
                 $sql .= ' LIMIT ' . $data['limit'];
+            } elseif (array_key_exists('limit', $data)) {
+                $sql .= ' LIMIT ' . $data['limit'];
             }
 
             $query = $this->pdo->prepare($sql);
@@ -116,6 +118,7 @@ class Core
     $query->bindParam(":phone", $phone);
     $query->execute();
     */
+    
     public function insert($table, $data)
     {
         try {

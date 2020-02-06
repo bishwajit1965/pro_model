@@ -1,10 +1,10 @@
-<?php include_once('../partials/_head.php'); ?>
+<?php require_once '../partials/_head.php'; ?>
 <!-- Site wrapper -->
 <div class="wrapper">
-    <?php include_once('../partials/_header.php'); ?>
+    <?php require_once '../partials/_header.php'; ?>
     <!-- =============================================== -->
     <!-- Left side column. contains the sidebar -->
-    <?php include_once '../partials/_leftSidebar.php'; ?>
+    <?php require_once '../partials/_leftSidebar.php'; ?>
     <!-- =============================================== -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -86,7 +86,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $order_by = ['order_by' => 'category_id DESC'];
+                                $order_by = ['order_by' => 'id DESC'];
                                 /*
                                 $selectCond = ['select' => 'name'];
                                 $whereCond = [
@@ -106,12 +106,12 @@
                                     $i = 1;
                                     foreach ($articleData as $article) { ?>
                                         <tr>
-                                            <td><?= $i++; ?></td>
-                                            <td><?= $helpers->textShorten($article->title, 40); ?></td>
-                                            <td><?= $article->author; ?></td>
+                                            <td><?php echo $i++; ?></td>
+                                            <td><?php echo $helpers->textShorten($article->title, 40); ?></td>
+                                            <td><?php echo $article->author; ?></td>
                                             <td>
                                                 <?php if (!empty($article->photo)) : ?>
-                                                    <img src="<?= $article->photo; ?>" style="width:80px;height:50px;" class="img-rounded img-thumbnail" alt="Article photo">
+                                                    <img src="<?php echo $article->photo; ?>" style="width:80px;height:50px;" class="img-rounded img-thumbnail" alt="Article photo">
                                                 <?php else : ?>
                                                     <img src="../images/avatar/avatar.jpg" style="width:60px;height:60px;" class="img-rounded img-thumbnail" alt="Avatar">
                                                 <?php endif ?>
@@ -152,15 +152,15 @@
                                                     }
                                                 } ?>
                                             </td>
-                                            <td><?= $helpers->dateFormat($article->created_at); ?></td>
-                                            <td><?= $helpers->dateFormat($article->updated_at); ?></td>
-                                            <td><?= $helpers->dateFormat($article->published_on); ?></td>
+                                            <td><?php echo $helpers->dateFormat($article->created_at); ?></td>
+                                            <td><?php echo $helpers->dateFormat($article->updated_at); ?></td>
+                                            <td><?php echo $helpers->dateFormat($article->published_on); ?></td>
                                             <td>
-                                                <a href="editarticle.php?edit_id=<?= $article->id; ?>" class="btn btn-xs btn-success btn-block"><i class="fa fa-edit"></i> Edit</a>
+                                                <a href="editarticle.php?edit_id=<?php echo $article->id; ?>" class="btn btn-xs btn-success btn-block"><i class="fa fa-edit"></i> Edit</a>
 
                                                 <form style="margin-top:3px;" action="processArticle.php" method="post" accept-charset="utf-8">
                                                     <input type="hidden" name="action" value="verify">
-                                                    <input type="hidden" name="id" value="<?= $article->id; ?>">
+                                                    <input type="hidden" name="id" value="<?php echo $article->id; ?>">
 
                                                     <button type="submit" name="submit" value="delete" class="btn btn-xs btn-danger btn-block" onClick="return confirm('Do you really want to delete this data ?');"><i class="fa fa-trash"></i> Delete </button>
                                                 </form>
@@ -197,10 +197,10 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <?php include_once('../partials/_footer.php'); ?>
+    <?php require_once '../partials/_footer.php'; ?>
 </div>
 <!-- ./wrapper -->
-<?php include_once('../partials/_scripts.php'); ?>
+<?php require_once '../partials/_scripts.php'; ?>
 </body>
 
 </html>
