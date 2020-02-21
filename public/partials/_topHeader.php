@@ -12,12 +12,4 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <!-- /Facebook Javascript SDK -->
-
-    <div class="container-fluid bg-dark top-header-bar text-white py-2">
-        <div class="row">
-            <div class="col-sm-3">BBC</div>
-            <div class="col-sm-3">BBC</div>
-            <div class="col-sm-3">BBC</div>
-            <div class="col-sm-3">BBC</div>
-        </div>
-    </div>
+    <div class="top-header-bar bg-info py-1"></div>

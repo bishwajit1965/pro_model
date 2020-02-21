@@ -54,7 +54,7 @@
             $searchedData = $core->searchData($table, $search);
             if (!empty($searchedData)) {
                 foreach ($searchedData as $article) {
-            ?>
+                    ?>
                     <div class="post">
                         <h1><?php echo  $article->title; ?></h1>
                         <p>
@@ -100,7 +100,7 @@
                             <a href="singlePost.php?post_id=<?php echo $article->id; ?>" class="btn btn-sm btn-primary"><i class="fas fa-book-open"></i> Read More</a>
                         </p>
                     </div>
-                <?php
+                    <?php
                 }
             } else {
                 ?>

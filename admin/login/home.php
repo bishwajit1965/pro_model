@@ -256,6 +256,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
               <li><a href="../logo/logoIndex.php"><i class="fa fa-circle-o"></i> Logo Index</a></li>
               <li><a href="../socialMedia/socialMediaIndex.php"><i class="fa fa-circle-o"></i> Social Media Index</a></li>
               <li><a href="../tag/tagIndex.php"><i class="fa fa-circle-o"></i> Tag Index</a></li>
+              <li><a href="../links/linkIndex.php"><i class="fa fa-circle-o"></i> Link Index</a></li>
             </ul>
           </li>
         </ul>

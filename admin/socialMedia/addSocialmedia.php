@@ -42,7 +42,7 @@
                     <div class="col-sm-6 col-sm-offset-3">
                         <?php
                         // Will load vendor autoloader
-                        require_once('../app/start.php');
+                        require_once '../app/start.php';
 
                         use CodeCourse\Repositories\Session as Session;
                         use CodeCourse\Repositories\SocialMedia as SocialMedia;

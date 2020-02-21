@@ -105,17 +105,21 @@ s {
 }
 
 h1::first-letter {
-    font-size: 150%;
+    font-size: 125%;
     color: #8A2BE2;
     padding-top: 20px;
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 1px 2px 3px rgba(255, 255, 255, 0.589);
+    font-weight: 800;
 }
 
 h2::first-letter {
-    font-size: 160%;
+    font-size: 150%;
     color: #DA0A0A;
     text-shadow: 1px 2px 3px rgba(255, 255, 255, 0.589);
     line-height: 30px;
     padding-top: 15px;
+    font-family: 'Roboto', sans-serif;
 }
 
 h3::first-letter {
@@ -128,10 +132,11 @@ h3::first-letter {
 h1,
 h2,
 h3 {
-    font-family: 'Allura', cursive;
-    font-weight: 800;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight:  ;
     line-height: 26px;
-    color:
+    color:;
 }
 
 #navbar>a {

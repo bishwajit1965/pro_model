@@ -18,14 +18,15 @@ require_once '../admin/app/start.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Project Model || <?= ucfirst($current_page); ?> page </title>
     <!-- Favicon -->
-    <link rel="icon" href="../img/favicon/favicon1.ico" type="image/x-icon" />
+    <link rel="icon" href="img/favicon/favicon1.ico" type="image/x-icon" />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <!-- Font awesome kit-->
     <script src="https://kit.fontawesome.com/1b551efcfa.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/normalize.css"> -->
     <link rel="stylesheet" type="text/css" href="css/responsive.css">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
     
@@ -42,6 +43,14 @@ require_once '../admin/app/start.php';
             position: fixed;
             top: 0;
             width: 100%;
+        }
+        .post h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            line-height: 45px;
+            font-weight:800;
+            text-shadow: 1px 2px 3px #333;
+            color: #222;
         }
 
         .sticky+.main-content {

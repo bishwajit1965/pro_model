@@ -56,6 +56,13 @@
     // var_dump($article);
     if (!empty($article)) { ?>
         <div class="post">
+            <?php
+            if (!empty($article->photo)) { ?>
+                <img class="img-fluid img-thumbnail mb-3 w-100 h-75" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <?php
+            } else {
+            }
+            ?>
             <h1><?php echo  $article->title; ?></h1>
             <p>
                 <span style="color:#999;font-weight:600;"><strong> Author :</strong> <?php echo $article->author; ?> || </span>
@@ -68,9 +75,9 @@
                     if (!empty($categoryData)) {
                         foreach ($categoryData as $categoryResult) {
                             if ($categoryResult->category_id == $article->category_id) {
-                    ?>
+                                ?>
                                 <a href="#" class="badge badge-secondary"><?php echo $categoryResult->category_name; ?></a>
-                    <?php
+                                <?php
                             }
                         }
                     }
@@ -84,34 +91,26 @@
                     if (!empty($tagData)) {
                         foreach ($tagData as $tagResult) {
                             if ($tagResult->tag_id == $article->tag_id) {
-                    ?>
+                                ?>
                                 <a href="#" class="badge badge-secondary"><?php echo $tagResult->tag_name; ?></a>
-                    <?php
+                                <?php
                             }
                         }
                     }
                     ?>
                 </span>
             </p>
-            <?php
-
-            if (!empty($article->photo)) { ?>
-                <img class="img-fluid img-thumbnail w-100 h-75" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo">
-            <?php
-            } else {
-            }
-            ?>
 
             <p style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;"><strong> Post synopsis :</strong> <?php echo $article->description; ?></p>
 
             <p><?php echo htmlspecialchars_decode($article->body); ?></p>
             <p>
-                <a href="index.php" class="btn btn-sm btn-primary">
+                <a href="index.php" class="btn btn-sm btn-primary" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                     <i class="fas fa-fast-backward"></i> Home page</a>
             </p>
         </div>
         <hr>
-    <?php
+        <?php
     }
     ?>
     <!--Post wise Facebook comments-->
@@ -137,9 +136,9 @@
                 if (!empty($categoryData)) {
                     foreach ($categoryData as $categoryResult) {
                         if ($categoryResult->category_id == $article->category_id) {
-                ?>
+                            ?>
                             <a href="#" class="badge badge-secondary"><?php echo $categoryResult->category_name; ?></a>
-                <?php
+                            <?php
                         }
                     }
                 }
@@ -151,13 +150,13 @@
         $postData = $core->select($table);
         foreach ($postData as $post) {
             if ($post->category_id == $article->category_id) {
-        ?>
+                ?>
                 <div class="col-sm-2 p-1">
                     <a href="singlePost.php?post_id=<?php echo $post->id; ?>">
-                        <img class="img-fluid img-thumbnail" src="../admin/article/<?php echo $post->photo; ?>" alt="Article Photo">
+                        <img class="img-fluid img-thumbnail" src="../admin/article/<?php echo $post->photo; ?>" alt="Article Photo" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                     </a>
                 </div>
-        <?php
+                <?php
             }
         }
         ?>

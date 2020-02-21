@@ -17,7 +17,12 @@ class FrontEnd extends Core
         $dbConnection = $database->dbConnection();
         $this->pdo = $dbConnection;
     }
-
+    /**
+     * Will fetch data from database
+     *
+     * @param [type] $query
+     * @return void
+     */
     public function frontEndDataAndPagination($query)
     {
         try {
@@ -37,7 +42,13 @@ class FrontEnd extends Core
         }
     }
 
-    //Pagination begins
+    /**
+     * Will fetch data for pagination
+     *
+     * @param [type] $table
+     * @param [type] $records_per_page
+     * @return void
+     */
     public function paging($table, $records_per_page)
     {
         try {
@@ -56,6 +67,12 @@ class FrontEnd extends Core
         }
     }
 
+    /**
+     * [pagingLink description]
+     * @param  [type] $table            [description]
+     * @param  [type] $records_per_page [description]
+     * @return [type]                   [description]
+     */
     public function pagingLink($table, $records_per_page)
     {
         try {
@@ -103,8 +120,8 @@ class FrontEnd extends Core
     /**
      * Will redirect header as desired
      *
-     * @param [type] $home_url
-     * @return void
+     * @param  [string] $home_url
+     * @return $home_url
      */
     public function redirect($home_url)
     {

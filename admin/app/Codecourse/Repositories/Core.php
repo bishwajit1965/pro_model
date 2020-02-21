@@ -104,7 +104,7 @@ class Core
             return !empty($value) ? $value : false;
         } catch (PDOException $e) {
             $this->pdo->rollBack();
-            echo 'ERROR !!! '.$e->getMessage();
+            echo 'ERROR !!! ' . $e->getMessage();
         }
     }
 
@@ -118,7 +118,7 @@ class Core
     $query->bindParam(":phone", $phone);
     $query->execute();
     */
-    
+
     public function insert($table, $data)
     {
         try {
@@ -341,10 +341,11 @@ class Core
         }
     }
     /**
-     * Search data from databse
-     * @table [type] variable
-     * @search [type] variable
-     * @return $searchedData
+     * Will search data from database
+     *
+     * @param  [array] $table
+     * @param  [search] $search
+     * @return true
      */
     public function searchData($table, $search)
     {
@@ -382,6 +383,31 @@ class Core
             $foundRows = $stmt->rowCount();
             return $foundRows ? true : false;
         } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            echo $e->getMessage();
+        }
+    }
+    /**
+     * Will check if there is data in database
+     *
+     * @param [type] $table
+     * @return void
+     */
+    public function dataExists($table)
+    {
+        try {
+            $this->pdo->beginTransaction();
+            $query = "SELECT * FROM $table";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $this->pdo->commit();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $profileData[] = $data;
+                }
+                return $profileData;
+            }
+        } catch (PDOExceptin $e) {
             $this->pdo->rollBack();
             echo $e->getMessage();
         }
