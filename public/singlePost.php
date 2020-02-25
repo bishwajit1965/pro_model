@@ -16,7 +16,6 @@
 
 <!-- Content area -->
 <div class="container">
-    <!-- Middle content area -->
 
     <?php
     // Class loader
@@ -58,7 +57,7 @@
         <div class="post">
             <?php
             if (!empty($article->photo)) { ?>
-                <img class="img-fluid img-thumbnail mb-3 w-100 h-75" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <img class="img-fluid img-thumbnail mb-3 w-100" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);height:350px;margin-top:30px;">
                 <?php
             } else {
             }
@@ -131,7 +130,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1>Posts in the same category</h1>
-            <span style="color:#888;font-weight:600;"><strong>Category :</strong>
+            <span style="color:#888;font-weight:600;"><strong>Category :</strong></span>
                 <?php
                 if (!empty($categoryData)) {
                     foreach ($categoryData as $categoryResult) {
@@ -145,15 +144,15 @@
                 ?>
         </div>
     </div>
-    <div class="row">
+    <div class="row py-4">
         <?php
         $postData = $core->select($table);
         foreach ($postData as $post) {
             if ($post->category_id == $article->category_id) {
                 ?>
-                <div class="col-sm-2 p-1">
+                <div class="col-sm-2">
                     <a href="singlePost.php?post_id=<?php echo $post->id; ?>">
-                        <img class="img-fluid img-thumbnail" src="../admin/article/<?php echo $post->photo; ?>" alt="Article Photo" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                        <img class="img-fluid img-thumbnail w-100" src="../admin/article/<?php echo $post->photo; ?>" alt="Article Photo" style="height:100px;" data-toggle="tooltip" title="<?php echo $post->description; ?>">
                     </a>
                 </div>
                 <?php
@@ -162,8 +161,6 @@
         ?>
     </div>
     <!-- /Posts in the same category -->
-
-    <!-- /Middle content area -->
 </div>
 <!-- /Content area -->
 

@@ -26,7 +26,7 @@ require_once '../admin/app/start.php';
     <script src="https://kit.fontawesome.com/1b551efcfa.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <!-- <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="css/normalize.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/responsive.css">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
     
@@ -46,10 +46,10 @@ require_once '../admin/app/start.php';
         }
         .post h1 {
             font-family: 'Roboto', sans-serif;
-            font-size: 2.5em;
+            font-size: 3.5em;
             line-height: 45px;
             font-weight:800;
-            text-shadow: 1px 2px 3px #333;
+            /* text-shadow: 1px 2px 3px #333; */
             color: #222;
         }
 

@@ -27,8 +27,8 @@ if (isset($path)) {
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <!-- <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet"> -->
     <!-- Custom style sheets -->
-    <!-- <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/normalize.css"> -->
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/responsive.css" rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/custom.css">
     <style>
@@ -57,13 +57,22 @@ if (isset($path)) {
             text-decoration: none;
         }
         .post h1 {
-            font-family: 'Roboto', sans-serif;
+            /* font-family: 'Roboto', sans-serif;
             font-size: 2.5em;
             line-height: 45px;
             font-weight:800;
-            margin-top: 40px;
+            margin-top: 20px;
             text-shadow: 1px 2px 3px #333;
-            color: #222;
+            color: #222; */
+        }
+        hr.type_7 {
+            margin: auto;
+            border: 0;
+            height: 50px;
+            background-image: url(img/type_7.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100%;
         }
     </style>
 </head>
@@ -113,7 +122,7 @@ if (isset($path)) {
             <?php require_once 'partials/_leftSideBar.php'; ?>
             <!-- /Left side bar -->
 
-            <!-- Middle contant area -->
+            <!-- Middle content area -->
             <div class="col-sm-6 main-content" style="overflow:auto;">
                 <!-- Display validation message if any -->
                 <div class="row d-block">
@@ -189,13 +198,13 @@ if (isset($path)) {
                         <p>
                             <a href="singlePost.php?post_id=<?php echo $article->id; ?>" class="btn btn-sm btn-primary" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"><i class="fas fa-book-open"></i> Read More</a>
                         </p>
-                    </div>
+                    </div><hr class="type_7">
                     <?php
                 }
                 ?>
                 <!-- Pagination begins -->
                 <div class="row d-flex justify-content-center">
-                    <nav aria-label="Page navigation example ">
+                    <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <?php $frontEnd->pagingLink($table, $records_per_page); ?>
                         </ul>
@@ -203,7 +212,7 @@ if (isset($path)) {
                 </div>
                 <!-- /Pagination ends -->
             </div>
-            <!-- /Middle contant area -->
+            <!-- /Middle content area -->
 
             <!-- Right side bar -->
             <?php require_once 'partials/_rightSideBar.php'; ?>

@@ -249,6 +249,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             </a>
             <ul class="treeview-menu">
               <li><a href="../article/articleIndex.php"><i class="fa fa-circle-o"></i> Article Index</a></li>
+              <li><a href="../aboutUs/aboutUsIndex.php"><i class="fa fa-circle-o"></i> About Us Index</a></li>
               <li><a href="../category/categoryIndex.php"><i class="fa fa-circle-o"></i> Category Index</a></li>
               <li><a href="../copyright/copyrightIndex.php"><i class="fa fa-circle-o"></i> Copyright Index</a></li>
               <li><a href="../footer/footerIndex.php"><i class="fa fa-circle-o"></i> Footer Index</a></li>

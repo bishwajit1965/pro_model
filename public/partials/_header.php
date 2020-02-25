@@ -112,8 +112,8 @@ $limit = ['limit' => '1'];
                             line-height: 40px;
                         }
                     </style>
-                    <h1><?php echo $header->title; ?> </h1>
-                    <h2><?php echo $header->slogan; ?> </h2>
+                    <h1 style="text-shadow:1px 2px 3px #000;"><?php echo $header->title; ?> </h1>
+                    <h3><?php echo $header->slogan; ?> </h3>
                     <hr style="width:30%;height:3px;background-color:#DDD;border-radius:5px;">
                     <?php
                 }

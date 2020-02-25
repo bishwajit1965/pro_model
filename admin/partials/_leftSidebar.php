@@ -39,6 +39,18 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
+                    <span>About Us Options</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../aboutUs/aboutUsIndex.php"><i class="fa fa-circle-o"></i> About Us Index</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
                     <span>Article Options</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>

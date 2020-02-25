@@ -72,5 +72,4 @@
  </script>
  <!-- /Tooltip -->
 
-
- <?php ob_flush(); ?>
+<?php ob_flush(); ?>

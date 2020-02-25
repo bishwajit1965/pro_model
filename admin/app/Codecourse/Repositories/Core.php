@@ -22,6 +22,7 @@ class Core
         $dbConnection = $database->dbConnection();
         $this->pdo = $dbConnection;
     }
+    
     // Read data from database
     /*
     $sql = "SELECT * FROM tbl_student WHERE id = :id AND email = :email LIMIT 5";
@@ -237,11 +238,9 @@ class Core
                 }
                 $sql = 'UPDATE ' . $table . ' SET ' . $keyValue . $whereCond;
                 $query = $this->pdo->prepare($sql);
-
                 foreach ($data as $key => $value) {
                     $query->bindValue(":$key", $value);
                 }
-
                 foreach ($cond as $key => $value) {
                     $query->bindValue(":$key", $value);
                 }
@@ -407,7 +406,7 @@ class Core
                 }
                 return $profileData;
             }
-        } catch (PDOExceptin $e) {
+        } catch (PDOException $e) {
             $this->pdo->rollBack();
             echo $e->getMessage();
         }

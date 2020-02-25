@@ -127,4 +127,51 @@ class FrontEnd extends Core
     {
         header("Location: $home_url");
     }
+    /**
+     * Will fetch random data from database for footer area
+     *
+     * @param [type] $table
+     * @return void
+     */
+    public function selectRandomArticle($table)
+    {
+        try {
+            $this->pdo->beginTransaction();
+            $query = "SELECT * FROM $table WHERE published_on <= NOW() && status = 0 ORDER BY RAND() LIMIT 16";
+
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($randomData = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $randomArticle[] = $randomData;
+                }
+                $this->pdo->commit();
+                return !empty($randomArticle) ? $randomArticle : false;
+            }
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            echo $e->getMessage();
+        }
+    }
+
+    public function selectData($table)
+    {
+        try {
+            $this->pdo->beginTransaction();
+            $query = "SELECT * FROM $table LIMIT 1";
+
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($randomData = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $randomArticle[] = $randomData;
+                }
+                $this->pdo->commit();
+                return !empty($randomArticle) ? $randomArticle : false;
+            }
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            echo $e->getMessage();
+        }
+    }
 }

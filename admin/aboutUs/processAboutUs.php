@@ -1,15 +1,15 @@
 <?php
 require_once '../app/start.php';
 
-use CodeCourse\Repositories\Category as Category;
+use CodeCourse\Repositories\AboutUs as AboutUs;
 use CodeCourse\Repositories\Helpers as Helpers;
 use CodeCourse\Repositories\Session as Session;
 
-$category = new Category();
+$aboutUs = new AboutUs();
 $helpers = new Helpers();
 Session::init();
 $sessionId = session_id();
-$table = 'tbl_category';
+$table = 'tbl_about_us';
 
 // Accessor to switch CRUD options in switch
 $accessor = $_POST['submit'];
@@ -19,36 +19,35 @@ case 'insert':
         if ($_REQUEST['action'] == 'verify') {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['submit'])) {
-                    // Insertable field with validation
-                    $category_name = $helpers->validate($_POST['category_name']);
+                    //Insertable field with validation
+                    $about_us = $helpers->validate($_POST['about_us']);
                     // Validation
-                    if (empty($category_name)) {
+                    if (empty($about_us)) {
                         $message = '<div class="alert alert-danger alert-dismissible " role="alert">
-                            <strong> ERROR !!!</strong> Category field was left blank !!!
+                            <strong> ERROR !!!</strong> About us field was left blank !!!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                             </div>';
                         Session::set('message', $message);
-                        $home_url = 'addCategory.php';
-                        $category->redirect("$home_url");
+                        $home_url = 'addAboutUs.php';
+                        $aboutUs->redirect("$home_url");
                     } else {
-                        // Insertable data associative array
                         $fields = [
-                            'category_name' => $category_name
+                            'about_us' => $about_us
                         ];
-                        $insertedData = $category->insert($table, $fields);
+                        $insertedData = $aboutUs->insert($table, $fields);
                         // validation messages and page redirects
                         if ($insertedData) {
                             $message = '<div class="alert alert-success alert-dismissible " role="alert">
-                            <strong> WOW !</strong> Category has been inserted successsfully !!!
+                            <strong> WOW !</strong> About us data has been inserted successfully !!!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                             </div>';
                             Session::set('message', $message);
-                            $home_url = 'categoryIndex.php';
-                            $category->redirect("$home_url");
+                            $home_url = 'aboutUsIndex.php';
+                            $aboutUs->redirect("$home_url");
                         }
                     }
                 }
@@ -56,42 +55,39 @@ case 'insert':
         }
     }
     break;
-
-
+    
 case 'update':
     if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
         if ($_REQUEST['action'] == 'verify') {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['submit'])) {
                     if (isset($_POST['submit'])) {
-                        $id = $_POST['category_id'];
-                        $category_name = $helpers->validate($_POST['category_name']);
-                        $fields = [
-                            'category_name' => $category_name
-                        ];
-                        $condition = ['category_id' => $id];
-                        $updateStatus = $category->updateWithoutPhoto($table, $fields, $condition);
+                        $id = $_POST['id'];
+                        $about_us = $helpers->validate($_POST['about_us']);
+                        $fields = ['about_us' => $about_us];
+                        $condition = ['id' => $id];
+                        $updateStatus = $aboutUs->updateWithoutPhoto($table, $fields, $condition);
                         // validation messages and page redirects
                         if ($updateStatus) {
                             $message = '<div class="alert alert-success alert-dismissible " role="alert">
-                            <strong> WOW !!!</strong> Category has been updated successfully !!!
+                            <strong> WOW !!!</strong> About us data has been updated successfully !!!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                             </div>';
                             Session::set('message', $message);
-                            $home_url = 'categoryIndex.php';
-                            $category->redirect("$home_url");
+                            $home_url = 'aboutUsIndex.php';
+                            $aboutUs->redirect("$home_url");
                         } else {
                             $message = '<div class="alert alert-warning alert-dismissible " role="alert">
-                            <strong> WARNING !!!</strong> Category has not been updated successfully. No data has been provided !!!
+                            <strong> WARNING !!!</strong> About us data has not been updated successfully. No data has been provided !!!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                             </div>';
                             Session::set('message', $message);
-                            $home_url = 'categoryIndex.php';
-                            $category->redirect("$home_url");
+                            $home_url = 'aboutUsIndex.php';
+                            $aboutUs->redirect("$home_url");
                         }
                     }
                 }
@@ -104,22 +100,22 @@ case 'delete':
         if ($_REQUEST['action'] == 'verify') {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['submit'])) {
-                    $id = $_POST['category_id'];
+                    $id = $_POST['id'];
                     $condition = [
-                        'category_id' => $id
+                        'id' => $id
                     ];
-                    $deleteStatus = $category->delete($table, $condition);
+                    $deleteStatus = $aboutUs->delete($table, $condition);
                     // validation messages and page redirects
                     if ($deleteStatus) {
                         $message = '<div class="alert alert-success alert-dismissible " role="alert">
-                        <strong> WOW !</strong> Category data has been deleted successfully !!!
+                        <strong> WOW !</strong> About us data has been deleted successfully !!!
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                         </div>';
                         Session::set('message', $message);
-                        $home_url = 'categoryIndex.php';
-                        $category->redirect("$home_url");
+                        $home_url = 'aboutUsIndex.php';
+                        $aboutUs->redirect("$home_url");
                     }
                 }
             }
@@ -127,7 +123,7 @@ case 'delete':
     }
     break;
 
-default:
-    // code...
-    break;
+    default:
+        // code...
+        break;
 }
