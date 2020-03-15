@@ -5,37 +5,49 @@ namespace CodeCourse\Repositories;
 use CodeCourse\Repositories\Database as Database;
 use PDO;
 use PDOException;
-
+/**
+ * Log in customer/viewers
+ */
 class LoginCustomer
 {
     // Database connection constructor
-    private $conn;
-
+    private $pdo;
+    /**
+     * Constructor for database connection
+     */
     public function __construct()
     {
         $database = new Database();
         $dbConnection = $database->dbConnection();
-        $this->conn = $dbConnection;
+        $this->pdo = $dbConnection;
     }
+    /**
+     * Log in method
+     *
+     * @param string $email 
+     * @param string $table 
+     *
+     * @return void
+     */
     public function logIn($email, $table)
     {
         try {
             $query = "SELECT * FROM $table WHERE email=:email";
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute([':email' => $email]);
-            $customerData = $stmt->fetch(PDO::FETCH_OBJ);
-            if ($stmt->rowCount() == 1) {
-                if (!empty($customerData)) {
-                    return $customerData;
-                } else {
-                    return false;
-                }
-            }
+            $loginData = $stmt->fetch(PDO::FETCH_OBJ);
+            return isset($loginData) ? $loginData : false;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
-    // Redirect to desired page
+    /**
+     * Redirecting method
+     *
+     * @param string $url 
+     *
+     * @return void
+     */
     public function redirect($url)
     {
         header("Location: $url");

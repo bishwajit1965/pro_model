@@ -20,16 +20,6 @@
         <?php require_once 'partials/_leftSideBar.php'; ?>
         <div class="col-sm-6 main-content" style="overflow:auto;">
             <h1>Master Template</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt rem possimus expedita enim
-                rerum soluta nesciunt blanditiis distinctio quasi mollitia sequi, beatae veritatis corporis
-                deleniti, adipisci iusto reprehenderit voluptatem officia odit sed quis pariatur exercitationem
-                provident. Quod ad dolore iste dolorum delectus impedit nulla minus assumenda natus, numquam
-                reiciendis fugiat esse, unde ea quasi, cum est cupiditate iusto aut libero. Id officiis
-                consequuntur obcaecati necessitatibus tempore debitis sapiente ipsa a odit nostrum temporibus,
-                error dolor, voluptates itaque enim nobis velit eaque perspiciatis quasi cupiditate explicabo
-                facere culpa? Delectus recusandae, culpa facere nesciunt voluptates voluptas neque corporis
-            </p>
 
             <?php
             // Load classes

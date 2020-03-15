@@ -1,15 +1,88 @@
-@media (min-width: 576px) {
-  .card {}
-
-  .card-title {
-    font-size: 14px;
-  }
-
-  .cart-items input {
-    display: block;
-  }
+@media only screen and (min-width:320px) {
+    .random-articles-photo {
+        width: 25%;
+    }
+    .post h1 {
+        font-size: 25px;
+    }
+    a {
+        color: #999;
+    }
+    .posts-same-category {
+        width: 50%;
+    }
+    .header-area>h1 {
+        font-size: 135% !important;
+        line-height: 100% !important;
+    }
+    .header-area>h3 {
+        font-size: 100% !important;
+        line-height: 100% !important;
+    }
+    .header-area>h6 {
+        font-size: 80% !important;
+        line-height: 100% !important;
+    }
+    .post>a>h1{
+        font-size: 125% !important;
+    }
+    .like {
+        width:15%;
+    }
+    .message {
+        width:15%;
+    }
+    .dislike {
+        width:70%;
+    }
 }
 
-@media (min-width: 320px) {
-  .log-in {display: block;}
+@media only screen and (min-width:575px) {
+    .random-articles-photo {
+        width: 25%;
+    }
+}
+
+@media only screen and (min-width:768px) {
+    .random-articles-photo {
+        width: 25%;
+    }
+}
+
+@media only screen and (min-width:992px) {
+    .random-articles-photo {
+        width: 25%;
+    }
+}
+
+@media only screen and (min-width:1200px) {
+    .random-articles-photo {
+        width: 25%;
+    }
+    .header-area>h1 {
+        font-size: 380% !important;
+        line-height: 150% !important;
+    }
+    .header-area>h3 {
+        font-size: 210% !important;
+        line-height: 150% !important;
+    }
+    .header-area>h6 {
+        font-size: 150% !important;
+        line-height: 150% !important;
+    }
+    .post>a>h1 {
+        font-size: 200% !important;
+    }
+    .like {
+        width: 20%;
+    }
+
+    .message {
+        width: 60%;
+    }
+
+    .dislike {
+        width: 20%;
+    }
 }

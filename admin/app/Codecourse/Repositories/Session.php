@@ -4,7 +4,11 @@ namespace CodeCourse\Repositories;
 
 class Session
 {
-    // Verify php version and then will start session
+    /**
+     * Session initiating method
+     *
+     * @return void
+     */
     public static function init()
     {
         if (version_compare(phpversion(), '5.4.0', '<')) {
@@ -18,26 +22,37 @@ class Session
         }
     }
 
-    // Session key is set
+    /**
+     * Undocumented function
+     *
+     * @param  key $key commented
+     * @param  val $val commented
+     * @return void
+     */
     public static function set($key, $val)
     {
         $_SESSION[$key] = $val;
     }
 
-    // Session key is grabbed
+    /**
+     * Undocumented function
+     *
+     * @param  key $key should be dealt
+     * @return key
+     */
     public static function get($key)
     {
         if (isset($_SESSION[$key])) {
-
-
-            
             return $_SESSION[$key];
-        } else {
-            return false;
         }
+        return false; 
     }
 
-    // Session state Checking
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public static function checkSession()
     {
         self::init();
@@ -47,7 +62,11 @@ class Session
         }
     }
 
-    // Checking login
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public static function checkLogin()
     {
         self::init();
@@ -56,11 +75,27 @@ class Session
         }
     }
 
-    // Destroying session ang logging out
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public static function destroy()
     {
         session_destroy();
         session_unset();
         header('Location:login.php');
+    }
+
+    /**
+     * Redirect url function.
+     *
+     * @param url $url commented
+     *
+     * @return void
+     */
+    public function redirect($url)
+    {
+        header('Location:' . $url);
     }
 }

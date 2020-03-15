@@ -2,9 +2,9 @@
 
 require_once '../app/start.php';
 
+use CodeCourse\Repositories\Helpers as Helpers;
 use CodeCourse\Repositories\Link as Link;
 use CodeCourse\Repositories\Session as Session;
-use CodeCourse\Repositories\Helpers as Helpers;
 
 // Classes instantiated
 $link = new Link();
@@ -15,7 +15,7 @@ $sessionId = session_id();
 // Table to be operated upon
 $table = 'tbl_link';
 
-// Accessor to swith CRUD options in switch
+// Accessor to switch CRUD options in switch
 $accessor = $_POST['submit'];
 switch ($accessor) {
 case 'insert':
@@ -24,13 +24,13 @@ case 'insert':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['submit'])) {
                     // Insertable field with validation
-                    $title = $helpers->validate($_POST['title']);
-                    $email = $helpers->validate(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
-                    $phone = $helpers->validate($_POST['phone']);
-                    $url = $helpers->validate($_POST['url']);
-                    $address = $helpers->validate($_POST['address']);
-                    $zipcode = $helpers->validate($_POST['zipcode']);
-                    $country = $helpers->validate($_POST['country']);
+                    $title = $helpers->validation($_POST['title']);
+                    $email = $helpers->validation(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
+                    $phone = $helpers->validation($_POST['phone']);
+                    $url = $helpers->validation($_POST['url']);
+                    $address = $helpers->validation($_POST['address']);
+                    $zipcode = $helpers->validation($_POST['zipcode']);
+                    $country = $helpers->validation($_POST['country']);
                     // Validation
                     if (empty($title)) {
                         $message = '<div class="alert alert-danger alert-dismissible " role="alert">
@@ -139,13 +139,13 @@ case 'update':
                 if (isset($_POST['submit'])) {
                     if (isset($_POST['submit'])) {
                         $id = $_POST['id'];
-                        $title = $helpers->validate($_POST['title']);
-                        $email = $helpers->validate(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
-                        $phone = $helpers->validate($_POST['phone']);
-                        $url = $helpers->validate($_POST['url']);
-                        $address = $helpers->validate($_POST['address']);
-                        $zipcode = $helpers->validate($_POST['zipcode']);
-                        $country = $helpers->validate($_POST['country']);
+                        $title = $helpers->validation($_POST['title']);
+                        $email = $helpers->validation(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
+                        $phone = $helpers->validation($_POST['phone']);
+                        $url = $helpers->validation($_POST['url']);
+                        $address = $helpers->validation($_POST['address']);
+                        $zipcode = $helpers->validation($_POST['zipcode']);
+                        $country = $helpers->validation($_POST['country']);
                         $fields = [
                             'title' => $title,
                             'email' => $email,

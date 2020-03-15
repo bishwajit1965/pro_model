@@ -17,8 +17,7 @@
 <!-- Middle content area -->
 <div class="container-fluid">
     <div class="row">
-        <?php require_once 'partials/_leftSideBar.php'; ?>
-        <div class="col-sm-6 main-content" style="overflow:auto;">
+        <div class="col-sm-12 search-page" style="overflow:auto;">
             <?php
             // Load classes
             require_once '../admin/app/start.php';
@@ -105,22 +104,7 @@
             } else {
                 ?>
                 <div class="row">
-                    <style>
-                        h1 {
-                            font-family: Arial, Helvetica, sans-serif;
-                            font-size: 40px;
-                            line-height: 50px;
-                        }
-
-                        h2 {
-                            line-height: 40px;
-                        }
-
-                        .content {
-                            min-height: 300px;
-                        }
-                    </style>
-                    <div class="m-auto text-danger text-center content">
+                    <div class="m-auto text-danger text-center">
                         <h1>SORRY ! NO DATA FOUND</h1>
                         <h2>The searched data is not available in the database yet.</h2>
                         <h2>You may try another one.</h2>
@@ -130,9 +114,6 @@
             }
             ?>
         </div>
-        <!-- Right side bar -->
-        <?php require_once 'partials/_rightSideBar.php'; ?>
-        <!-- /Right side bar -->
     </div>
 </div>
 <!-- /Middle content area -->

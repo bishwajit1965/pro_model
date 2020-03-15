@@ -8,18 +8,21 @@ use CodeCourse\Repositories\Session as Session;
 use CodeCourse\Repositories\Helpers as Helpers;
 use CodeCourse\Repositories\Logo as Logo;
 use CodeCourse\Repositories\Link as Link;
+use CodeCourse\Repositories\viewersSessions as viewersSessions;
 
 // Classes instantiated
 $header = new Header();
 $link = new Link();
 $logo = new Logo;
 $helpers = new Helpers();
+$viewersSession = new viewersSessions();
 Session::init();
 
 // Tables to be operated upon
 $table = 'tbl_header';
 $tableLogo = 'tbl_logo';
 $tableLink = 'tbl_link';
+$tableSession = 'tbl_session';
 
 // Limit of fetching data
 $limit = ['limit' => '1'];
@@ -38,7 +41,7 @@ $limit = ['limit' => '1'];
         ?>'>
         <!-- Header top area -->
         <div class="col-sm-12">
-            <div class="row">
+            <div class="row pt-2">
                 <div class="col-sm-6">
                     <ul class="nav">
                         <li class="nav-item">
@@ -53,36 +56,42 @@ $limit = ['limit' => '1'];
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Link</a>
                         </li>
-                        <li class="nav-item text-white">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>
                     </ul>
                 </div>
-                <div class="col-sm-6 ">
+                <div class="col-sm-6 pt-1">
                     <ul class="nav justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Link</a>
-                        </li>
-                        <li class="nav-item text-white">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>
+                        <?php
+                        if (Session::get('login') == true) {
+                            ?>
+                            <li class="nav-item">
+                                <form action="processViewerLoginRegister.php" method="post" class="d-inline">
+                                    <input type="hidden" name="action" value="verify">
+                                    <button type="submit" onclick="return confirm('Are you sure to log out ?');" name="submit" value="log_out" class="btn btn-sm btn-danger"><i class="fas fa-sign-out-alt"></i> Log out</button>
+                                </form>
+                            </li>
+                            <?php
+                        } else {
+                            ?>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="login.php"><i class="fas fa-sign-in-alt"></i> Log in</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="register.php"><i class="fas fa-user-plus"></i> Register</a>
+                            </li>
+                            <?php 
+                        }
+                        ?>
+                        
                     </ul>
                 </div>
             </div>
-            <hr style="height: 1px;background-color:#0000ff;border:1px solid #1FB0C5;">
+            <!-- <div class="border bg-danger py-1"></div>
+            <hr style="height: 1px;background-color:#0000ff;border:1px solid #1FB0C5;"> -->
         </div>
         <!-- /Header top area ends -->
 
-        <div class="col-sm-2 mt- p-" style='background-repeat:no-repeat;
+        <div class="col-sm-2" style='background-repeat:no-repeat;
         <?php
         $logoData = $logo->select($tableLogo, $limit);
         if (!empty($logoData)) {
@@ -94,27 +103,16 @@ $limit = ['limit' => '1'];
         }
         ?>'>
         </div>
-        <div class="col-sm-8 text-center header-title">
+        <div class="col-sm-8 text-center header-area">
             <?php
             if (!empty($headerData)) {
                 foreach ($headerData as $header) {
                     ?>
-                    <style>
-                        .header-title h1 {
-                            font-size: 60px;
-                            font-weight: 800;
-                            line-height: 60px;
-                        }
-
-                        .header-title h2 {
-                            font-size: 40px;
-                            font-weight: 800;
-                            line-height: 40px;
-                        }
-                    </style>
-                    <h1 style="text-shadow:1px 2px 3px #000;"><?php echo $header->title; ?> </h1>
+                    <h1><?php echo $header->title; ?> </h1>
                     <h3><?php echo $header->slogan; ?> </h3>
-                    <hr style="width:30%;height:3px;background-color:#DDD;border-radius:5px;">
+                    <h6><strong>Working since: </strong><?php echo $helpers->dateFormat($header->created_at); ?>
+                    </h6>
+                    <hr>
                     <?php
                 }
             }

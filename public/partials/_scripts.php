@@ -1,6 +1,9 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+ <!-- CK Editor -->
+<script src="../admin/bower_components/ckeditor/ckeditor.js"></script>
+<!-- CK Editor -->
  <!-- Scroll top -->
  <script src="js/scrolltop.js"></script>
 
@@ -22,7 +25,17 @@
      }
  </script>
  <!-- /Sticky navbar -->
-
+<!-- CK Editor -->
+<script>
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('editor1')
+    //bootstrap WYSIHTML5 - text editor
+    $('.textarea').wysihtml5()
+  })
+</script>
+<!-- /CK Editor -->
 
  <!-- Code injected by live-server -->
  <script type="text/javascript">

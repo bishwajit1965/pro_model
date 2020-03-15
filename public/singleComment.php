@@ -57,7 +57,7 @@
                 <span style="color:#999;font-weight:800;"><strong> on :</strong> <?php echo $helpers->dateFormat($contact->created_at); ?></span>
             </p>
             
-            <p style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"><strong> Commented that :</strong> <?php echo $contact->message; ?></p>
+            <p style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;"><strong> Commented that :</strong> <?php echo $contact->message; ?></p>
 
             <p>
                 <a href="index.php" class="btn btn-sm btn-primary" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">

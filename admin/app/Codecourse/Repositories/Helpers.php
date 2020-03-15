@@ -7,19 +7,19 @@ class Helpers
     /**
      * Will show formatted date
      *
-     * @param [type] $data
-     * @return $data
+     * @param  Data $data Commented
+     * @return  $data
      */
     public function dateFormat($date)
     {
         return date('F j, Y, g:i a', strtotime($date));
     }
     /**
-     * Will shorten text
+     * Text shortener method
      *
-     * @param [type] $text
-     * @param [type] $limit
-     * @return $text and $limit
+     * @param  text $text commented 
+     * @param  integer $limit commented
+     * @return void
      */
     public function textShorten($text, $limit = 400)
     {
@@ -32,10 +32,10 @@ class Helpers
     /**
      * Will validate and trim data
      *
-     * @param [type] $data
-     * @return $data
+     * @param  Data $data commented about this variable
+     * @return  Data $data Commented
      */
-    public function validate($data)
+    public function validation($data)
     {
         $data = trim($data);
         $data = stripslashes($data);
@@ -43,10 +43,9 @@ class Helpers
         return $data;
     }
     /**
-     * Will change title to upper case
+     * Title to be made upper case
      *
-     * @param [type] $title
-     * @return $title
+     * @return void
      */
     public function title()
     {
@@ -60,5 +59,17 @@ class Helpers
             $title = 'testimonials';
         }
         return $title = ucwords($title);
+    }
+
+    /**
+     * Redirect url function.
+     *
+     * @param url $url commented
+     *
+     * @return void
+     */
+    public function redirect($url)
+    {
+        header('Location:' . $url);
     }
 }

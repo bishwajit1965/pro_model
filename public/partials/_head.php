@@ -1,13 +1,15 @@
 <?php
 ob_start();
+require_once '../admin/app/start.php';
+use CodeCourse\Repositories\Session as Session;
+Session::init();
 
 // Detects file name
 $path = $_SERVER['SCRIPT_FILENAME'];
 if (isset($path)) {
     $current_page = basename($path, '.php');
 }
-// Class loader
-require_once '../admin/app/start.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,37 +26,8 @@ require_once '../admin/app/start.php';
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <!-- Font awesome kit-->
     <script src="https://kit.fontawesome.com/1b551efcfa.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="css/custom.css">
-    
-    <style>
-        .color {
-            color: #FFF;
-        }
-
-        .navbar {
-            z-index: 999;
-        }
-
-        .sticky {
-            position: fixed;
-            top: 0;
-            width: 100%;
-        }
-        .post h1 {
-            font-family: 'Roboto', sans-serif;
-            font-size: 3.5em;
-            line-height: 45px;
-            font-weight:800;
-            /* text-shadow: 1px 2px 3px #333; */
-            color: #222;
-        }
-
-        .sticky+.main-content {
-            padding-top: 60px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>

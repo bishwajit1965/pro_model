@@ -37,17 +37,17 @@
                 <a href="<?php echo $socialMedia->name; ?>" target="blank">
                 <?php
                 if ($socialMedia->name == 'https://www.facebook.com') {
-                    echo '<i class="fab fa-facebook"></i>';
+                    echo '<i class="fab fa-facebook text-white"></i>';
                 } elseif ($socialMedia->name == 'https://www.twitter.com') {
-                    echo '<i class="fab fa-twitter"></i>';
+                    echo '<i class="fab fa-twitter text-white"></i>';
                 } elseif ($socialMedia->name == 'https://www.linkedin.com') {
-                    echo '<i class="fab fa-linkedin"></i>';
+                    echo '<i class="fab fa-linkedin text-white"></i>';
                 } elseif ($socialMedia->name == 'https://www.youtube.com') {
-                    echo '<i class="fab fa-youtube"></i>';
+                    echo '<i class="fab fa-youtube text-white"></i>';
                 } elseif ($socialMedia->name == 'https://www.stackoverflow.com') {
-                    echo '<i class="fab fa-stack-overflow"></i>';
+                    echo '<i class="fab fa-stack-overflow text-white"></i>';
                 } elseif ($socialMedia->name == 'https://www.github.com') {
-                    echo '<i class="fab fa-github"></i>';
+                    echo '<i class="fab fa-github text-white"></i>';
                 } else {
                 }
                 ?>
@@ -160,6 +160,19 @@
                     if ($_REQUEST['action'] == 'verify') {
                         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             if (isset($_POST['submit'])) {
+                                ?>
+                                <form action="" method="post">
+                                    <div class="form-group">
+                                      <label for="archive">Archive</label>
+                                      <select class="form-control" name="archive" id="archive">
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                      </select>
+                                    </div>
+                                    <button type="submit" name="submit" value="" class="btn btn-sm btn-primary"> Get Data</button>
+                                </form>
+                                <?php
                             }
                         }
                     }
@@ -177,7 +190,7 @@
         </div>      
         <div class="row">
             <?php
-            $limit = ['limit' => '5'];
+            $limit = ['limit' => '4'];
             $recentPosts = $core->select($table, $limit);
             if (!empty($recentPosts)) {
                 foreach ($recentPosts as $post) {

@@ -12,4 +12,4 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <!-- /Facebook Javascript SDK -->
-    <div class="top-header-bar bg-info py-1"></div>
+    <div class="top-header-bar bg-dark py-1"></div>

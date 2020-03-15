@@ -65,7 +65,7 @@ case 'update':
                 if (isset($_POST['submit'])) {
                     if (isset($_POST['submit'])) {
                         $id = $_POST['category_id'];
-                        $category_name = $helpers->validate($_POST['category_name']);
+                        $category_name = $helpers->validation($_POST['category_name']);
                         $fields = [
                             'category_name' => $category_name
                         ];

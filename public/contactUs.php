@@ -17,64 +17,55 @@
 <!-- Middle content area -->
 <div class="container-fluid">
     <div class="row">
-        <?php require_once 'partials/_leftSideBar.php'; ?>
-        <div class="col-sm-6 main-content" style="overflow:auto;">
-            <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt rem possimus expedita enim
-                rerum soluta nesciunt blanditiis distinctio quasi mollitia sequi, beatae veritatis corporis
-                deleniti, adipisci iusto reprehenderit voluptatem officia odit sed quis pariatur exercitationem
-                provident. Quod ad dolore iste dolorum delectus impedit nulla minus assumenda natus, numquam
-                reiciendis fugiat esse, unde ea quasi, cum est cupiditate iusto aut libero. Id officiis
-                consequuntur obcaecati necessitatibus tempore debitis sapiente ipsa a odit nostrum temporibus,
-                error dolor, voluptates itaque enim nobis velit eaque perspiciatis quasi cupiditate explicabo
-                facere culpa? Delectus recusandae, culpa facere nesciunt voluptates voluptas neque corporis
-                voluptate tenetur praesentium, quidem a voluptatem optio ratione harum quia quisquam, rem
-                molestias ea vero aperiam veniam repellat ad! Nostrum minima sint in. Quisquam, incidunt aliquam
-                voluptatum, culpa voluptates quia expedita nostrum commodi nulla eaque quae adipisci
-                consequuntur, voluptatem atque quidem. Aspernatur est dicta quis nam. Atque saepe facilis
-                voluptatem omnis explicabo, fugit ut architecto ab in, deleniti eius natus neque vero officiis
-                ipsam repellendus praesentium provident amet error! Deleniti esse aliquam consequatur nam ab sed
-                itaque incidunt et neque id atque accusamus ad autem nulla recusandae odio enim mollitia, iure
-                dolorum error natus in rem facere? Cupiditate similique, velit voluptatibus nisi cumque
-                obcaecati?
-            </p>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 contact-us mb-4" style="overflow:auto;">
+            <h1>Contact us</h1>
 
             <?php
             // Load classes
             require_once '../admin/app/start.php';
 
             // Use the classes needed
-            use CodeCourse\Repositories\FrontEnd as FrontEnd;
-
-            $frontEnd = new FrontEnd();
-            // Table to be operated upon
-            $table = 'tbl_articles';
-
-            $records_per_page = 2;
-            $articleData = $frontEnd->paging($table, $records_per_page);
-            $articles = $frontEnd->frontEndDataAndPagination($articleData);
-            foreach ($articles as $article) {
-                ?>
-                <h1><?php echo $article->title; ?></h1>
-                <h4><?php echo $article->description; ?></h4>
-                <p><?php echo htmlspecialchars_decode($article->body); ?></p>
-                <?php
+            use CodeCourse\Repositories\Session as Session;
+            Session::init();
+            $message = Session::get('message');
+            if (!empty($message)) {
+                echo $message;
+                Session::set('message', null);
             }
+
             ?>
-            <!-- Pagination begins -->
-            <div class="row d-flex justify-content-center">
-                <nav aria-label="Page navigation example ">
-                    <ul class="pagination">
-                        <?php $frontEnd->pagingLink($table, $records_per_page); ?>
-                    </ul>
-                </nav>
-            </div>
-            <!-- /Pagination eends -->
+            <form action="processContact.php" method="post">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" name="first_name" id="" class="form-control form-control-sm" placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="last_name" id="last_name" class="form-control form-control-sm" placeholder="Last name">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="text" name="email" id="email" class="form-control form-control-sm" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="phone" id="phone" class="form-control form-control-sm" placeholder="Phone">
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="address" id="address" class="form-control" placeholder="Address">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control form-control-sm" name="message" id="editor1" rows="1" placeholder="Message"></textarea>
+                </div>
+                <input type="hidden" name="action" value="verify">
+                <button type="submit" name="submit" value="insert" class="btn btn-primary btn-sm"> <i class="fas fa-envelope"></i> Send Message</button>
+            </form> 
         </div>
-        <!-- Right side bar -->
-        <?php require_once 'partials/_rightSideBar.php'; ?>
-        <!-- /Right side bar -->
+        <div class="col-sm-2"></div>
     </div>
 </div>
 <!-- /Middle content area -->

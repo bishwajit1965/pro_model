@@ -20,7 +20,7 @@ switch ($accessor) {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit'])) {
                         // Insertable field with validation
-                        $name = $helpers->validate($_POST['name']);
+                        $name = $helpers->validation($_POST['name']);
                         // Validation message
                         if (empty($name)) {
                             $message = '<div class="alert alert-danger alert-dismissible " role="alert">
@@ -63,7 +63,7 @@ switch ($accessor) {
                     if (isset($_POST['submit'])) {
                         if (isset($_POST['submit'])) {
                             $id = $_POST['id'];
-                            $name = $helpers->validate($_POST['name']);
+                            $name = $helpers->validation($_POST['name']);
                             $fields = [
                                 'name' => $name
                             ];

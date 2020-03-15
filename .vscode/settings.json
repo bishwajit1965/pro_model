@@ -1,5 +1,16 @@
 {
     "cSpell.words": [
         "htmlspecial"
+    ],
+    "sqltools.connections": [
+        {
+            "askForPassword": true,
+            "database": "pro_model",
+            "dialect": "MySQL",
+            "name": "MyConnection",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
     ]
 }

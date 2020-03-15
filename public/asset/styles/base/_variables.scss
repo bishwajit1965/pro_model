@@ -1,5 +1,4 @@
-/** Global
-==============================*/
+/*Global*/
 
 $body-bg-color:#edeff0;
 $body-text-color:#222;
@@ -9,18 +8,33 @@ $body-font-size:100%;
 $body-line-height:150%;
 $link-color:#000;
 $link-weight:600;
+$large-font-size:20px;
+$bold-font-weight:#800;
+$nav-active-color:#00ffff;
+$nav-active-color-bottom-border:#00ffff;
+$header-one-font-weight:800;
+$header-four-font-weight:700;
+$header-one-font-size:360%;
+$header-three-font-size:2em;
+$header-six-font-size:1.3em;
+$header-one-text-shadow:1px 2px 3px #000;
 
-/** Colors
-=============================*/
+/*Colors*/
 
 $primary-color:#e0e0e0;
 $success-color:#5ebc41;
 $error-color:#bb2828;
 $footer-links-border:2px solid#ddd;
 $footer-links-color:#DDD;
+$header-one-color:#343A40;
+$header-two-color:#343A40;
+$header-three-color:#343A40;
+$header-four-color:#343A40;
+$header-five-color:#343A40;
+$header-six-color:#343A40;
+$ash-color:#999;
 
-/** Container
-=============================*/
+/*Container*/
 
 $container-bg-color:#fff;
 $container-border-radius:5px;
@@ -29,26 +43,29 @@ $container-margin:0 auto;
 $container-width:90%;
 $container-footer-top-border:1px solid #e8ebed;
 
-/** Buttons
-==============================*/
+/*Buttons*/
 
 $button-border-radius:5px;
 $button-bg-color:$primary-color;
 $button-success-text-color:#fff;
 $button-error-text-color:#fff;
 
-/** Nav
-==============================*/
+/*Nav*/
 
 $nav-bg-color:#444;
 $nav-text-color:#fff;
 $nav-link-color:#666;
 
-/** Footer
-==============================*/
+/*Footer*/
 
 $footer-header-text-color:#BBB;
 $top-header-bg-color:#343A40;
 $footer-header-bg-color:#17A2B8;
 $footer-bg-color:#252525;
 $footer-bottom-bg-color:#000000;
+
+/*shadow*/
+
+$box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+0 6px 20px 0 rgba(0, 0, 0, 0.19);
+$text-shadow: 1px 2px 3px #c0c0c0;

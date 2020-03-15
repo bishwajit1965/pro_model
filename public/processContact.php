@@ -23,13 +23,13 @@ if (isset($_POST['submit'])) {
             if ($_REQUEST['action'] == 'verify') {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit'])) {
-                        $first_name = $helpers->validate($_POST['first_name']);
-                        $last_name = $helpers->validate($_POST['last_name']);
-                        $email = $helpers->validate($_POST['email']);
+                        $first_name = $helpers->validation($_POST['first_name']);
+                        $last_name = $helpers->validation($_POST['last_name']);
+                        $email = $helpers->validation($_POST['email']);
                         $email = filter_var($email, FILTER_VALIDATE_EMAIL);
-                        $phone = $helpers->validate($_POST['phone']);
-                        $message = $helpers->validate($_POST['message']);
-                        $address = $helpers->validate($_POST['address']);
+                        $phone = $helpers->validation($_POST['phone']);
+                        $message = $helpers->validation($_POST['message']);
+                        $address = $helpers->validation($_POST['address']);
                         // Fields to be uploaded
                         $fields = [
                         'first_name' => $first_name,

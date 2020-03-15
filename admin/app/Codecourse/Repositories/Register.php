@@ -133,8 +133,48 @@ class Register
             echo $e->getMessage();
         }
     }
+    /**
+     * Redirect url
+     *
+     * @param  Url $url Commented
+     * @return Url $url commented
+     */
     public function redirect($url)
     {
         header('Location:' . $url);
     }
+    /**
+     * Undocumented function
+     *
+     * @param [type] $table
+     * @param [type] $data
+     * @return void
+     */
+    public function delete($table, $data)
+    {
+        try {
+            $this->pdo->beginTransaction();
+            if (!empty($data) && is_array($data)) {
+                $whereCond .= ' WHERE ';
+                $i = 0;
+                foreach ($data as $key => $value) {
+                    $add = ($i > 0) ? ' AND ' : '';
+                    $whereCond .= "$add" . "$key=:$key";
+                    ++$i;
+                }
+            }
+            $sql = 'DELETE FROM ' . $table . $whereCond;
+            $query = $this->pdo->prepare($sql);
+            foreach ($data as $key => $value) {
+                $query->bindValue(":$key", $value);
+            }
+            $delete = $query->execute();
+            $this->pdo->commit();
+            return $delete ? true : false;
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            echo $e->getMessage();
+        }
+    }
+
 }

@@ -21,11 +21,11 @@ switch ($accessor) {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit'])) {
                         // Insertable field with validation
-                        $title = $helpers->validate($_POST['title']);
-                        $slogan = $helpers->validate($_POST['slogan']);
-                        $email = $helpers->validate(filter_var($_POST['email']), FILTER_VALIDATE_EMAIL);
-                        $phone = $helpers->validate($_POST['phone']);
-                        $created_at = $helpers->validate($_POST['created_at']);
+                        $title = $helpers->validation($_POST['title']);
+                        $slogan = $helpers->validation($_POST['slogan']);
+                        $email = $helpers->validation(filter_var($_POST['email']), FILTER_VALIDATE_EMAIL);
+                        $phone = $helpers->validation($_POST['phone']);
+                        $created_at = $helpers->validation($_POST['created_at']);
                         // Photo
                         $permitted = ['jpg', 'jpeg', 'png', 'gif'];
                         $file_name = $_FILES['photo']['name'];
@@ -180,11 +180,11 @@ switch ($accessor) {
                                 $id = $_POST['id'];
                             }
                             // Insertable field with validation
-                            $title = $helpers->validate($_POST['title']);
-                            $slogan = $helpers->validate($_POST['slogan']);
-                            $email = $helpers->validate(filter_var($_POST['email']), FILTER_VALIDATE_EMAIL);
-                            $phone = $helpers->validate($_POST['phone']);
-                            $created_at = $helpers->validate($_POST['created_at']);
+                            $title = $helpers->validation($_POST['title']);
+                            $slogan = $helpers->validation($_POST['slogan']);
+                            $email = $helpers->validation(filter_var($_POST['email']), FILTER_VALIDATE_EMAIL);
+                            $phone = $helpers->validation($_POST['phone']);
+                            $created_at = $helpers->validation($_POST['created_at']);
                             // Photo
                             $permitted = ['jpg', 'jpeg', 'png', 'gif'];
                             $file_name = $_FILES['photo']['name'];

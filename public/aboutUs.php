@@ -17,7 +17,7 @@
 <!-- Middle content area -->
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 main-content py-3" style="overflow:auto;min-height:300px;">
+        <div class="col-sm-12 about-us py-3" style="overflow:auto;min-height:300px;">
             <h1>About us</h1>
             <?php
             // Load classes
@@ -34,12 +34,13 @@
            
             foreach ($aboutUsData as $about) {
                 ?>
-                    <div style="background-color: #D4EDDA;padding:20px;border-left:4px solid #008000;">
-                        <?php echo htmlspecialchars_decode($about->about_us); ?>
-                    </div>
+                <div style="background-color: #D4EDDA;padding:20px;border-left:4px solid #008000;">
+                    <?php echo htmlspecialchars_decode($about->about_us); ?>
+                </div>
                 <?php
             }
-            ?>
+            ?>            
+            <a href="index.php" class="btn btn-lg btn-primary mt-4" id="shadow"><i class="fas fa-fast-backward"></i> Home</a>
         </div>
     </div>
 </div>

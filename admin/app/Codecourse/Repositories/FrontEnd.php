@@ -18,10 +18,10 @@ class FrontEnd extends Core
         $this->pdo = $dbConnection;
     }
     /**
-     * Will fetch data from database
+     * Will fetch data from database to show as well to paginate
      *
-     * @param [type] $query
-     * @return void
+     * @param  String $query 
+     * @return void 
      */
     public function frontEndDataAndPagination($query)
     {
@@ -41,12 +41,12 @@ class FrontEnd extends Core
             echo $e->getMessage();
         }
     }
-
     /**
-     * Will fetch data for pagination
+     * Will get paging data
      *
-     * @param [type] $table
-     * @param [type] $records_per_page
+     * @param string $table 
+     * @param int    $records_per_page commented
+     *
      * @return void
      */
     public function paging($table, $records_per_page)
@@ -68,10 +68,12 @@ class FrontEnd extends Core
     }
 
     /**
-     * [pagingLink description]
-     * @param  [type] $table            [description]
-     * @param  [type] $records_per_page [description]
-     * @return [type]                   [description]
+     * Will generate pagination
+     *
+     * @param string $table 
+     * @param int    $records_per_page 
+     *
+     * @return void
      */
     public function pagingLink($table, $records_per_page)
     {
@@ -118,19 +120,21 @@ class FrontEnd extends Core
         }
     }
     /**
-     * Will redirect header as desired
+     * Will generate th URL
      *
-     * @param  [string] $home_url
-     * @return $home_url
+     * @param string $home_url 
+     *
+     * @return void
      */
     public function redirect($home_url)
     {
         header("Location: $home_url");
     }
     /**
-     * Will fetch random data from database for footer area
+     * Will select random data from article table
      *
-     * @param [type] $table
+     * @param string $table commented
+     *
      * @return void
      */
     public function selectRandomArticle($table)
@@ -153,7 +157,13 @@ class FrontEnd extends Core
             echo $e->getMessage();
         }
     }
-
+    /**
+     * Select data from database
+     *
+     * @param string $table 
+     *
+     * @return void
+     */
     public function selectData($table)
     {
         try {
@@ -170,6 +180,36 @@ class FrontEnd extends Core
                 return !empty($randomArticle) ? $randomArticle : false;
             }
         } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            echo $e->getMessage();
+        }
+    }
+    /**
+     * Will insert like in article table 
+     * 
+     * @param string $table   
+     * @param int    $id 
+     * @param int    $likeCount 
+     *
+     * @return void
+     */
+    public function likePost($table, $id, $likeCount)
+    {
+        try {
+            $this->pdo->beginTransaction();
+            $query = "UPDATE $table SET like_count = $likeCount WHERE id = $id";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam('like_count', $likeCount);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($randomData = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $randomArticle[] = $randomData;
+                }
+                $this->pdo->commit();
+                return !empty($randomArticle) ? $randomArticle : false;
+            }
+            
+        }catch (PDOException $e) {
             $this->pdo->rollBack();
             echo $e->getMessage();
         }

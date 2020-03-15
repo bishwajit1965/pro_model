@@ -1,10 +1,74 @@
-body{
-	font-family:$body-font-family;
-	font-size:$body-font-size;
-		
+body {
+    font-family: $body-font-family;
+    font-size: $body-font-size;
 }
 
-a{
-	color:$link-color;
-	font-weight:$link-weight;
+a {
+    color: $link-color;
+    font-weight: $link-weight;
+}
+
+.home>a {
+    color: $ash-color;
+    font-weight: $bold-font-weight;
+    font-size: $large-font-size;
+}
+
+.collapse>ul>li>a {
+    text-transform: uppercase;
+}
+
+#active {
+    color: $nav-active-color;
+    border-bottom: 3px solid $nav-active-color-bottom-border;
+}
+
+hr.type_7 {
+    margin: auto;
+    border: 0;
+    height: 50px;
+    background-image: url(../img/type_7.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+}
+
+#shadow {
+    box-shadow: $box-shadow;
+}
+
+h1::first-letter {
+    color: #fc0707;
+    text-shadow: $header-one-text-shadow;
+}
+
+h3::first-letter {
+    color: #00ff00;
+}
+
+.header-area>h1 {
+    font-size: $header-one-font-size;
+    text-shadow: $header-one-text-shadow;
+    font-weight: $header-one-font-weight;
+    line-height: 100%;
+}
+
+.header-area>h3 {
+    font-size: $header-three-font-size;
+    line-height: 60px;
+    text-shadow: $header-one-text-shadow;
+}
+
+.header-area>h6 {
+    font-size: $header-six-font-size;
+    line-height: 30px;
+    text-shadow: $header-one-text-shadow;
+}
+.post>a>h1 {
+    font-size: $header-three-font-size;
+    font-weight: $header-one-font-weight;
+    color: $header-one-color; 
+}
+.post>a{
+    text-decoration: none;
 }

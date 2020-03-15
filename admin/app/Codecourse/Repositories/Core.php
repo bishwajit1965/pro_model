@@ -8,13 +8,14 @@ use PDOException;
 
 class Core
 {
-    // Database connection constructor
+    /**
+     * Database connector variable
+     *
+     * @var string
+     */
     private $pdo;
     /**
-     * Database connection constructor
-     *
-     * @param [type] variable
-     * @return variable
+     * Will create database connection
      */
     public function __construct()
     {
@@ -41,10 +42,12 @@ class Core
     */
 
     /**
-     * Will fetch data as desired
+     * Will select data from database
      *
-     * @table[type] $table
-     * @return$data
+     * @param string $table 
+     * @param array  $data 
+     *
+     * @return void
      */
     public function select($table, $data = [])
     {
@@ -55,11 +58,11 @@ class Core
             $sql .= ' FROM ' . $table;
             if (array_key_exists('where', $data)) {
                 $sql .= ' WHERE ';
-                $i = 0;
+                $initiator = 0;
                 foreach ($data['where'] as $key => $value) {
-                    $add = ($i > 0) ? ' AND ' : '';
+                    $add = ($initiator > 0) ? ' AND ' : '';
                     $sql .= "$add" . "$key=:$key";
-                    ++$i;
+                    ++$initiator;
                 }
             }
 
@@ -119,7 +122,14 @@ class Core
     $query->bindParam(":phone", $phone);
     $query->execute();
     */
-
+    /**
+     * Will insert data into database
+     *
+     * @param string $table 
+     * @param array  $data 
+     *
+     * @return void
+     */
     public function insert($table, $data)
     {
         try {
@@ -138,9 +148,7 @@ class Core
                 if ($insertedData) {
                     $lastId = $this->pdo->lastInsertId();
                     $this->pdo->commit();
-                    return $lastId;
-                } else {
-                    return false;
+                    return $lastId ? true : '';
                 }
             }
         } catch (PDOException $e) {
@@ -160,6 +168,16 @@ class Core
     $query->bindValue(':phone', $phone);
     $query->execute();
     */
+    /**
+     * Will update data in database
+     *
+     * @param string $table 
+     * @param int    $id 
+     * @param array  $data 
+     * @param array  $cond 
+     *
+     * @return void
+     */
     public function update($table, $id, $data, $cond)
     {
         try {
@@ -178,19 +196,19 @@ class Core
             if (!empty($data) && is_array($data)) {
                 $keyValue = '';
                 $whereCond = '';
-                $i = 0;
+                $initiator = 0;
                 foreach ($data as $key => $value) {
-                    $add = ($i > 0) ? ' , ' : '';
+                    $add = ($initiator > 0) ? ' , ' : '';
                     $keyValue .= "$add" . "$key=:$key";
-                    ++$i;
+                    ++$initiator;
                 }
                 if (!empty($cond) && is_array($cond)) {
                     $whereCond .= ' WHERE ';
-                    $i = 0;
+                    $initiator = 0;
                     foreach ($cond as $key => $value) {
-                        $add = ($i > 0) ? ' AND ' : '';
+                        $add = ($initiator > 0) ? ' AND ' : '';
                         $whereCond .= "$add" . "$key=:$key";
-                        ++$i;
+                        ++$initiator;
                     }
                 }
                 $sql = 'UPDATE ' . $table . ' SET ' . $keyValue . $whereCond;
@@ -204,8 +222,6 @@ class Core
                 $update = $query->execute();
                 $this->pdo->commit();
                 return $update ? $query->rowCount() : false;
-            } else {
-                return false;
             }
         } catch (PDOException $e) {
             $this->pdo->rollBack();
@@ -213,7 +229,15 @@ class Core
         }
     }
 
-    // Update without photo
+    /**
+     * Will update data in database
+     *
+     * @param string $table 
+     * @param array  $data 
+     * @param array  $cond 
+     *
+     * @return void
+     */
     public function updateWithoutPhoto($table, $data, $cond)
     {
         try {
@@ -221,19 +245,19 @@ class Core
             if (!empty($data) && is_array($data)) {
                 $keyValue = '';
                 $whereCond = '';
-                $i = 0;
+                $initiator = 0;
                 foreach ($data as $key => $value) {
-                    $add = ($i > 0) ? ' , ' : '';
+                    $add = ($initiator > 0) ? ' , ' : '';
                     $keyValue .= "$add" . "$key=:$key";
-                    ++$i;
+                    ++$initiator;
                 }
                 if (!empty($cond) && is_array($cond)) {
                     $whereCond .= ' WHERE ';
-                    $i = 0;
+                    $initiator = 0;
                     foreach ($cond as $key => $value) {
-                        $add = ($i > 0) ? ' AND ' : '';
+                        $add = ($initiator > 0) ? ' AND ' : '';
                         $whereCond .= "$add" . "$key=:$key";
-                        ++$i;
+                        ++$initiator;
                     }
                 }
                 $sql = 'UPDATE ' . $table . ' SET ' . $keyValue . $whereCond;
@@ -247,8 +271,6 @@ class Core
                 $update = $query->execute();
                 $this->pdo->commit();
                 return $update ? $query->rowCount() : false;
-            } else {
-                return false;
             }
         } catch (PDOException $e) {
             $this->pdo->rollBack();
@@ -260,6 +282,7 @@ class Core
      * Will redirect to th desired url
      *
      * @home_url [param] $home_url
+     * 
      * @return void
      */
     public function redirect($home_url)
@@ -275,6 +298,15 @@ class Core
     $query->bindValue(".id", $id);
     $query->execute();
     */
+    /**
+     * Will delete data from database as well as photo from folder
+     *
+     * @param string $table 
+     * @param int    $id 
+     * @param array  $data 
+     *
+     * @return void
+     */
     public function deleteDataWithFolderPhoto($table, $id, $data)
     {
         try {
@@ -291,11 +323,11 @@ class Core
             }
             if (!empty($data) && is_array($data)) {
                 $whereCond .= ' WHERE ';
-                $i = 0;
+                $initiator = 0;
                 foreach ($data as $key => $value) {
-                    $add = ($i > 0) ? ' AND ' : '';
+                    $add = ($initiator > 0) ? ' AND ' : '';
                     $whereCond .= "$add" . "$key=:$key";
-                    ++$i;
+                    ++$initiator;
                 }
             }
             $sql = 'DELETE FROM ' . $table . $whereCond;
@@ -312,18 +344,25 @@ class Core
         }
     }
 
-    // Delete only data
+    /**
+     * Will delete data from database
+     *
+     * @param table $table commented
+     * @param data  $data  commented
+     * 
+     * @return void
+     */
     public function delete($table, $data)
     {
         try {
             $this->pdo->beginTransaction();
             if (!empty($data) && is_array($data)) {
                 $whereCond .= ' WHERE ';
-                $i = 0;
+                $initiator = 0;
                 foreach ($data as $key => $value) {
-                    $add = ($i > 0) ? ' AND ' : '';
+                    $add = ($initiator > 0) ? ' AND ' : '';
                     $whereCond .= "$add" . "$key=:$key";
-                    ++$i;
+                    ++$initiator;
                 }
             }
             $sql = 'DELETE FROM ' . $table . $whereCond;
@@ -342,8 +381,9 @@ class Core
     /**
      * Will search data from database
      *
-     * @param  [array] $table
-     * @param  [search] $search
+     * @param string $table  
+     * @param string $search 
+     * 
      * @return true
      */
     public function searchData($table, $search)
@@ -366,31 +406,39 @@ class Core
         }
     }
     /**
-     * Will fetch number of rows
+     * Counting the post likes
      *
-     * @table[type] variable
-     * @return $rows
+     * @param string $tableLikes 
+     * @param int    $articleId 
+     *
+     * @return mixed
      */
-    public function numberOfRows($table)
+    public function countPostLikes($tableLikes, $articleId)
     {
         try {
             $this->pdo->beginTransaction();
-            $query = "SELECT FOUND_ROWS() FROM $table";
-            $stmt = $this->conn->prepare($query);
+            $query = "SELECT COUNT(article_id) FROM $tableLikes WHERE article_id = $articleId";
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute();
             $this->pdo->commit();
-            $foundRows = $stmt->rowCount();
-            return $foundRows ? true : false;
+            if ($stmt->rowCount() > 0) {
+                while ($numberOfLikes = $stmt->fetchAll(PDO::FETCH_OBJ)) {
+                    $likeData[] = $numberOfLikes;
+                }
+                return isset($likeData) ? $likeData : false;
+            }
         } catch (PDOException $e) {
             $this->pdo->rollBack();
             echo $e->getMessage();
         }
     }
+    
     /**
-     * Will check if there is data in database
+     * Checks if data exists in database or not
      *
-     * @param [type] $table
-     * @return void
+     * @param table $table commented
+     * 
+     * @return rows $table  
      */
     public function dataExists($table)
     {

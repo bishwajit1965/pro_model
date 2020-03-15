@@ -49,9 +49,9 @@ $order_by = ['order_by' => 'id DESC LIMIT 6'];
             if (!empty($aboutUsData)) {
                 foreach ($aboutUsData as $about) {
                     ?>
-                    <span>
+                    <p style="color:#DDD;font-size:12px;">
                         <?php  echo $helpers->textShorten(htmlspecialchars_decode($about->about_us), 150); ?>
-                    </span>
+                    </p>
                     <?php
                     
                 }
@@ -60,7 +60,26 @@ $order_by = ['order_by' => 'id DESC LIMIT 6'];
             } 
             ?>
             <a href="aboutUs.php" class="btn btn-sm btn-primary"><i class="fas fa-fast-forward"></i> About us in detail</a>                  
-                         
+            <div class="row mt-3 text-white">
+                <div class="col-sm-6 text-white">
+                    <h6>SITE LINKS</h6>
+                    <ul>
+                        <li><a href="">ABOUT US</a></li>
+                        <li><a href="">ABOUT US</a></li>
+                        <li><a href="">ABOUT US</a></li>
+                        <li><a href="">ABOUT US</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 text-white">
+                    <h6>VISIT PAGES</h6>
+                    <ul>
+                        <li><a href="">ABOUT US</a></li>
+                        <li><a href="">ABOUT US</a></li>
+                        <li><a href="">ABOUT US</a></li>
+                        <li><a href="">ABOUT US</a></li>
+                    </ul>
+                </div>
+            </div>            
         </div>
         <div class="col-sm-3"> 
             <h5 style="border-bottom:2px solid #DDD;padding-bottom:5px;width:100%;">Random articles:</h5> 
@@ -70,7 +89,7 @@ $order_by = ['order_by' => 'id DESC LIMIT 6'];
             if (!empty($article)) {
                 foreach ($article as $randomData) {
                     ?>
-                    <div class="col-sm-3" style="padding:1px;">
+                    <div class="col-sm-3 random-articles-photo" style="padding:1px;">
                         <a href="singlePost.php?post_id=<?php echo $randomData->id; ?>">
                             <img src="../admin/article/<?php echo $randomData->photo;?>" class="w-100 img-thumbnail img-cover" alt="Random article" style="height:68px;" data-toggle="tooltip" title="<?php echo $randomData->description; ?>">
                         </a>

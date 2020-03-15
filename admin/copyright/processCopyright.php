@@ -21,7 +21,7 @@ case 'insert':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['submit'])) {
                     // Insertable field with validation
-                    $copyright_text = $helpers->validate($_POST['copyright_text']);
+                    $copyright_text = $helpers->validation($_POST['copyright_text']);
                     // Validation
                     if (empty($copyright_text)) {
                         $message = '<div class="alert alert-danger alert-dismissible " role="alert">
@@ -66,7 +66,7 @@ case 'update':
                 if (isset($_POST['submit'])) {
                     if (isset($_POST['submit'])) {
                         $id = $_POST['id'];
-                        $copyright_text = $helpers->validate($_POST['copyright_text']);
+                        $copyright_text = $helpers->validation($_POST['copyright_text']);
                         $fields = [
                             'copyright_text' => $copyright_text
                         ];

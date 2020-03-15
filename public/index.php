@@ -16,65 +16,22 @@ if (isset($path)) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Project Model || <?= ucfirst($current_page); ?> page</title>
+    <title>Project Model || <?php echo ucfirst($current_page); ?> page</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="css/bootstrap4.min.css">
     <!-- Favicon -->
     <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon" />
     <!-- Font awesome kit-->
     <script src="https://kit.fontawesome.com/1b551efcfa.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet"> -->
+
     <!-- Custom style sheets -->
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/responsive.css" rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <style>
-        .color {
-            color: #FFF;
-        }
-
-        .navbar {
-            z-index: 999;
-        }
-
-        .sticky {
-            position: fixed;
-            top: 0;
-            width: 100%;
-        }
-        .sticky+.main-content {
-            padding-top: 60px;
-        }
-
-        a {
-            color: #000;
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-        .post h1 {
-            /* font-family: 'Roboto', sans-serif;
-            font-size: 2.5em;
-            line-height: 45px;
-            font-weight:800;
-            margin-top: 20px;
-            text-shadow: 1px 2px 3px #333;
-            color: #222; */
-        }
-        hr.type_7 {
-            margin: auto;
-            border: 0;
-            height: 50px;
-            background-image: url(img/type_7.png);
-            background-repeat: no-repeat;
-            background-position: center;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 
 <body>
@@ -103,19 +60,22 @@ if (isset($path)) {
         use CodeCourse\Repositories\Category as Category;
         use CodeCourse\Repositories\Core as Core;
         use CodeCourse\Repositories\Tag as Tag;
-
+        use CodeCourse\Repositories\Like as Like;
+        
         // Classes instantiated
         $category = new Category();
         $core = new Core();
         $tag = new Tag();
         $frontEnd = new FrontEnd();
         $helpers = new Helpers();
+        $like = new Like();
         Session::init();
 
         // Tables to be operated upon
         $table = 'tbl_articles';
         $table_category = 'tbl_category';
         $table_tag = 'tbl_tag';
+        $tableLikes = 'tbl_likes';
         ?>
         <div class="row">
             <!-- Left side bar -->
@@ -127,7 +87,7 @@ if (isset($path)) {
                 <!-- Display validation message if any -->
                 <div class="row d-block">
                     <?php
-                    Session::init();
+                    // Session::init();
                     $message = Session::get('message');
                     if (!empty($message)) {
                         echo $message;
@@ -152,31 +112,34 @@ if (isset($path)) {
                 $articles = $frontEnd->frontEndDataAndPagination($articleData);
                 foreach ($articles as $article) {
                     ?>
-                    <div class="post">
-                        <a href="singlePost.php?post_id=<?php echo $article->id; ?>">
-                            <h1><?php echo  $article->title; ?></h1>
-                        </a>
-                        <p>
-                            <span style="color:#999;font-weight:600;"><strong> Author :</strong> <?php echo $article->author; ?> || </span>
-                            <span style="color:#999;font-weight:600;"><strong> Published on :</strong> <?php echo $helpers->dateFormat($article->published_on); ?></span>
-                        </p>
-                        <p>
-                            <span style="color:#999;font-weight:600;"><strong>Category :</strong>
+                <div class="post">
+                    <a href="singlePost.php?post_id=<?php echo $article->id; ?>">
+                        <h1><?php echo  $article->title; ?></h1>
+                    </a>
+                    <p>
+                        <span style="color:#999;font-weight:600;"><strong> Author :</strong>
+                            <?php echo $article->author; ?> || </span>
+                        <span style="color:#999;font-weight:600;"><strong> Published on :</strong>
+                            <?php echo $helpers->dateFormat($article->published_on); ?></span>
+                    </p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span style="color:#999;font-weight:500;"><strong>Category :</strong>
                                 <?php
                                 $categoryData = $category->select($table_category);
                                 if (!empty($categoryData)) {
                                     foreach ($categoryData as $categoryResult) {
                                         if ($categoryResult->category_id == $article->category_id) {
                                             ?>
-                                            <a href="#" class="badge badge-secondary"><?php echo $categoryResult->category_name; ?></a>
+                                            <a href="#" class="badge badge-secondary">
+                                            <?php echo $categoryResult->category_name; ?></a>
                                             <?php
                                         }
                                     }
                                 }
                                 ?>
                             </span>
-                            <!-- Tag data will be fetched and displayed -->
-                            <span style="color:#999;font-weight:600;"><strong> || Tag :</strong>
+                            <span style="color:#999;font-weight:500;"><strong> || Tag :</strong>
                                 <?php
                                 $tagData = $tag->select($table_tag);
                                 if (!empty($tagData)) {
@@ -190,22 +153,106 @@ if (isset($path)) {
                                 }
                                 ?>
                             </span>
-                        </p>
-                        <!-- <p><img class="img-fluid img-thumbnail" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo"></p> -->
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                            <?php
+                            // Checks if the viewer is logged in
+                            if (Session::get('login')) {
+                                ?>
+                                <!-- Like button -->
+                                <div class="col-sm-3 like">
+                                    <form action="processFrontEnd.php" method="post">
+                                        <input type="hidden" name="action" value="verify">
+                                        <input type="hidden" name="id" value="<?php echo $article->id;?>">
+                                        <input type="hidden" name="like_count"
+                                            value="<?php echo $article->like_count + 1;?>">
+                                        <input type="hidden" name="user_session"
+                                            value="<?php echo $article->user_session;?>">
 
-                        <p style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;"><strong> Post synopsis :</strong> <?php echo $article->description; ?></p>
-                        <p><?php echo htmlspecialchars_decode($helpers->textShorten($article->body, 320)); ?></p>
-                        <p>
-                            <a href="singlePost.php?post_id=<?php echo $article->id; ?>" class="btn btn-sm btn-primary" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"><i class="fas fa-book-open"></i> Read More</a>
-                        </p>
-                    </div><hr class="type_7">
-                    <?php
+                                        <button type="submit" name="submit" value="like"
+                                            class="fas fa-thumbs-up text-white btn btn-sm btn-primary">   
+                                            <span class="badge badge-danger" style="border:1px solid#FFF;"><?php echo $article->like_count ; ?></span>
+                                            
+                                        </button>
+                                    </form>
+                                </div>
+                                <!-- Dislike button -->
+                                <div class="col-sm-3 dislike">
+                                    <form action="processFrontEnd.php" method="post">
+                                        <input type="hidden" name="action" value="verify">
+                                        <input type="hidden" name="id" value="<?php echo $article->id;?>">
+                                        <input type="hidden" name="like_count"
+                                            value="<?php echo $article->like_count - 1;?>">
+                                        <input type="hidden" name="user_session"
+                                            value="<?php echo $article->user_session;?>">
+
+                                        <button type="submit" name="submit" value="like"
+                                            class="fas fa-thumbs-down btn btn-sm btn-primary text-white">&nbsp;
+                                            <span class="badge badge-danger" style="border:1px solid#FFF;"><?php echo $article->like_count ; ?></span>
+                                        </button>
+                                    </form>
+                                </div>
+                                <?php
+                            } else {
+                                ?>
+                                <!-- If not logged in this like button will be shown  -->
+                                <div class="col-sm-6">
+                                    <a href="login.php" name="submit-index" value="index-page-login"><i class="fas fa-thumbs-up"></i></a>
+                                    <sup style="color:#bf0000;font-weight:900;"><?php echo $article->like_count ; ?></sup>   
+                                </div>
+                                <?php
+                            }
+                            ?>
+                            </div>
+                        </div> 
+                    </div>
+                    <!-- <p><img class="img-fluid img-thumbnail mt-4 w-100" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo" style="height: 250px;"></p> -->
+
+                    <p style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;">
+                        <strong> Post synopsis :</strong> <?php echo $article->description; ?>
+                    </p>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <a href="singlePost.php?post_id=<?php echo $article->id; ?>">
+                            <img class="img-fluid img-thumbnail mt- w-100" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo" style="height: 90px;"></a>
+                        </div>
+                        <div class="col-sm-9">
+                            <?php echo htmlspecialchars_decode($helpers->textShorten($article->body, 270)); ?>
+                        </div>
+                    </div>
+                    <!-- <p><?php //echo htmlspecialchars_decode($helpers->textShorten($article->body, 320)); ?></p> -->
+                    <div class="row">
+                        <div class="col-sm-12 d-flex justify-content-end">
+                            <a href="singlePost.php?post_id=<?php echo $article->id; ?>"
+                                class="btn btn-sm btn-primary read-more-shadow"
+                                style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                                <i class="fas fa-book-open"></i> Read More</a>
+                        </div>
+                    </div>  
+                </div>
+                <hr class="type_7">
+                <?php
+                }
+                ?>
+                <?php
+                // $articleId = $article->id;
+                $articleId = 54;
+                $likeData = $like->countPostLikes($tableLikes, $articleId);
+                if (!empty($likeData)) {
+                    foreach ($likeData as $value) {
+                        echo '<pre>';
+                        var_dump($likeData);
+                        echo '</pre>';
+                        die();
+                        // echo $value;
+                    }
                 }
                 ?>
                 <!-- Pagination begins -->
                 <div class="row d-flex justify-content-center">
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination">
+                        <ul class="pagination pagination-md pagination-responsive">
                             <?php $frontEnd->pagingLink($table, $records_per_page); ?>
                         </ul>
                     </nav>
