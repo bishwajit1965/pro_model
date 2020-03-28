@@ -5,7 +5,7 @@ namespace CodeCourse\Repositories;
 class Session
 {
     /**
-     * Session initiating method
+     * Session initiating and php version checking method
      *
      * @return void
      */
@@ -19,14 +19,15 @@ class Session
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
-        }
+        }  
     }
 
     /**
-     * Undocumented function
+     * Method to set session value
      *
-     * @param  key $key commented
-     * @param  val $val commented
+     * @param int    $key 
+     * @param string $val 
+     * 
      * @return void
      */
     public static function set($key, $val)
@@ -37,7 +38,8 @@ class Session
     /**
      * Undocumented function
      *
-     * @param  key $key should be dealt
+     * @param key $key should be dealt
+     * 
      * @return key
      */
     public static function get($key)
@@ -71,7 +73,8 @@ class Session
     {
         self::init();
         if (self::get('login') == true) {
-            header('Location:index.php');
+            // header('Location:index.php');
+            return true;
         }
     }
 
@@ -88,9 +91,9 @@ class Session
     }
 
     /**
-     * Redirect url function.
+     * Redirect url method
      *
-     * @param url $url commented
+     * @param url $url 
      *
      * @return void
      */

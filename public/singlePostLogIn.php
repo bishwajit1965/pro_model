@@ -3,6 +3,7 @@
 require_once '../admin/app/start.php';
 
 use CodeCourse\Repositories\Session as Session;
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -143,9 +144,8 @@ use CodeCourse\Repositories\Session as Session;
                         <input type="hidden" name="action" value="verify">
                         <div class="row">
                             <div class="col-sm-6">
-                                <button type="submit" name="submit" style="width:100%;" value="login"
-                                    class="btn btn-sm btn-info d-block">
-                                    <i class="fas fa-users"></i> Log in
+                                <button type="submit" name="submit" style="width:100%;" value="single-post-login"
+                                    class="btn btn-sm btn-info d-block"><i class="fas fa-users"></i> Log in
                                 </button>
                             </div>
                             <div class="col-sm-6">

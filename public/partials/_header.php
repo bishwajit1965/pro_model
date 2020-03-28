@@ -4,10 +4,10 @@ require_once '../admin/app/start.php';
 
 // Use the classes needed
 use CodeCourse\Repositories\Header as Header;
-use CodeCourse\Repositories\Session as Session;
 use CodeCourse\Repositories\Helpers as Helpers;
-use CodeCourse\Repositories\Logo as Logo;
 use CodeCourse\Repositories\Link as Link;
+use CodeCourse\Repositories\Logo as Logo;
+use CodeCourse\Repositories\Session as Session;
 use CodeCourse\Repositories\viewersSessions as viewersSessions;
 
 // Classes instantiated
@@ -150,6 +150,21 @@ $limit = ['limit' => '1'];
                     }
                     ?>
                     <!-- /Will fetch links data ends-->
+                </div>
+            </div>
+            <div class="row px-2">
+                <div class="col-sm-12 bg-success text-center">
+                    <!-- Logged in message -->
+                    <small style="font-weight: 500;">
+                    <?php
+                    if (Session::get('login') == true) {
+                        echo 'Logged in! '.Session::get('login');
+                    } else {
+                        echo '<span style="color:#FFF;">Not logged in !</span>  ';
+                    }
+                    ?>
+                    </small>
+                    <!-- /Logged in message -->
                 </div>
             </div>
         </div>

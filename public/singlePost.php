@@ -25,13 +25,17 @@
     use CodeCourse\Repositories\Session as Session;
     use CodeCourse\Repositories\Helpers as Helpers;
     use CodeCourse\Repositories\Category as Category;
+    use CodeCourse\Repositories\FrontEnd as FrontEnd;
     use CodeCourse\Repositories\Tag as Tag;
+    use CodeCourse\Repositories\Like as Like;
 
     // Class instantiated
     $core = new Core();
     $helpers = new Helpers();
     $category = new Category();
     $tag = new Tag();
+    $frontEnd = new FrontEnd();
+    $like = new Like();
     Session::init();
 
     // Single post fetching id
@@ -43,6 +47,7 @@
     $table = 'tbl_articles';
     $table_category = 'tbl_category';
     $table_tag = 'tbl_tag';
+    $tableLikes = 'tbl_likes';
 
     // Conditional fetching of data
     $whereCond = [
@@ -104,47 +109,77 @@
             <div class="row">
             <?php
             // Checks if the viewer is logged in
-            if (Session::get('login')) {
+            if (Session::checkLogin()) {
                 ?>
                 <div class="col-sm-1 like">
                     <form action="processFrontEnd.php" method="post">
+
                         <input type="hidden" name="action" value="verify">
+
                         <input type="hidden" name="id" value="<?php echo $article->id; ?>">
-                        <input type="hidden" name="like_count"
-                            value="<?php echo $article->like_count + 1; ?>">
-                        <input type="hidden" name="user_session"
-                            value="<?php echo $article->user_session; ?>">
+
+                        <input type="hidden" name="like_count" value="<?php echo $article->like_count + 1; ?>">
+
+                        <input type="hidden" name="user_session" value="<?php echo $article->user_session; ?>">
+
                         <input type="hidden" name="single-post-submit" value="single-post-like">
 
                         <button type="submit" name="submit" value="like"
                             class="fas fa-thumbs-up text-white btn btn-sm btn-primary">
-                            <span class="badge badge-danger"><?php echo $article->like_count ; ?></span>
+                            <span class="badge badge-danger">
+                                <?php
+                                $articleId = $article->id;
+                                $likeData = $like->countPostLikes($tableLikes, $articleId);
+                                if (isset($likeData)) {
+                                    echo count($likeData);
+                                } else { ?>
+                                <span style="color:#FFF;font-weight:900;"><?php echo '0' ; ?></span>
+                                    <?php
+                                }
+                                ?>
+                            </span>
                         </button>
                     </form>
                 </div>
                 <div class="col-sm-1 dislike">
                     <form action="processFrontEnd.php" method="post">
+
                         <input type="hidden" name="action" value="verify">
+
                         <input type="hidden" name="id" value="<?php echo $article->id; ?>">
-                        <input type="hidden" name="like_count"
-                            value="<?php echo $article->like_count - 1; ?>">
-                        <input type="hidden" name="user_session"
-                            value="<?php echo $article->user_session; ?>">
+
+                        <!-- <input type="hidden" name="like_count" value="<?php echo $article->like_count - 1; ?>"> -->
+
+                        <input type="hidden" name="user_session" value="<?php echo $article->user_session; ?>">
 
                         <button type="submit" name="submit" value="like"
                             class="fas fa-thumbs-down btn btn-sm btn-primary text-white">
-                             <span class="badge badge-danger"><?php echo $article->like_count ; ?></span>
+                             <span class="badge badge-danger"></span>
                         </button>
                     </form>
                 </div>
                 <?php
             } else {
                 ?>
-                <div class="col-sm-10">
-                    <span><a href="login.php" name="submit" value="single-page-login">
-                        <i class="fas fa-thumbs-up"></i></a></span>
-                        
-                    <sup style="color:#bf0000;font-weight:900;"><?php echo $article->like_count ; ?></sup> 
+                <!-- If not logged in this like button will be shown  -->
+                <div class="col-sm-12">
+                    <a href="login.php?" name="post_id" value="<?php echo $article->id; ?>"><i class="fas fa-thumbs-up"></i>
+                    <?php
+                    $articleId = $article->id;
+                    $likeData = $like->countPostLikes($tableLikes, $articleId);
+                    if (isset($likeData)) {
+                        ?>
+                        <sup style="color:#bf0000;">
+                        <?php echo count($likeData);?>
+                        </sup>
+                        <?php    
+                    } else {
+                        ?>
+                            <span style="color:#bf0000;"><?php echo 0 ; ?></span>
+                        <?php
+                    }
+                    ?>  
+                    </a> 
                 </div>
                 <?php
             }
@@ -155,7 +190,9 @@
                     <p style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;"><strong> Post synopsis :</strong> <?php echo $article->description; ?></p>
         
                     <p><?php echo htmlspecialchars_decode($article->body); ?></p>
-                    <p><a href="index.php" class="btn btn-sm btn-primary" id="shadow">
+
+                    <p>
+                        <a href="index.php" class="btn btn-sm btn-primary" id="shadow">
                         <i class="fas fa-fast-backward"></i> Home page</a>
                     </p>
                 </div>

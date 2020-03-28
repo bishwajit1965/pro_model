@@ -342,7 +342,7 @@ case 'delete':
                     $deleteStatus = $article->deleteDataWithFolderPhoto($table, $id, $condition);
                     // validation messages and page redirects
                     if ($deleteStatus) {
-                        $message = '<div class="alert alert-success alert-dismissible " role="alert">
+                        $message ='<div class="alert alert-success alert-dismissible " role="alert">
                         <strong> WOW !</strong> Article data has been deleted successfully !!!
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

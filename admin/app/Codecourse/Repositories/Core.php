@@ -417,13 +417,13 @@ class Core
     {
         try {
             $this->pdo->beginTransaction();
-            $query = "SELECT COUNT(article_id) FROM $tableLikes WHERE article_id = $articleId";
+            $query = "SELECT article_id FROM $tableLikes WHERE article_id = $articleId";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute();
             $this->pdo->commit();
             if ($stmt->rowCount() > 0) {
                 while ($numberOfLikes = $stmt->fetchAll(PDO::FETCH_OBJ)) {
-                    $likeData[] = $numberOfLikes;
+                    $likeData = $numberOfLikes;
                 }
                 return isset($likeData) ? $likeData : false;
             }
@@ -445,7 +445,7 @@ class Core
         try {
             $this->pdo->beginTransaction();
             $query = "SELECT * FROM $table";
-            $stmt = $this->conn->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute();
             $this->pdo->commit();
             if ($stmt->rowCount() > 0) {
@@ -458,5 +458,51 @@ class Core
             $this->pdo->rollBack();
             echo $e->getMessage();
         }
+    }
+    
+    /**
+     * Checks if data exists in database or not
+     *
+     * @param table $table commented
+     * 
+     * @return rows $table  
+     */
+    public function selectAll($table)
+    {
+        try {
+            $this->pdo->beginTransaction();
+            $query = "SELECT * FROM $table";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+            $this->pdo->commit();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $fetchedData[] = $data;
+                }
+                return (isset($fetchedData)) ? $fetchedData : false;
+            }
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            echo $e->getMessage();
+        }
+    }
+    /**
+     * Method to prevent duplicate entry
+     *
+     * @param string $table 
+     * @param int    $articleId 
+     * @param string $sessionId 
+     *
+     * @return void
+     */
+    public function preventDuplicateEntry($table, $articleId, $sessionId)
+    {
+        $query = "SELECT * FROM $table WHERE article_id = :article_id && session = :session";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':article_id', $articleId);
+        $stmt->bindParam(':session', $sessionId);
+        $stmt->execute();
+        $stmtExecute = $stmt->fetch(PDO::FETCH_OBJ);
+        return ($stmtExecute) ? $stmtExecute : false;
     }
 }

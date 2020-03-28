@@ -184,7 +184,7 @@
         }
         ?>
     </div>
-    <div class="pagelinks mt-2">
+    <div class="page-links mt-2">
         <div class="social-site-heading bg-secondary p-1 text-white">
             <h4>Recent posts</h4>
         </div>      

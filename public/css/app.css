@@ -159,7 +159,8 @@ body {
 
 #sidebar {
   position: static;
-  min-height: 100%; }
+  min-height: 100%; 
+}
 
 .left-sidebar {
   height: 100%;
@@ -175,6 +176,8 @@ body {
   position: relative;
   width: auto;
   padding-top: 0;
-  background-color: #FFF; }
+  background-color: #FFF;
+  position:static;
+}
 
 /*# sourceMappingURL=app.css.map */

@@ -10,7 +10,9 @@ class FrontEnd extends Core
 {
     // Database connection constructor
     private $pdo;
-
+    /**
+     * Constructor to connect to database
+     */
     public function __construct()
     {
         $database = new Database();
@@ -20,8 +22,9 @@ class FrontEnd extends Core
     /**
      * Will fetch data from database to show as well to paginate
      *
-     * @param  String $query 
-     * @return void 
+     * @param String $query 
+     *  
+     * @return void  
      */
     public function frontEndDataAndPagination($query)
     {
@@ -210,6 +213,40 @@ class FrontEnd extends Core
             }
             
         }catch (PDOException $e) {
+            $this->pdo->rollBack();
+            echo $e->getMessage();
+        }
+    }
+    /**
+     * Delete data from database
+     *
+     * @param string $table 
+     * @param array  $data  
+     *
+     * @return void
+     */
+    public function delete($table, $data)
+    {
+        try {
+            $this->pdo->beginTransaction();
+            if (!empty($data) && is_array($data)) {
+                $whereCond .= ' WHERE ';
+                $initiator = 0;
+                foreach ($data as $key => $value) {
+                    $add = ($initiator > 0) ? ' AND ' : '';
+                    $whereCond .= "$add" . "$key=:$key";
+                    ++$initiator;
+                }
+            }
+            $sql = 'DELETE FROM ' . $table . $whereCond;
+            $query = $this->pdo->prepare($sql);
+            foreach ($data as $key => $value) {
+                $query->bindValue(":$key", $value);
+            }
+            $delete = $query->execute();
+            $this->pdo->commit();
+            return $delete ? true : false;
+        } catch (PDOException $e) {
             $this->pdo->rollBack();
             echo $e->getMessage();
         }

@@ -10,7 +10,6 @@ use CodeCourse\Repositories\Session as Session;
 use CodeCourse\Repositories\Viewers as Viewers;
 use CodeCourse\Repositories\ViewersSessions as ViewersSessions;
 
-
 // Classes instantiated
 Session::init();
 $register = new Register();
@@ -66,11 +65,11 @@ if (isset($_POST['submit'])) {
                                             'email' => $value,
                                             'session' => $session
                                         ];
-                                        // Will store data
-                                        $viewersSessions->insert($tableSession, $fields); 
+                                        // Will store data in sessions table
+                                        $viewersSessions->insert($tableSession, $fields);
+                                        $home_url = 'index.php';
+                                        Session::redirect("$home_url");
                                     }
-                                    $home_url = 'index.php';
-                                    Session::redirect("$home_url");
                                 } else {
                                     $home_url = 'login.php';
                                     Session::redirect("$home_url?logInError");
@@ -90,6 +89,7 @@ if (isset($_POST['submit'])) {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit'])) {
                         Session::destroy();
+                        session_unset();
                         $home_url = 'index.php';
                         Session::redirect("$home_url");
                     }
@@ -105,6 +105,7 @@ if (isset($_POST['submit'])) {
                         $first_name = $helpers->validation($_POST['first_name']);
                         $last_name = $helpers->validation($_POST['last_name']);
                         $email = $helpers->validation($_POST['email']);
+                        $email = $helpers->validation(filter_var($email, FILTER_VALIDATE_EMAIL));
                         $phone = $helpers->validation($_POST['phone']);
                         $address = $helpers->validation($_POST['address']);
                         $city = $helpers->validation($_POST['city']);
@@ -127,7 +128,7 @@ if (isset($_POST['submit'])) {
                                 'password' => $password,
                             ];
                             if (empty($first_name)) {
-                                $message = '<div class="alert alert-success" role="alert">
+                                $message = '<div class="alert alert-danger" role="alert">
                                 <strong class="alert-heading">SORRY !!!</strong>
                                 <span class="mb-0"> First name empty !!!</span>
                             </div>';
@@ -135,7 +136,7 @@ if (isset($_POST['submit'])) {
                                 $home_url = 'register.php';
                                 $register->redirect("$home_url");
                             } elseif (empty($last_name)) {
-                                $message = '<div class="alert alert-success" role="alert">
+                                $message = '<div class="alert alert-danger" role="alert">
                                 <strong class="alert-heading">SORRY !!!</strong>
                                 <span class="mb-0"> Last name empty !!!</span>
                             </div>';
@@ -143,7 +144,7 @@ if (isset($_POST['submit'])) {
                                 $home_url = 'register.php';
                                 $register->redirect("$home_url");
                             } elseif (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                                $message = '<div class="alert alert-success" role="alert">
+                                $message = '<div class="alert alert-danger" role="alert">
                                 <strong class="alert-heading">SORRY !!!</strong>
                                 <span class="mb-0"> Email address empty !!!</span>
                             </div>';
@@ -151,7 +152,7 @@ if (isset($_POST['submit'])) {
                                 $home_url = 'register.php';
                                 $register->redirect("$home_url");
                             } elseif (empty($password)) {
-                                $message = '<div class="alert alert-success" role="alert">
+                                $message = '<div class="alert alert-danger" role="alert">
                                 <strong class="alert-heading">SORRY !!!</strong>
                                 <span class="mb-0"> Password field left empty !!!</span>
                             </div>';
@@ -159,7 +160,7 @@ if (isset($_POST['submit'])) {
                                 $home_url = 'register.php';
                                 $register->redirect("$home_url");
                             } elseif (strlen($password) < 6) {
-                                $message = '<div class="alert alert-success" role="alert">
+                                $message = '<div class="alert alert-danger" role="alert">
                                 <strong class="alert-heading">SORRY !!!</strong>
                                 <span class="mb-0"> Password should be at least 6 chars !!!</span>
                             </div>';
@@ -167,7 +168,7 @@ if (isset($_POST['submit'])) {
                                 $home_url = 'register.php';
                                 $register->redirect("$home_url");
                             } elseif (empty($confirm_password)) {
-                                $message = '<div class="alert alert-success" role="alert">
+                                $message = '<div class="alert alert-danger" role="alert">
                                 <strong class="alert-heading">SORRY !!!</strong>
                                 <span class="mb-0"> Confirm password field left empty !!!</span>
                             </div>';
@@ -175,7 +176,7 @@ if (isset($_POST['submit'])) {
                                 $home_url = 'register.php';
                                 $register->redirect("$home_url");
                             } elseif (strlen($confirm_password) < 6) {
-                                $message = '<div class="alert alert-success" role="alert">
+                                $message = '<div class="alert alert-danger" role="alert">
                                 <strong class="alert-heading">SORRY !!!</strong>
                                 <span class="mb-0"> Confirm password should be at least 6 chars !!!</span>
                             </div>';
@@ -197,7 +198,7 @@ if (isset($_POST['submit'])) {
                                 }
                             }
                         } else {
-                            $message ='<div class="alert alert-success" role="alert">
+                            $message ='<div class="alert alert-danger" role="alert">
                             <strong class="alert-heading">SORRY !!!</strong>
                             <span class="mb-0"> Password mismatch !!!</span>
                             </div>';
