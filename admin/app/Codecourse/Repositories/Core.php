@@ -495,12 +495,13 @@ class Core
      *
      * @return void
      */
-    public function preventDuplicateEntry($table, $articleId, $sessionId)
+    public function preventDuplicateEntry($table, $articleId, $sessionId, $email)
     {
-        $query = "SELECT * FROM $table WHERE article_id = :article_id && session = :session";
+        $query = "SELECT * FROM $table WHERE article_id = :article_id && session = :session && email =:email";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':article_id', $articleId);
         $stmt->bindParam(':session', $sessionId);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
         $stmtExecute = $stmt->fetch(PDO::FETCH_OBJ);
         return ($stmtExecute) ? $stmtExecute : false;

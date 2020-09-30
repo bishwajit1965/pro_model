@@ -1,4 +1,7 @@
 <?php
+/**
+ * Turn on output buffering
+ */
 ob_start();
 /**
  * Detects file name
@@ -40,6 +43,7 @@ $tableLikes = 'tbl_likes';
 ?>
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -47,7 +51,8 @@ $tableLikes = 'tbl_likes';
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Project Model || <?php echo ucfirst($current_page); ?> page</title>
+    <title>Project Model || <?php echo ucfirst($current_page); ?>
+        page</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
         integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -80,7 +85,6 @@ $tableLikes = 'tbl_likes';
 
     <!-- Main content area -->
     <div class="container-fluid">
-        
         <div class="row">
             <!-- Left side bar -->
             <?php require_once 'partials/_leftSideBar.php'; ?>
@@ -88,9 +92,18 @@ $tableLikes = 'tbl_likes';
 
             <!-- Middle content area -->
             <div class="col-sm-6 main-content" style="overflow:auto;">
+                <div class="row mt-1">
+                    <!-- Marquee tag -->
+                    <marquee class="bg-secondary py-2" behavior="scroll" scrollAmount="100" scrollDelay="1500"
+                        onMouseOver="this.stop();" onMouseOut="this.start();" direction="lft">
+                        <a class="text-white" href=""><i class="fas fa-star"></i> <?php echo $header->title; ?>
+                            <i class="fas fa-star"></i></a>
+                    </marquee>
+                    <!--/Marquee tag -->
+                </div>
                 <!-- Will display the validation message if any-->
                 <div class="row d-block">
-                <?php
+                    <?php
                 Session::init();
                 $message = Session::get('message');
                 if (!empty($message)) {
@@ -122,7 +135,8 @@ $tableLikes = 'tbl_likes';
                     </a>
                     <p>
                         <span style="color:#999;font-weight:600;"><strong> Author :</strong>
-                            <?php echo $article->author; ?> || </span>
+                            <?php echo $article->author; ?> ||
+                        </span>
                         <span style="color:#999;font-weight:600;"><strong> Published on :</strong>
                             <?php echo $helpers->dateFormat($article->published_on); ?></span>
                     </p>
@@ -131,143 +145,149 @@ $tableLikes = 'tbl_likes';
                             <span style="color:#999;font-weight:500;"><strong>Category :</strong>
                                 <?php
                                 $categoryData = $category->select($table_category);
-                                if (!empty($categoryData)) {
-                                    foreach ($categoryData as $categoryResult) {
-                                        if ($categoryResult->category_id == $article->category_id) {
-                                            ?>
-                                            <a href="#" class="badge badge-secondary">
-                                            <?php echo $categoryResult->category_name; ?></a>
-                                            <?php
-                                        }
-                                    }
-                                }
+                    if (!empty($categoryData)) {
+                        foreach ($categoryData as $categoryResult) {
+                            if ($categoryResult->category_id == $article->category_id) {
                                 ?>
+                                <a href="#" class="badge badge-secondary">
+                                    <?php echo $categoryResult->category_name; ?></a>
+                                <?php
+                            }
+                        }
+                    } ?>
                             </span>
                             <span style="color:#999;font-weight:500;"><strong> || Tag :</strong>
                                 <?php
                                 $tagData = $tag->select($table_tag);
-                                if (!empty($tagData)) {
-                                    foreach ($tagData as $tagResult) {
-                                        if ($tagResult->tag_id == $article->tag_id) {
-                                            ?>
-                                            <a href="#" class="badge badge-secondary"><?php echo $tagResult->tag_name; ?></a>
-                                            <?php
-                                        }
-                                    }
-                                }
+                    if (!empty($tagData)) {
+                        foreach ($tagData as $tagResult) {
+                            if ($tagResult->tag_id == $article->tag_id) {
                                 ?>
+                                <a href="#" class="badge badge-secondary"><?php echo $tagResult->tag_name; ?></a>
+                                <?php
+                            }
+                        }
+                    } ?>
                             </span>
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                            <?php
+                                <?php
                             // Checks if the viewer is logged in
                             if (Session::checkLogin()) {
                                 ?>
                                 <!-- Like button -->
-                                <div class="col-sm-3 like">
+                                <div class="col-sm-4 like">
                                     <a href="singlePost.php?post_id=<?php echo $article->id; ?>">
-                                    <form action="processFrontEnd.php" method="post">
-                                        <input type="hidden" name="action" value="verify">
-                                        <input type="hidden" name="id" value="<?php echo $article->id;?>">
+                                        <form action="processFrontEnd.php" method="post">
+                                            <input type="hidden" name="action" value="verify">
+                                            <input type="hidden" name="post_id" value="<?php echo $article->id; ?>">
+                                            <input type="hidden" name="like" value="index-page-like">
 
-                                        <button type="submit" name="submit" value="like"
-                                            class="fas fa-thumbs-up text-white btn btn-sm btn-primary">   
-                                            <span class="badge badge-danger" style="border:1px solid#FFF;">
-                                            <?php
-                                            $articleId = $article->id;
-                                            $likeData = $like->countPostLikes($tableLikes, $articleId);
-                                            if (isset($likeData)) {
-                                                echo count($likeData);
-                                            } else { ?>
-                                                <span style="color:#FFF;"><?php echo '0' ; ?></span>
-                                                <?php
-                                            }
-                                            ?>
-                                            </span>  
-                                        </button>
-                                    </form>
+                                            <button type="submit" name="submit" value="like"
+                                                class="fas fa-thumbs-up text-white btn btn-sm btn-primary"> Like
+                                                <span class="badge badge-danger" style="border:1px solid#FFF;">
+                                                    <?php
+                                                    $articleId = $article->id;
+                                $likeData = $like->countPostLikes($tableLikes, $articleId);
+                                if (isset($likeData)) {
+                                    echo count($likeData);
+                                } else { ?>
+                                                    <span style="color:#FFF;"><?php echo '0' ; ?></span>
+                                                    <?php
+                                                    } ?>
+                                                </span>
+                                            </button>
+                                        </form>
                                     </a>
                                 </div>
                                 <?php
                             } else {
                                 ?>
                                 <!-- If not logged in this like button will be shown with likes counted -->
-                                <div class="col-sm-6">
-                                    <a href="login.php?post_id=<?php echo $article->id; ?>" name="post_id" value="<?php echo $article->id; ?>"><i class="fas fa-thumbs-up"></i>
-                                    <?php
-                                    $articleId = $article->id;
-                                    $likeData = $like->countPostLikes($tableLikes, $articleId);
-                                    if (isset($likeData)) {
-                                        ?>
-                                        <sup style="color:#bf0000;font-weight:900;">
-                                        <?php echo count($likeData);?>
-                                        </sup>
-                                        <?php    
-                                    } else {
-                                        ?>
-                                            <span style="color:#bf0000;font-weight:900;"><?php echo 0 ; ?></span>
+                                <div class="col-sm-5">
+                                    <a href="login.php?post_id=<?php echo $article->id; ?>">
+                                        <i class="fas fa-thumbs-up"></i>
                                         <?php
-                                    }
-                                    ?>  
-                                    </a> 
+                                        $articleId = $article->id;
+                                $likeData = $like->countPostLikes($tableLikes, $articleId);
+                                if (isset($likeData)) {
+                                    ?>
+                                        <sup style="color:#bf0000;font-weight:900;">
+                                            <?php echo count($likeData); ?>
+                                        </sup>
+                                        <?php
+                                } else {
+                                    ?>
+                                        <span style="color:#bf0000;font-weight:900;"><?php echo 0 ; ?></span>
+                                        <?php
+                                } ?>
+                                    </a>
                                 </div>
                                 <?php
-                            }
-                            ?>
-                            <!-- / Like button ends -->
+                            } ?>
+                                <!-- / Like button ends -->
 
-                            <!-- Dislike button begins-->
-                            <?php
-                            if (Session::checkLogin()) {
-                                // Dislike button will be displayed to the person who has liked the post only
-                                $likeData = $like->select($tableLikes);
-                                if (!empty($likeData)) {
-                                    foreach ($likeData as $likeValue) {
-                                        if ($likeValue->email == Session::get('login') && $likeValue->article_id == $article->id &&         $likeValue->session == session_id() && $likeValue->viewers_id == Session::get('id')) {
-                                            ?>
-                                            <div class="col-sm-3 dislike">
-                                                <form action="processFrontEnd.php" method="post">
-                                                    <input type="hidden" name="action" value="verify">
-                                                    
-                                                    <input type="hidden" name="article_id" value="<?php echo $article->id; ?>">
-                                                    <input type="hidden" name="viewers_id" value="<?php echo Session::get('id'); ?>">
-                                                    <input type="hidden" name="email" value="<?php echo $likeValue->email; ?>">
-                                                    <input type="hidden" name="session" value="<?php echo session_id(); ?>">
-            
-                                                    <button type="submit" name="submit" value="delete" style="padding:6px 15px;"
-                                                        class="fas fa-thumbs-down btn btn-sm btn-primary text-white" data-toggle="tooltip" title="<?php echo Session::get('login'). ' liked the post'; ?>">
-                                                    </button>
-                                                </form>
-                                            </div>
-                                            <?php
-                                        }
-                                    }
-                                }
-                                ?>
+                                <!-- Dislike button begins-->
                                 <?php
-                            } else {
-                            }
-                            ?> 
-                            <!-- Dislike button ends -->
-                            </div>
-                        </div> 
-                    </div>
-                    <!-- <p><img class="img-fluid img-thumbnail mt-4 w-100" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo" style="height: 250px;"></p> -->
+                                if (Session::checkLogin()) {
+                                    // Dislike button will be displayed to the person who has liked the post only
+                                    $likeData = $like->select($tableLikes);
+                                    if (!empty($likeData)) {
+                                        foreach ($likeData as $likeValue) {
+                                            if ($likeValue->email == Session::get('login') && $likeValue->article_id == $article->id
+                                        && $likeValue->session == session_id() && $likeValue->viewers_id == Session::get('id')) {
+                                                ?>
+                                <div class="col-sm-3 dislike">
+                                    <form action="processFrontEnd.php" method="post">
+                                        <input type="hidden" name="action" value="verify">
+                                        <input type="hidden" name="post_id" value="<?php echo $article->id; ?>">
+                                        <input type="hidden" name="viewers_id"
+                                            value="<?php echo Session::get('id'); ?>">
+                                        <input type="hidden" name="email" value="<?php echo $likeValue->email; ?>">
+                                        <input type="hidden" name="session" value="<?php echo session_id(); ?>">
+                                        <input type="hidden" name="dislike" value="index-page-dislike">
 
-                    <p style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;">
+                                        <button type="submit" name="submit" value="delete" style="padding:6px 15px;"
+                                            class="fas fa-thumbs-down btn btn-sm btn-primary text-white"
+                                            data-toggle="tooltip"
+                                            title="<?php echo Session::get('login'). ' liked the post'; ?>">
+                                            Dislike
+                                        </button>
+                                    </form>
+                                </div>
+                                <?php
+                                            }
+                                        }
+                                    } ?>
+                                <?php
+                                } else {
+                                } ?>
+                                <!-- Dislike button ends -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <p><img class="img-fluid img-thumbnail mt-4 w-100" src="../admin/article/<?php echo $article->photo; ?>"
+                    alt="Article Photo" style="height: 250px;"></p> -->
+
+                    <p
+                        style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;">
                         <strong> Post synopsis :</strong> <?php echo $article->description; ?>
                     </p>
                     <div class="row">
                         <div class="col-sm-3">
                             <a href="singlePost.php?post_id=<?php echo $article->id; ?>">
-                            <img class="img-fluid img-thumbnail mt- w-100" src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo" style="height: 95px;"></a>
+                                <img class="img-fluid img-thumbnail mt- w-100"
+                                    src="../admin/article/<?php echo $article->photo; ?>" alt="Article Photo"
+                                    style="height: 95px;">
+                            </a>
                         </div>
                         <div class="col-sm-9">
                             <?php echo htmlspecialchars_decode($helpers->textShorten($article->body, 270)); ?>
                         </div>
                     </div>
-                    <!-- <p><?php //echo htmlspecialchars_decode($helpers->textShorten($article->body, 320)); ?></p> -->
+                    <!-- <p><?php //echo htmlspecialchars_decode($helpers->textShorten($article->body, 320));?>
+                    </p> -->
                     <div class="row">
                         <div class="col-sm-12 d-flex justify-content-end">
                             <a href="singlePost.php?post_id=<?php echo $article->id; ?>"
@@ -275,7 +295,7 @@ $tableLikes = 'tbl_likes';
                                 style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                                 <i class="fas fa-book-open"></i> Read More</a>
                         </div>
-                    </div>  
+                    </div>
                 </div>
                 <hr class="type_7">
                 <?php

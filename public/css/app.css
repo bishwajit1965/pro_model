@@ -159,8 +159,7 @@ body {
 
 #sidebar {
   position: static;
-  min-height: 100%; 
-}
+  min-height: 100%; }
 
 .left-sidebar {
   height: 100%;
@@ -176,8 +175,12 @@ body {
   position: relative;
   width: auto;
   padding-top: 0;
-  background-color: #FFF;
-  position:static;
-}
+  background-color: #FFF; }
+
+.left-sidebar-heading > h4 {
+  background-color: #E4E4E4;
+  padding: 6px 6px;
+  color: #000;
+  font-weight: 800; }
 
 /*# sourceMappingURL=app.css.map */

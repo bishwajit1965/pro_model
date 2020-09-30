@@ -2,9 +2,9 @@
 
 require_once '../app/start.php';
 
-use Codecourse\Repositories\Core as Core;
-use Codecourse\Repositories\Session as Session;
-use Codecourse\Repositories\Helpers as Helpers;
+use CodeCourse\Repositories\Core as Core;
+use CodeCourse\Repositories\Helpers as Helpers;
+use CodeCourse\Repositories\Session as Session;
 
 $core = new Core();
 $helpers = new Helpers();
@@ -25,7 +25,7 @@ switch ($accessor) {
                             $pro_price = $cart->validate($_POST['pro_price']);
                             $ordered_on = $cart->validate($_POST['ordered_on']);
                             $ordered_status = $cart->validate($_POST['status']);
-                            // Updates staus in orders table
+                            // Updates status in orders table
                             $statusUpdated = $cart->updateOrderStatus($tableOrders, $order_id, $pro_price, $ordered_on, $ordered_status);
                             // validation messages and page redirects
                             if (statusUpdated) {
@@ -57,7 +57,7 @@ switch ($accessor) {
                                 $pro_price = $cart->validate($_POST['pro_price']);
                                 $ordered_on = $cart->validate($_POST['ordered_on']);
                                 $ordered_status = $cart->validate($_POST['status']);
-                                // Revoke staus in orders table
+                                // Revoke status in orders table
                                 $statusUpdated = $cart->revokeOrderStatus($tableOrders, $order_id, $pro_price, $ordered_on, $ordered_status);
                                 // validation messages and page redirects
                                 if ($statusUpdated) {
@@ -122,7 +122,7 @@ switch ($accessor) {
                             // Move order to table_archive
                             $orderedProduct = $cart->shiftOrderToArchive($tableOrders, $sessionId, $tableOrderArchive);
                             if (isset($_POST['order_id']) && isset($_POST['customer_id']) && isset($_POST['ordered_on']) && isset($_POST['status'])) {
-                                // Revoke staus in orders table
+                                // Revoke status in orders table
                                 // Verifies and matches all the fields then deletes
                                 $order_id = $cart->validate($_POST['order_id']);
                                 $customer_id = $cart->validate($_POST['customer_id']);
@@ -148,8 +148,7 @@ switch ($accessor) {
             }
         }
         break;
-
-
+        
     default:
         // code...
         break;

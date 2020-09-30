@@ -108,7 +108,7 @@ case 'update':
                             $id = $_POST['id'];
                         }
                         // Insertable field with validation
-                        $description = $helpers->validate($_POST['description']);
+                        $description = $helpers->validation($_POST['description']);
                         // Photo
                         $permitted = ['jpg', 'jpeg', 'png', 'gif'];
                         $file_name = $_FILES['photo']['name'];

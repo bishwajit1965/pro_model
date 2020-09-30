@@ -2,18 +2,22 @@
     font-weight: $header-four-font-weight;
     color: $header-four-color;
 }
+
 .single-post-category>h4 {
     font-weight: $header-four-font-weight;
     color: $header-four-color;
 }
-.single-post>a>h1{
+
+.single-post>a>h1 {
     font-size: $header-three-font-size;
     font-weight: $header-one-font-weight;
     color: $header-one-color;
 }
+
 .single-post>a {
     text-decoration: none;
 }
+
 .about-us>h1 {
     font-weight: $header-four-font-weight;
     color: $header-four-color;
@@ -25,9 +29,11 @@
     background-color: #DDD;
     border-radius: 5px;
 }
+
 .pagination-sm {
     width: 100%;
 }
+
 #sidebar {
     position: static;
     min-height: 100%;
@@ -48,4 +54,11 @@
     width: auto;
     padding-top: 0;
     background-color: #FFF;
+}
+
+.left-sidebar-heading>h4 {
+    background-color: #E4E4E4;
+    padding: 6px 6px;
+    color: #000;
+    font-weight: 800;
 }

@@ -63,12 +63,37 @@ if (isset($_POST['submit'])) {
                                     if (isset($session)) {
                                         $fields = [
                                             'email' => $value,
-                                            'session' => $session
+                                            'session' => $session,
+                                            'token' =>  md5(Session::get('login'))
                                         ];
-                                        // Will store data in sessions table
-                                        $viewersSessions->insert($tableSession, $fields);
-                                        $home_url = 'index.php';
-                                        Session::redirect("$home_url");
+                                            
+                                        // Catches login_id as switch accessor
+                                        if (isset($_POST['login_id'])) {
+                                            $loginAccessor = $_POST['login_id'];
+                                        }
+                                        // Sets post_id in session as it does
+                                        // not get expired when URI changes
+                                        if (isset($_POST['single-post_id'])) {
+                                            $PostId = $_POST['single-post_id'];
+                                            $loginPostId = Session::set('post_id', $PostId);
+                                            $loginPostId = Session::get('post_id');
+                                        }
+                                        // Switches URI requests
+                                        switch ($loginAccessor) {
+                                        case 'single-post-login':
+                                            // Will store data in sessions table
+                                            $viewersSessions->insert($tableSession, $fields);
+                                            $home_url = "singlePost.php?post_id=$loginPostId";
+                                            Session::redirect("$home_url");
+                                            break;
+                                        case 'login-default':
+                                            $viewersSessions->insert($tableSession, $fields);
+                                            $homeUrl = "index.php";
+                                            Session::redirect("$homeUrl");
+                                            break;
+                                        default:
+                                            #...
+                                        }
                                     }
                                 } else {
                                     $home_url = 'login.php';

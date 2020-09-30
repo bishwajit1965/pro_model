@@ -63,26 +63,31 @@ $limit = ['limit' => '1'];
                         <?php
                         if (Session::get('login') == true) {
                             ?>
-                            <li class="nav-item">
-                                <form action="processViewerLoginRegister.php" method="post" class="d-inline">
-                                    <input type="hidden" name="action" value="verify">
-                                    <button type="submit" onclick="return confirm('Are you sure to log out ?');" name="submit" value="log_out" class="btn btn-sm btn-danger"><i class="fas fa-sign-out-alt"></i> Log out</button>
-                                </form>
-                            </li>
-                            <?php
+                        <li class="nav-item">
+                            <form action="processViewerLoginRegister.php" method="post" class="d-inline">
+                                <input type="hidden" name="action" value="verify">
+                                <button type="submit" onclick="return confirm('Are you sure to log out ?');"
+                                    name="submit" value="log_out" class="btn btn-sm btn-danger"><i
+                                        class="fas fa-sign-out-alt"></i> Log out</button>
+                            </form>
+                        </li>
+                        <?php
                         } else {
                             ?>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="login.php"><i class="fas fa-sign-in-alt"></i> Log in</a>
-                            </li>
+                        <li class="nav-item">
+                            <a href="login.php?login-default=<?php echo 1; ?>"
+                                class="nav-link text-white"><i class="fas fa-sign-in-alt"></i> Log
+                                in</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="register.php"><i class="fas fa-user-plus"></i> Register</a>
-                            </li>
-                            <?php 
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="register.php"><i class="fas fa-user-plus"></i>
+                                Register</a>
+                        </li>
+                        <?php
                         }
                         ?>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -108,17 +113,19 @@ $limit = ['limit' => '1'];
             if (!empty($headerData)) {
                 foreach ($headerData as $header) {
                     ?>
-                    <h1><?php echo $header->title; ?> </h1>
-                    <h3><?php echo $header->slogan; ?> </h3>
-                    <h6><strong>Working since: </strong><?php echo $helpers->dateFormat($header->created_at); ?>
-                    </h6>
-                    <hr>
-                    <?php
+            <h1><?php echo $header->title; ?>
+            </h1>
+            <h3><?php echo $header->slogan; ?>
+            </h3>
+            <h6><strong>Working since: </strong><?php echo $helpers->dateFormat($header->created_at); ?>
+            </h6>
+            <hr>
+            <?php
                 }
             }
             ?>
         </div>
-        <div class="col-sm-2 py-">
+        <div class="col-sm-2">
             <div class="row">
                 <div class="col-sm-12">
                     <!-- Will fetch links data -->
@@ -128,45 +135,51 @@ $limit = ['limit' => '1'];
                     if (!empty($linkData)) {
                         foreach ($linkData as $link) {
                             ?>
-                            <h6 style="border-bottom:2px solid #DDD;"><?php echo $link->title; ?></h6>
-                            <p style="font-size:13px;margin-bottom:5px;"><i class="fas fa-envelope"></i>
-                                <?php echo $link->email; ?>
+                    <h6 style="border-bottom:2px solid #DDD;"><?php echo $link->title; ?>
+                    </h6>
+                    <p style="font-size:10px;margin-bottom:5px;"><i class="fas fa-envelope"></i>
+                        <?php echo $link->email; ?>
+                    </p>
+                    <p style="font-size:10px;margin-bottom:5px;"><i class="fas fa-phone"></i> <?php echo $link->phone; ?>
+                    </p>
+                    <p style="font-size:10px;margin-bottom:5px;"><i class="fas fa-list"></i> <?php echo $link->url; ?>
+                    </p>
+                    <address style="margin-bottom: 5px;"><i class="fas fa-home"></i>
+                        <?php echo $link->address; ?>
+                    </address>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p style="font-size:10px;margin-bottom:5px;"><i class="fas fa-file-archive"></i> <?php echo $link->zipcode; ?>
                             </p>
-                            <p style="font-size:13px;margin-bottom:5px;"><i class="fas fa-phone"></i> <?php echo $link->phone; ?> </p>
-                            <p style="font-size:12px;margin-bottom:5px;"><i class="fas fa-list"></i> <?php echo $link->url; ?></p>
-                            <address style="margin-bottom: 5px;"><i class="fas fa-home"></i>
-                                <?php echo $link->address; ?>
-                            </address>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <p style="font-size:12px;margin-bottom:5px;"><i class="fas fa-file-archive"></i> <?php echo $link->zipcode; ?></p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <p style="font-size:12px;margin-bottom:5px;"><i class="fas fa-flag"></i> <?php echo $link->country; ?></p>
-                                </div>
-                            </div>
-                            <?php
+                        </div>
+                        <div class="col-sm-6">
+                            <p style="font-size:10px;margin-bottom:5px;"><i class="fas fa-flag"></i> <?php echo $link->country; ?>
+                            </p>
+                        </div>
+                    </div>
+                    <?php
                         }
                     }
                     ?>
                     <!-- /Will fetch links data ends-->
                 </div>
             </div>
-            <div class="row px-2">
-                <div class="col-sm-12 bg-success text-center">
+            <div class="row">
+                <div class="col-sm-12 text-center">
                     <!-- Logged in message -->
-                    <small style="font-weight: 500;">
-                    <?php
-                    if (Session::get('login') == true) {
-                        echo 'Logged in! '.Session::get('login');
-                    } else {
-                        echo '<span style="color:#FFF;">Not logged in !</span>  ';
-                    }
-                    ?>
+                    <small style="font-weight:bold;">
+                        <?php
+                        if (Session::get('login') == true) {
+                            echo '<i class="fas fa-sign-out-alt"></i> Logged in! '.Session::get('login');
+                        } else {
+                            echo '<i class="fas fa-sign-in-alt"></i> <span style="color:#FFF;margin-bottom:15px;"> Not logged in !</span>';
+                        }
+                        ?>
                     </small>
                     <!-- /Logged in message -->
                 </div>
             </div>
         </div>
+
     </div>
 </div>

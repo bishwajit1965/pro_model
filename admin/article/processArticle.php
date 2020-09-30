@@ -223,7 +223,7 @@ case 'update':
                         if (isset($_POST['id'])) {
                             $id = $_POST['id'];
                         }
-                        // Insertable field with validation
+                        // Insert table field with validation
                         $title = $helpers->validation($_POST['title']);
                         $description = $helpers->validation($_POST['description']);
                         $body = $helpers->validation($_POST['body']);

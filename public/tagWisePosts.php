@@ -20,7 +20,7 @@
         <?php require_once 'partials/_leftSideBar.php'; ?>
         <div class="col-sm-6 post" style="overflow:auto;">
             <style>
-                .post h1 {
+                .post>h1 {
                     font-family: 'Roboto', sans-serif;
                     font-size: 2.5em;
                     line-height: 45px;
@@ -60,7 +60,7 @@
                             ?>
                             <h1><?php echo  $article->title; ?></h1>
                             <h4><?php echo  $article->description; ?></h4>
-                            <p><?php echo  htmlspecialchars_decode($helpers->textShorten($article->body, 280)); ?></p>
+                            <p><?php echo  htmlspecialchars_decode($helpers->textShorten($article->body), 280); ?></p>
                             <?php
                         }
                     }

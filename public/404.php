@@ -18,21 +18,22 @@
 <div class="container-fluid">
     <div class="row">
         <style>
-            h1 {
+            .content-404>h1 {
                 font-family: Arial, Helvetica, sans-serif;
                 font-size: 50px;
                 line-height: 60px;
+                color:#a23806;
+                font-weight: 900;
+                text-shadow: 1px 2px 3px #400000;
             }
 
-            h2 {
+            .content-404>h2 {
                 line-height: 40px;
-            }
-
-            .content {
-                min-height: 300px;
+                color:#a23806;
+                font-weight: 900;
             }
         </style>
-        <div class="m-auto text-danger text-center content">
+        <div class="m-auto text-danger text-center content-404 py-5">
             <h1>404 NOT FOUND ERROR !!!</h1>
             <h2>Sorry !!! You have not input any search data.</h2>
             <h2>Input data and then search.</h2>

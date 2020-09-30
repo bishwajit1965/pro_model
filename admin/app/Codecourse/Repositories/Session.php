@@ -73,7 +73,6 @@ class Session
     {
         self::init();
         if (self::get('login') == true) {
-            // header('Location:index.php');
             return true;
         }
     }
@@ -97,8 +96,8 @@ class Session
      *
      * @return void
      */
-    public function redirect($url)
+    public function redirect($homeUrl)
     {
-        header('Location:' . $url);
+        header('Location:'.$homeUrl);
     }
 }

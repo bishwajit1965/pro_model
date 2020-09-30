@@ -4,8 +4,8 @@ require_once '../admin/app/start.php';
 
 // Class included
 use CodeCourse\Repositories\Contact as Contact;
-use CodeCourse\Repositories\Session as Session;
 use CodeCourse\Repositories\Helpers as Helpers;
+use CodeCourse\Repositories\Session as Session;
 
 // Classes instantiated
 $contact = new Contact();
@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
                             </button>
                             </div>';
                             Session::set('message', $message);
-                            $home_url = 'index.php';
+                            $home_url = 'contactUs.php';
                             $contact->redirect("$home_url");
                         } elseif (empty($last_name)) {
                             $message = '<div class="alert alert-danger alert-dismissible" role="alert">
@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
                             </button>
                             </div>';
                             Session::set('message', $message);
-                            $home_url = 'index.php';
+                            $home_url = 'contactUs.php';
                             $contact->redirect("$home_url");
                         } elseif (empty($email)) {
                             $message = '<div class="alert alert-danger alert-dismissible" role="alert">
@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
                             </button>
                             </div>';
                             Session::set('message', $message);
-                            $home_url = 'index.php';
+                            $home_url = 'contactUs.php';
                             $contact->redirect("$home_url");
                         } elseif (empty($phone)) {
                             $message = '<div class="alert alert-danger alert-dismissible" role="alert">
@@ -77,7 +77,7 @@ if (isset($_POST['submit'])) {
                             </button>
                             </div>';
                             Session::set('message', $message);
-                            $home_url = 'index.php';
+                            $home_url = 'contactUs.php';
                             $contact->redirect("$home_url");
                         } elseif (empty($message)) {
                             $message = '<div class="alert alert-danger alert-dismissible" role="alert">
@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
                             </button>
                             </div>';
                             Session::set('message', $message);
-                            $home_url = 'index.php';
+                            $home_url = 'contactUs.php';
                             $contact->redirect("$home_url");
                         } elseif (empty($address)) {
                             $message = '<div class="alert alert-danger alert-dismissible" role="alert">
@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) {
                             </button>
                             </div>';
                             Session::set('message', $message);
-                            $home_url = 'index.php';
+                            $home_url = 'contactUs.php';
                             $contact->redirect("$home_url");
                         } else {
                             $insertedData = $contact->insert($table, $fields);
@@ -109,7 +109,7 @@ if (isset($_POST['submit'])) {
                                 </button>
                                 </div>';
                                 Session::set('message', $message);
-                                $home_url = 'index.php';
+                                $home_url = 'contactUs.php';
                                 $contact->redirect("$home_url");
                             } else {
                                 $message = '<div class="alert alert-danger alert-dismissible" role="alert">
@@ -119,7 +119,7 @@ if (isset($_POST['submit'])) {
                                 </button>
                                 </div>';
                                 Session::set('message', $message);
-                                $home_url = 'index.php';
+                                $home_url = 'contactUs.php';
                                 $contact->redirect("$home_url");
                             }
                         }

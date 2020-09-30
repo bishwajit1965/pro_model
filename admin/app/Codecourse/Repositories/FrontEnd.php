@@ -125,13 +125,13 @@ class FrontEnd extends Core
     /**
      * Will generate th URL
      *
-     * @param string $home_url 
+     * @param string $homeUrl 
      *
      * @return void
      */
-    public function redirect($home_url)
+    public function redirect($homeUrl)
     {
-        header("Location: $home_url");
+        header("Location: $homeUrl");
     }
     /**
      * Will select random data from article table
@@ -191,16 +191,16 @@ class FrontEnd extends Core
      * Will insert like in article table 
      * 
      * @param string $table   
-     * @param int    $id 
+     * @param int    $lid 
      * @param int    $likeCount 
      *
      * @return void
      */
-    public function likePost($table, $id, $likeCount)
+    public function likePost($table, $lid, $likeCount)
     {
         try {
             $this->pdo->beginTransaction();
-            $query = "UPDATE $table SET like_count = $likeCount WHERE id = $id";
+            $query = "UPDATE $table SET like_count = $likeCount WHERE id = $lid";
             $stmt = $this->pdo->prepare($query);
             $stmt->bindParam('like_count', $likeCount);
             $stmt->execute();

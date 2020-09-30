@@ -19,8 +19,8 @@ case 'insert':
         if ($_REQUEST['action'] == 'verify') {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['submit'])) {
-                    //Insertable field with validation
-                    $about_us = $helpers->validate($_POST['about_us']);
+                    //Insert table field with validation
+                    $about_us = $helpers->validation($_POST['about_us']);
                     // Validation
                     if (empty($about_us)) {
                         $message = '<div class="alert alert-danger alert-dismissible " role="alert">
@@ -63,7 +63,7 @@ case 'update':
                 if (isset($_POST['submit'])) {
                     if (isset($_POST['submit'])) {
                         $id = $_POST['id'];
-                        $about_us = $helpers->validate($_POST['about_us']);
+                        $about_us = $helpers->validation($_POST['about_us']);
                         $fields = ['about_us' => $about_us];
                         $condition = ['id' => $id];
                         $updateStatus = $aboutUs->updateWithoutPhoto($table, $fields, $condition);
