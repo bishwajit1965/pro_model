@@ -127,7 +127,7 @@ $limit = ['limit' => '1'];
         </div>
         <div class="col-sm-2">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12 header-right">
                     <!-- Will fetch links data -->
                     <?php
                     $limit = ['limit' => '1'];
@@ -137,22 +137,18 @@ $limit = ['limit' => '1'];
                             ?>
                     <h6 style="border-bottom:2px solid #DDD;"><?php echo $link->title; ?>
                     </h6>
-                    <p style="font-size:10px;margin-bottom:5px;"><i class="fas fa-envelope"></i>
-                        <?php echo $link->email; ?>
-                    </p>
-                    <p style="font-size:10px;margin-bottom:5px;"><i class="fas fa-phone"></i> <?php echo $link->phone; ?>
-                    </p>
-                    <p style="font-size:10px;margin-bottom:5px;"><i class="fas fa-list"></i> <?php echo $link->url; ?>
-                    </p>
+                    <p><i class="fas fa-envelope"></i> <?php echo $link->email; ?></p>
+                    <p><i class="fas fa-phone"></i> <?php echo $link->phone; ?></p>
+                    <p><i class="fas fa-list"></i> <?php echo $link->url; ?></p>
                     <address style="margin-bottom: 5px;"><i class="fas fa-home"></i>
                         <?php echo $link->address; ?>
                     </address>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <p style="font-size:10px;margin-bottom:5px;"><i class="fas fa-file-archive"></i> <?php echo $link->zipcode; ?>
                             </p>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-8">
                             <p style="font-size:10px;margin-bottom:5px;"><i class="fas fa-flag"></i> <?php echo $link->country; ?>
                             </p>
                         </div>
@@ -167,12 +163,12 @@ $limit = ['limit' => '1'];
             <div class="row">
                 <div class="col-sm-12 text-center">
                     <!-- Logged in message -->
-                    <small style="font-weight:bold;">
+                    <small style="font-weight:900;">
                         <?php
                         if (Session::get('login') == true) {
-                            echo '<i class="fas fa-sign-out-alt"></i> Logged in! '.Session::get('login');
+                            echo '<span style="color:#edeff0;float:left;"><i class="fas fa-sign-out-alt"></i> Logged in ! </span> '.'<br>'.'Hello '.Session::get('login');
                         } else {
-                            echo '<i class="fas fa-sign-in-alt"></i> <span style="color:#FFF;margin-bottom:15px;"> Not logged in !</span>';
+                            echo '<i class="fas fa-sign-in-alt"></i> <span style="color:#FFF;margin-bottom:15px;float:left;"> Not logged in !</span>';
                         }
                         ?>
                     </small>
@@ -180,6 +176,5 @@ $limit = ['limit' => '1'];
                 </div>
             </div>
         </div>
-
     </div>
 </div>

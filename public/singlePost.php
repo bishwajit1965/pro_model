@@ -257,8 +257,8 @@
             <?php
                 if (!empty($categoryData)) {
                     foreach ($categoryData as $categoryResult) {
-                    if ($categoryResult->category_id == $article->category_id) {
-                    ?>
+                        if ($categoryResult->category_id == $article->category_id) {
+                            ?>
                     <a href="#" class="badge badge-secondary"><?php echo $categoryResult->category_name; ?></a>
                     <?php
                         }
