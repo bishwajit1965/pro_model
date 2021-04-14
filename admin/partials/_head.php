@@ -16,6 +16,12 @@ if (!$user_home->is_logged_in()) {
 $stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userID=:uid");
 $stmt->execute(array(":uid" => $_SESSION['userSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Detects file name
+$path = $_SERVER['SCRIPT_FILENAME'];
+if (isset($path)) {
+    $current_page = basename($path, '.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +29,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminPanel | Blank Page</title>
+    <title>Admin Panel || <?= ucfirst($current_page); ?> page </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Favicon -->

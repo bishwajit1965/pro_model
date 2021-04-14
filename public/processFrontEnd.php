@@ -1,7 +1,5 @@
 <?php
-/**
- * Class loader 
- */
+/**Class loader*/
 require_once '../admin/app/start.php';
 
 // Class included

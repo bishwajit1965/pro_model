@@ -3,20 +3,26 @@
 require_once '../app/start.php';
 
 use CodeCourse\Repositories\Database as Database;
-use CodeCourse\Repositories\User as User;
 use CodeCourse\Repositories\Helpers as Helpers;
 use CodeCourse\Repositories\Session as Session;
+use CodeCourse\Repositories\User as User;
 
 Session::init();
 
 $fm = new Helpers();
 $user_home = new User();
 if (!$user_home->is_logged_in()) {
-  $user_home->redirect('index.php');
+    $user_home->redirect('index.php');
 }
 $stmt = $user_home->runQuery('SELECT * FROM tbl_users WHERE userID=:uid');
 $stmt->execute(array(':uid' => $_SESSION['userSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Detects file name
+$path = $_SERVER['SCRIPT_FILENAME'];
+if (isset($path)) {
+    $current_page = basename($path, '.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,7 +30,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Aroma | Blank Page</title>
+  <title>Admin Panel || <?= ucfirst($current_page); ?> page </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -49,7 +55,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <?php
   spl_autoload_register(function ($class) {
-    include_once '../admin/classes/class.' . $class . '.php';
+      include_once '../admin/classes/class.' . $class . '.php';
   });
   // $db = new Database()
   ?>
@@ -259,6 +265,10 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
               <li><a href="../socialMedia/socialMediaIndex.php"><i class="fa fa-circle-o"></i> Social Media Index</a></li>
               <li><a href="../tag/tagIndex.php"><i class="fa fa-circle-o"></i> Tag Index</a></li>
               <li><a href="../links/linkIndex.php"><i class="fa fa-circle-o"></i> Link Index</a></li>
+              <li><a href="../roles/roleIndex.php"><i class="fa fa-circle-o"></i> Role Index</a></li>
+              <li><a href="../roles/userIndex.php"><i class="fa fa-circle-o"></i> User Role Index</a></li>
+              <li><a href="../contact/contactIndex.php"><i class="fa fa-circle-o"></i> Contact Index</a></li>
+              <li><a href="../gallery/galleryIndex.php"><i class="fa fa-circle-o"></i> Gallery Index</a></li>
             </ul>
           </li>
         </ul>

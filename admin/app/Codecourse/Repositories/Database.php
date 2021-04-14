@@ -7,6 +7,11 @@ namespace CodeCourse\Repositories;
 use PDO;
 use PDOException;
 
+define("GREETING", "Hello you! How are you today?");
+/**
+ * Database connection
+ */
+
 class Database
 {
     private $host = "localhost";

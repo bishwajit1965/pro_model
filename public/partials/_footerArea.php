@@ -105,30 +105,32 @@ $order_by = ['order_by' => 'id DESC LIMIT 6'];
                 ?>
             </div>
         </div>
+        <!-- Testomonial data displayed -->
         <div class="col-sm-3">
             <style>
-                #testimonial>p{
-                    font-size:12px;font-size:12px;border-bottom:1px dashed #666;padding-bottom:3px;margin-bottom:10px;margin-top:3px;}
-                #testimonial>p:last-child {border-bottom:0px dashed #666;}
-
+                #testimonials{
+                    font-size:12px;border-bottom:1px dashed #666;padding-bottom:3px;margin-top:6px;}
+                #testimonials:last-child {border-bottom:0px dashed #666;}
             </style>
-            <h5 style="border-bottom:2px solid #DDD;padding-bottom:5px;">Recent Testimonials:</h5>
+
+            <h5 style="border-bottom:2px solid #DDD;padding-bottom:5px;"> Recent Testimonials:</h5>
             <?php
+            // WhereCondition and order_by condition in fetching data
+            $whereCond = [' where ' => ['status' => '1'],
+            'order_by' => 'id DESC', 'limit' => '6'
+            ];
             // Will fetch data from database
-            $message = $contact->select($tableContact, $order_by);
+            $message = $contact->select($tableContact, $whereCond);
             if (!empty($message)) {
                 foreach ($message as $testimonial) {
-                    ?>
-            <a href="singleComment.php?id=<?php echo $testimonial->id; ?>" 
-                style="color:#DDD;text-decoration:none;">
-                <h6 style="margin-bottom:px;font-size:12px;font-weight:800;"><?php echo $testimonial->first_name . ' ' . $testimonial->last_name; ?>
-                    says : </h6>
-                <div id="testimonial">
-                    <?php echo htmlspecialchars_decode($helpers->textShorten($testimonial->message, 62)); ?> 
-                </div> 
-
-            </a>
-            <?php
+                ?>
+                    <div class="my-1 mb-1" id="testimonials">
+                        <a href="singleComment.php?id=<?php echo $testimonial->id; ?>" style="color:#DDD;text-decoration:none;">
+                            <h6 style="padding-bottom:0px;font-size:14px;font-weight:800;"><?php echo $testimonial->first_name . ' ' . $testimonial->last_name; ?> says : </h6>
+                            <span><?php echo htmlspecialchars_decode($helpers->textShorten($testimonial->message, 60)); ?></span>
+                        </a>
+                    </div>
+                <?php
                 }
             }
             ?>

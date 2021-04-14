@@ -8,7 +8,11 @@ ob_start();
  */
 $path = $_SERVER['SCRIPT_FILENAME'];
 if (isset($path)) {
-    $current_page = basename($path, '.php');
+    $current_page = basename($path,'.php');
+    if ($current_page = 'index.php') {
+        $current_page = 'home';
+        ucfirst($current_page);
+    }
 }
 ?>
 <?php
@@ -43,7 +47,6 @@ $tableLikes = 'tbl_likes';
 ?>
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -51,8 +54,11 @@ $tableLikes = 'tbl_likes';
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Project Model || <?php echo ucfirst($current_page); ?>
-        page</title>
+    <!-- Meta Data for SEO -->
+    <meta name="Tags" content="<?php echo constant("GREETING");?>">
+    <meta name="Description" content="<?php echo "Project Model";?>">
+     <!-- Meta Data for SEO -->
+    <title>Project Model || <?php echo $current_page.' page'; ?></title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
         integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -92,25 +98,41 @@ $tableLikes = 'tbl_likes';
 
             <!-- Middle content area -->
             <div class="col-sm-6 main-content" style="overflow:auto;">
+                <!-- Marquee tag -->
                 <div class="row mt-1">
-                    <!-- Marquee tag -->
-                    <marquee class="bg-secondary py-2" behavior="scroll" scrollAmount="100" scrollDelay="1500"
-                        onMouseOver="this.stop();" onMouseOut="this.start();" direction="lft">
-                        <a class="text-white" href=""><i class="fas fa-star"></i> <?php echo $header->title; ?>
-                            <i class="fas fa-star"></i></a>
+
+                    <marquee class="bg-secondary py-2" behavior="scroll" scrollAmount="100" scrollDelay="1600" onMouseOver="this.stop();" onMouseOut="this.start();" direction="lft">
+
+                    <?php
+                    $table = 'tbl_articles';
+                    $whereCond = [' where ' => ['status' => '1'],
+                    'order_by' => 'id DESC', 'limit' => '6'
+                    ];
+                    $marqueeData = $frontEnd->selectMarqueeData($table, $whereCond);
+                    if (!empty($marqueeData)) {
+                        $counter = '1';
+                        foreach ($marqueeData as $scrollingData) {
+                            ?>
+                                
+                            <a class="text-white bg-dark p-3" href="singlePost.php?post_id=<?php echo $scrollingData->id; ?>contactUs.php"> <i class="fas fa-star"> </i> <?php echo '(' . $counter++ .''.')' . ' ' . $scrollingData->title; ?> <i class="fas fa-star"> </i></a>
+                            
+                            <?php
+                        }
+                    }
+                    ?>
                     </marquee>
-                    <!--/Marquee tag -->
                 </div>
+                <!--/Marquee tag -->
                 <!-- Will display the validation message if any-->
                 <div class="row d-block">
                     <?php
-                Session::init();
-                $message = Session::get('message');
-                if (!empty($message)) {
-                    echo $message;
-                    Session::set('message', null);
-                }
-                ?>
+                    Session::init();
+                    $message = Session::get('message');
+                    if (!empty($message)) {
+                        echo $message;
+                        Session::set('message', null);
+                    }
+                    ?>
                 </div>
                 <!--/ Will display the validation message if any ends-->
 
@@ -145,29 +167,29 @@ $tableLikes = 'tbl_likes';
                             <span style="color:#999;font-weight:500;"><strong>Category :</strong>
                                 <?php
                                 $categoryData = $category->select($table_category);
-                    if (!empty($categoryData)) {
-                        foreach ($categoryData as $categoryResult) {
-                            if ($categoryResult->category_id == $article->category_id) {
-                                ?>
-                                <a href="#" class="badge badge-secondary">
-                                    <?php echo $categoryResult->category_name; ?></a>
-                                <?php
-                            }
-                        }
-                    } ?>
+                                if (!empty($categoryData)) {
+                                    foreach ($categoryData as $categoryResult) {
+                                        if ($categoryResult->category_id == $article->category_id) {
+                                            ?>
+                                            <a href="#" class="badge badge-secondary">
+                                                <?php echo $categoryResult->category_name; ?></a>
+                                            <?php
+                                        }
+                                    }
+                                } ?>
                             </span>
                             <span style="color:#999;font-weight:500;"><strong> || Tag :</strong>
                                 <?php
                                 $tagData = $tag->select($table_tag);
-                    if (!empty($tagData)) {
-                        foreach ($tagData as $tagResult) {
-                            if ($tagResult->tag_id == $article->tag_id) {
-                                ?>
-                                <a href="#" class="badge badge-secondary"><?php echo $tagResult->tag_name; ?></a>
-                                <?php
-                            }
-                        }
-                    } ?>
+                                if (!empty($tagData)) {
+                                    foreach ($tagData as $tagResult) {
+                                        if ($tagResult->tag_id == $article->tag_id) {
+                                            ?>
+                                            <a href="#" class="badge badge-secondary"><?php echo $tagResult->tag_name; ?></a>
+                                            <?php
+                                        }
+                                    }
+                                } ?>
                             </span>
                         </div>
                         <div class="col-sm-6">
@@ -189,10 +211,10 @@ $tableLikes = 'tbl_likes';
                                                 <span class="badge badge-danger" style="border:1px solid#FFF;">
                                                     <?php
                                                     $articleId = $article->id;
-                                $likeData = $like->countPostLikes($tableLikes, $articleId);
-                                if (isset($likeData)) {
-                                    echo count($likeData);
-                                } else { ?>
+                                                    $likeData = $like->countPostLikes($tableLikes, $articleId);
+                                                    if (isset($likeData)) {
+                                                        echo count($likeData);
+                                                    } else { ?>
                                                     <span style="color:#FFF;"><?php echo '0' ; ?></span>
                                                     <?php
                                                     } ?>
@@ -210,18 +232,18 @@ $tableLikes = 'tbl_likes';
                                         <i class="fas fa-thumbs-up"></i>
                                         <?php
                                         $articleId = $article->id;
-                                $likeData = $like->countPostLikes($tableLikes, $articleId);
-                                if (isset($likeData)) {
-                                    ?>
+                                        $likeData = $like->countPostLikes($tableLikes, $articleId);
+                                        if (isset($likeData)) {
+                                            ?>
                                         <sup style="color:#bf0000;font-weight:900;">
                                             <?php echo count($likeData); ?>
                                         </sup>
                                         <?php
-                                } else {
-                                    ?>
-                                        <span style="color:#bf0000;font-weight:900;"><?php echo 0 ; ?></span>
-                                        <?php
-                                } ?>
+                                        } else {
+                                            ?>
+                                                <span style="color:#bf0000;font-weight:900;"><?php echo 0 ; ?></span>
+                                                <?php
+                                        } ?>
                                     </a>
                                 </div>
                                 <?php
@@ -231,13 +253,13 @@ $tableLikes = 'tbl_likes';
                                 <!-- Dislike button begins-->
                                 <?php
                                 if (Session::checkLogin()) {
-                                    // Dislike button will be displayed to the person who has liked the post only
-                                    $likeData = $like->select($tableLikes);
-                                    if (!empty($likeData)) {
-                                        foreach ($likeData as $likeValue) {
-                                            if ($likeValue->email == Session::get('login') && $likeValue->article_id == $article->id
-                                        && $likeValue->session == session_id() && $likeValue->viewers_id == Session::get('id')) {
-                                                ?>
+                                // Dislike button will be displayed to the person who has liked the post only
+                                $likeData = $like->select($tableLikes);
+                                if (!empty($likeData)) {
+                                    foreach ($likeData as $likeValue) {
+                                        if ($likeValue->email == Session::get('login') && $likeValue->article_id == $article->id
+                                    && $likeValue->session == session_id() && $likeValue->viewers_id == Session::get('id')) {
+                                            ?>
                                 <div class="col-sm-3 dislike">
                                     <form action="processFrontEnd.php" method="post">
                                         <input type="hidden" name="action" value="verify">
@@ -267,8 +289,6 @@ $tableLikes = 'tbl_likes';
                             </div>
                         </div>
                     </div>
-                    <!-- <p><img class="img-fluid img-thumbnail mt-4 w-100" src="../admin/article/<?php echo $article->photo; ?>"
-                    alt="Article Photo" style="height: 250px;"></p> -->
 
                     <p
                         style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;">

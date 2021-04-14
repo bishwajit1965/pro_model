@@ -24,7 +24,7 @@ case 'insert':
                     $copyright_text = $helpers->validation($_POST['copyright_text']);
                     // Validation
                     if (empty($copyright_text)) {
-                        $message = '<div class="alert alert-danger alert-dismissible " role="alert">
+                        $message = '<div class="alert alert-danger alert-dismissible" role="alert">
                             <strong> ERROR !!!</strong> Copyright text field was left blank !!!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -41,7 +41,7 @@ case 'insert':
                         $insertedData = $copyright->insert($table, $fields);
                         // validation messages and page redirects
                         if ($insertedData) {
-                            $message = '<div class="alert alert-success alert-dismissible " role="alert">
+                            $message = '<div class="alert alert-success alert-dismissible" role="alert">
                             <strong> WOW !</strong> Category has been inserted successsfully !!!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

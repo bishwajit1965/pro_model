@@ -123,7 +123,7 @@
                                                 } elseif ($article->status == '1') {
                                                     echo 'Coming soon';
                                                 } elseif ($article->status == '2') {
-                                                    echo 'Draft';
+                                                    echo '<span style="color:red;font-weight:bold;">Draft</span>';
                                                 } elseif ($article->status == '3') {
                                                     echo 'Unpublished';
                                                 } else {
@@ -157,7 +157,30 @@
                                             <td><?php echo $helpers->dateFormat($article->published_on); ?></td>
                                             <td>
                                                 <a href="editarticle.php?edit_id=<?php echo $article->id; ?>" class="btn btn-xs btn-success btn-block"><i class="fa fa-edit"></i> Edit</a>
+                                                 
+                                                <?php 
+                                                if ($article->status == '2') {
+                                                ?>
+                                                    <form style="margin-top:3px;" action="processArticle.php" method="post" accept-charset="utf-8">
+                                                        <input type="hidden" name="action" value="verify">
+                                                        <input type="hidden" name="id" value="<?php echo $article->id; ?>">
+                                                        <input type="hidden" name="status" value="<?php echo '0';?>">
 
+                                                        <button type="submit" name="submit" value="publish" class="btn btn-xs btn-info btn-block" onClick="return confirm('Do you really want to publish this article ?');"><i class="fa fa-list"></i> Publish </button>
+                                                    </form>
+                                                <?php  
+                                                } else {
+                                                ?>
+                                                    <form style="margin-top:3px;" action="processArticle.php" method="post" accept-charset="utf-8">
+                                                        <input type="hidden" name="action" value="verify">
+                                                        <input type="hidden" name="id" value="<?php echo $article->id; ?>">
+                                                        <input type="hidden" name="status" value="<?php echo '2';?>">
+
+                                                        <button type="submit" name="submit" value="unpublish" class="btn btn-xs btn-warning btn-block" onClick="return confirm('Do you really want to publish this article ?');"><i class="fa fa-list"></i> Unpublish </button>
+                                                    </form>
+                                                <?php
+                                                }
+                                                ?>
                                                 <form style="margin-top:3px;" action="processArticle.php" method="post" accept-charset="utf-8">
                                                     <input type="hidden" name="action" value="verify">
                                                     <input type="hidden" name="id" value="<?php echo $article->id; ?>">

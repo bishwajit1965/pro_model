@@ -1,15 +1,6 @@
 <body>
     <!-- Facebook Javascript SDK -->
     <div id="fb-root"></div>
-    <script>
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=270756030089004&autoLogAppEvents=1';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=330175074286695&autoLogAppEvents=1" nonce="vtqkKCCP"></script>
     <!-- /Facebook Javascript SDK -->
     <div class="top-header-bar bg-dark py-1"></div>

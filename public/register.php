@@ -100,7 +100,7 @@
                     if (!empty($message)) {
                         echo $message;
                         Session::set('message', null);
-                        header("Refresh:5");
+                        header("Refresh:2");
                     }
                     ?>
                 <form action="processViewerLoginRegister.php" method="post">
@@ -190,7 +190,7 @@
                         <button type="submit" name="submit" value="register" class="btn btn-sm btn-info"><i
                                 class="fas fa-users">
                             </i> Register</button>
-                        <a href="../index.php" class="btn btn-sm btn-primary"><i class="fas fa-fast-backward"></i>
+                        <a href="index.php" class="btn btn-sm btn-primary"><i class="fas fa-fast-backward"></i>
                             Home</a>
                         <a href="login.php?login-default=<?php echo 1; ?>" class="btn btn-sm btn-success"><i
                                 class="fas fa-sign-in-alt"></i>

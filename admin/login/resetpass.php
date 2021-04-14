@@ -25,26 +25,26 @@ if (isset($_GET['id']) && isset($_GET['code'])) {
 
       if ($cpass !== $pass) {
         $msg = "<div class='alert alert-block'>
-						<button class='close' data-dismiss='alert'>&times;</button>
-						<strong>Sorry!</strong>  Password Doesn't match.
-						</div>";
+            <button class='close' data-dismiss='alert'>&times;</button>
+            <strong>Sorry!</strong>  Password Doesn't match.
+            </div>";
       } else {
         $password = md5($cpass);
         $stmt = $user->runQuery("UPDATE tbl_users SET userPass=:upass WHERE userID=:uid");
         $stmt->execute(array(":upass" => $password, ":uid" => $rows['userID']));
 
         $msg = "<div class='alert alert-success'>
-						<button class='close' data-dismiss='alert'>&times;</button>
-						Password Changed.
-						</div>";
+            <button class='close' data-dismiss='alert'>&times;</button>
+            Password Changed.
+            </div>";
         header("refresh:5;index.php");
       }
     }
   } else {
     $msg = "<div class='alert alert-success'>
-				<button class='close' data-dismiss='alert'>&times;</button>
-				No Account Found, Try again
-				</div>";
+        <button class='close' data-dismiss='alert'>&times;</button>
+        No Account Found, Try again
+        </div>";
   }
 }
 

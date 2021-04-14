@@ -29,15 +29,16 @@ class User
         return $stmt;
     }
 
-    public function register($uname, $email, $upass, $code)
+    public function register($firstName, $lastName, $email, $upass, $code)
     {
         try {
             $password = md5($upass);
-            $stmt = $this->conn->prepare('INSERT INTO tbl_users(userName,userEmail,userPass,tokenCode) VALUES(:user_name, :user_mail, :user_pass, :active_code)');
-            $stmt->bindparam(':user_name', $uname);
-            $stmt->bindparam(':user_mail', $email);
-            $stmt->bindparam(':user_pass', $password);
-            $stmt->bindparam(':active_code', $code);
+            $stmt = $this->conn->prepare('INSERT INTO tbl_users(firstName,lastName,userEmail,userPass,tokenCode) VALUES(:firstName,:lastName, :user_mail, :user_pass, :active_code)');
+            $stmt->bindParam(':firstName', $firstName);
+            $stmt->bindParam(':lastName', $lastName);
+            $stmt->bindParam(':user_mail', $email);
+            $stmt->bindParam(':user_pass', $password);
+            $stmt->bindParam(':active_code', $code);
             $stmt->execute();
 
             return $stmt;

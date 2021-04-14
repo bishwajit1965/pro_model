@@ -44,8 +44,8 @@ class Core
     /**
      * Will select data from database
      *
-     * @param string $table 
-     * @param array  $data 
+     * @param string $table
+     * @param array  $data
      *
      * @return void
      */
@@ -125,8 +125,8 @@ class Core
     /**
      * Will insert data into database
      *
-     * @param string $table 
-     * @param array  $data 
+     * @param string $table
+     * @param array  $data
      *
      * @return void
      */
@@ -171,10 +171,10 @@ class Core
     /**
      * Will update data in database
      *
-     * @param string $table 
-     * @param int    $id 
-     * @param array  $data 
-     * @param array  $cond 
+     * @param string $table
+     * @param int    $id
+     * @param array  $data
+     * @param array  $cond
      *
      * @return void
      */
@@ -232,9 +232,9 @@ class Core
     /**
      * Will update data in database
      *
-     * @param string $table 
-     * @param array  $data 
-     * @param array  $cond 
+     * @param string $table
+     * @param array  $data
+     * @param array  $cond
      *
      * @return void
      */
@@ -282,7 +282,7 @@ class Core
      * Will redirect to th desired url
      *
      * @home_url [param] $home_url
-     * 
+     *
      * @return void
      */
     public function redirect($home_url)
@@ -301,9 +301,9 @@ class Core
     /**
      * Will delete data from database as well as photo from folder
      *
-     * @param string $table 
-     * @param int    $id 
-     * @param array  $data 
+     * @param string $table
+     * @param int    $id
+     * @param array  $data
      *
      * @return void
      */
@@ -349,7 +349,7 @@ class Core
      *
      * @param table $table commented
      * @param data  $data  commented
-     * 
+     *
      * @return void
      */
     public function delete($table, $data)
@@ -381,9 +381,9 @@ class Core
     /**
      * Will search data from database
      *
-     * @param string $table  
-     * @param string $search 
-     * 
+     * @param string $table
+     * @param string $search
+     *
      * @return true
      */
     public function searchData($table, $search)
@@ -408,8 +408,8 @@ class Core
     /**
      * Counting the post likes
      *
-     * @param string $tableLikes 
-     * @param int    $articleId 
+     * @param string $tableLikes
+     * @param int    $articleId
      *
      * @return mixed
      */
@@ -437,8 +437,8 @@ class Core
      * Checks if data exists in database or not
      *
      * @param table $table commented
-     * 
-     * @return rows $table  
+     *
+     * @return rows $table
      */
     public function dataExists($table)
     {
@@ -464,8 +464,8 @@ class Core
      * Checks if data exists in database or not
      *
      * @param table $table commented
-     * 
-     * @return rows $table  
+     *
+     * @return rows $table
      */
     public function selectAll($table)
     {
@@ -489,9 +489,9 @@ class Core
     /**
      * Method to prevent duplicate entry
      *
-     * @param string $table 
-     * @param int    $articleId 
-     * @param string $sessionId 
+     * @param string $table
+     * @param int $articleId
+     * @param string $sessionId
      *
      * @return void
      */
@@ -505,5 +505,25 @@ class Core
         $stmt->execute();
         $stmtExecute = $stmt->fetch(PDO::FETCH_OBJ);
         return ($stmtExecute) ? $stmtExecute : false;
+    }
+
+    /**
+     * [preverntDuplicateUserRole description]
+     * @param  string $table
+     * @param  int $userID
+     * @param  int $role_id
+     * @return mixed
+     */
+    public function preventDuplicateAdminRole($table)
+    {
+        $query = "SELECT * FROM $table";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $fetchedData[] = $data;
+            }
+            return (isset($fetchedData)) ? $fetchedData : false;
+        }
     }
 }

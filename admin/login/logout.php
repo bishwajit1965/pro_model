@@ -4,8 +4,8 @@
 
 require_once '../app/start.php';
 
-use CodeCourse\Repositories\User as User;
 use CodeCourse\Repositories\Session as Session;
+use CodeCourse\Repositories\User as User;
 
 Session::init();
 

@@ -156,6 +156,54 @@
                     <li><a href="../links/linkIndex.php"><i class="fa fa-circle-o"></i> Link Index</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>Role Index</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../roles/roleIndex.php"><i class="fa fa-circle-o"></i> Role Index</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>User Roles</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../roles/userIndex.php"><i class="fa fa-circle-o"></i> User Role Index</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>Contact Option</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../contact/contactIndex.php"><i class="fa fa-circle-o"></i> Contact Index</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>Gallery Option</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../gallery/galleryIndex.php"><i class="fa fa-circle-o"></i> Gallery Index</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

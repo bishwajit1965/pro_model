@@ -19,7 +19,7 @@ case 'insert':
         if ($_REQUEST['action'] == 'verify') {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['submit'])) {
-                    // Insertable field with validation
+                    // Insert field with validation
                     $category_name = $helpers->validate($_POST['category_name']);
                     // Validation
                     if (empty($category_name)) {

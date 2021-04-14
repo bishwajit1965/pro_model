@@ -83,7 +83,7 @@
                 <p>
                     <span style="color:#999;font-weight:600;"><strong>Category :</strong>
                         <?php
-                                $categoryData = $category->select($table_category);
+                    $categoryData = $category->select($table_category);
                     if (!empty($categoryData)) {
                         foreach ($categoryData as $categoryResult) {
                             if ($categoryResult->category_id == $article->category_id) {

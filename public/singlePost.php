@@ -103,7 +103,7 @@
                             foreach ($categoryData as $categoryResult) {
                                 if ($categoryResult->category_id == $article->category_id) {
                                     ?>
-                        <a href="#" class="badge badge-secondary"><?php echo $categoryResult->category_name; ?></a>
+                                    <a href="#" class="badge badge-secondary"><?php echo $categoryResult->category_name; ?></a>
                                     <?php
                                 }
                             }
@@ -149,10 +149,10 @@
                                     <span class="badge badge-danger" style="border:1px solid#FFF;">
                                         <?php
                                         $articleId = $article->id;
-                        $likeData = $like->countPostLikes($tableLikes, $articleId);
-                        if (isset($likeData)) {
-                            echo count($likeData);
-                        } else { ?>
+                                        $likeData = $like->countPostLikes($tableLikes, $articleId);
+                                        if (isset($likeData)) {
+                                            echo count($likeData);
+                                        } else { ?>
                                         <span style="color:#FFF;"><?php echo '0' ; ?></span>
                                         <?php
                                         } ?>
@@ -170,14 +170,14 @@
                             value="<?php echo $article->id; ?>"><i class="fas fa-thumbs-up"></i>
                             <?php
                             $articleId = $article->id;
-                        $likeData = $like->countPostLikes($tableLikes, $articleId);
-                        if (isset($likeData)) {
-                            ?>
-                            <sup style="color:#bf0000;font-weight:900;">
-                                <?php echo count($likeData); ?>
-                            </sup>
-                                <?php
-                        } else {
+                            $likeData = $like->countPostLikes($tableLikes, $articleId);
+                            if (isset($likeData)) {
+                                ?>
+                                <sup style="color:#bf0000;font-weight:900;">
+                                    <?php echo count($likeData); ?>
+                                </sup>
+                                    <?php
+                            } else {
                             ?>
                             <span style="color:#bf0000;font-weight:900;"><?php echo 0 ; ?></span>
                             <?php
@@ -196,19 +196,17 @@
                         $likeData = $like->select($tableLikes);
                         if (!empty($likeData)) {
                             foreach ($likeData as $likeValue) {
-                                if ($likeValue->email == Session::get('login') && $likeValue->article_id == $article->id
-                                && $likeValue->session == session_id() && $likeValue->viewers_id == Session::get('id')) {
+                                if ($likeValue->email == Session::get('login') && $likeValue->article_id == $article->id && $likeValue->session == session_id() 
+                                    && $likeValue->viewers_id == Session::get('id')) {
                                     ?>
                                     <div class="col-sm-3 dislike">
                                         <form action="processFrontEnd.php" method="post">
                                             <input type="hidden" name="action" value="verify">
-
                                             <input type="hidden" name="post_id" value="<?php echo $article->id; ?>">
                                             <input type="hidden" name="viewers_id" value="<?php echo Session::get('id'); ?>">
                                             <input type="hidden" name="email" value="<?php echo $likeValue->email; ?>">
                                             <input type="hidden" name="session" value="<?php echo session_id(); ?>">
                                             <input type="hidden" name="dislike" value="single-post-dislike">
-
                                             <button type="submit" name="submit" value="delete" style="padding:6px 15px;"
                                                 class="fas fa-thumbs-down btn btn-sm btn-primary text-white" data-toggle="tooltip"
                                                 title="<?php echo Session::get('login'). ' liked the post'; ?>">
@@ -234,10 +232,8 @@
                     style="color:#666;font-weight:600;margin-top:30px;background-color:#D4EDDA;border-left:5px solid#4CAF50;padding:10px;">
                     <strong> Post synopsis :</strong> <?php echo $article->description; ?>
                 </p>
-
                 <p><?php echo htmlspecialchars_decode($article->body); ?>
                 </p>
-
                 <p>
                     <a href="index.php" class="btn btn-sm btn-primary" id="shadow">
                         <i class="fas fa-fast-backward"></i> Home page</a>
@@ -297,8 +293,7 @@
                 <?php
                 $url = (!empty($_SERVER['HTTPS'])) ? 'https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] : 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
                 ?>
-                <!-- /Uri generator for each post -->
-                <div class="fb-comments" data-href="<?php echo $url; ?>" data-numposts="5" data-width="80%"></div>
+                <div class="fb-comments" data-href="<?php echo $url; ?>" data-numposts="5" data-width=""></div>
             </div>
             <!-- /Post wise Facebook comments -->
         </div>

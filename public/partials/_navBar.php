@@ -25,6 +25,11 @@ if (isset($path)) {
                                         echo 'id="active"';
                                     } ?> href="contactUs.php">Contact Us</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" <?php if ($current_page == 'gallery') {
+                                        echo 'id="active"';
+                                    } ?> href="gallery.php">Gallery</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Dropdown

@@ -96,7 +96,7 @@ $limit = ['limit' => '1'];
         </div>
         <!-- /Header top area ends -->
 
-        <div class="col-sm-2" style='background-repeat:no-repeat;
+        <div class="col-sm-2" style='background-repeat:no-repeat;with:100px;height: 100px;
         <?php
         $logoData = $logo->select($tableLogo, $limit);
         if (!empty($logoData)) {
@@ -161,7 +161,7 @@ $limit = ['limit' => '1'];
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12 text-center">
+                <div class="col-sm-12">
                     <!-- Logged in message -->
                     <small style="font-weight:900;">
                         <?php

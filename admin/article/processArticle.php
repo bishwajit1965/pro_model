@@ -326,6 +326,92 @@ case 'update':
         }
     }
     break;
+case 'publish':
+    if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
+        if ($_REQUEST['action'] == 'verify') {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                if (isset($_POST['submit'])) {
+                    if (isset($_POST['submit'])) {
+                        if (isset($_POST['id'])) {
+                            $id = $_POST['id'];   
+                        }
+                        $status = $helpers->validation($_POST['status']);
+                        $fields = [
+                            'status' => $status
+                        ];
+                        $whereCond = ['id' => $id];
+                        $updateStatus = $article->updateWithoutPhoto($table, $fields, $whereCond);
+                        // validation messages and page redirects
+                        if ($updateStatus) {
+                            $message = '<div class="alert alert-success alert-dismissible " role="alert">
+                            <strong> SUCCESS !!!</strong> Article has been publishes successfully !!!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>';
+                            Session::set('message', $message);
+                            $home_url = 'articleIndex.php';
+                            $article->redirect("$home_url");
+                        } else {
+                            $message = '<div class="alert alert-warning alert-dismissible " role="alert">
+                            <strong> WARNING !!!</strong> Article has not been published !!!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>';
+                            Session::set('message', $message);
+                            $home_url = 'articleIndex.php';
+                            $article->redirect("$home_url");
+                        }   
+                    }
+                }
+            }
+        }
+    }
+    break;
+case 'unpublish':
+    if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
+        if ($_REQUEST['action'] == 'verify') {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                if (isset($_POST['submit'])) {
+                    if (isset($_POST['submit'])) {
+                        if (isset($_POST['id'])) {
+                            $id = $_POST['id'];   
+                        }
+                        $status = $helpers->validation($_POST['status']);
+                        $fields = [
+                            'status' => $status
+                        ];
+                        $whereCond = ['id' => $id];
+                        $updateStatus = $article->updateWithoutPhoto($table, $fields, $whereCond);
+                        // validation messages and page redirects
+                        if ($updateStatus) {
+                            $message = '<div class="alert alert-success alert-dismissible " role="alert">
+                            <strong> SUCCESS !!!</strong> Article has been unpublished successfully !!!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>';
+                            Session::set('message', $message);
+                            $home_url = 'articleIndex.php';
+                            $article->redirect("$home_url");
+                        } else {
+                            $message = '<div class="alert alert-warning alert-dismissible " role="alert">
+                            <strong> WARNING !!!</strong> Article has not been unpublished !!!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>';
+                            Session::set('message', $message);
+                            $home_url = 'articleIndex.php';
+                            $article->redirect("$home_url");
+                        }   
+                    }
+                }
+            }
+        }
+    }
+    break;
 case 'delete':
     if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
         if ($_REQUEST['action'] == 'verify') {
