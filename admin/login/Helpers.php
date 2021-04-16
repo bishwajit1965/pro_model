@@ -2,13 +2,30 @@
 
 namespace CodeCourse\Repositories;
 
+/**
+ * Class Helpers
+ */
 class helpers
 {
+    /**
+     * Date format
+     *
+     * @param string $date
+     *
+     * @return void
+     */
     public function dateFormat($date)
     {
         return date('F j, Y, g:i a', strtotime($date));
     }
-
+    /**
+     * Will shorten text
+     *
+     * @param string $text
+     * @param integer $limit
+     *
+     * @return void
+     */
     public function textShorten($text, $limit = 400)
     {
         $text = $text . ' ';
@@ -18,7 +35,13 @@ class helpers
 
         return $text;
     }
-
+    /**
+     * Will validate data
+     *
+     * @param string $data
+     *
+     * @return void
+     */
     public function validation($data)
     {
         $data = trim($data);
@@ -27,7 +50,11 @@ class helpers
 
         return $data;
     }
-
+    /**
+     * Will get the file name
+     *
+     * @return void
+     */
     public function title()
     {
         $path = $_SERVER['SCRIPT_FILENAME'];

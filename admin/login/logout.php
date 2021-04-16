@@ -1,7 +1,5 @@
 <?php
 
-// session_start();
-
 require_once '../app/start.php';
 
 use CodeCourse\Repositories\Session as Session;

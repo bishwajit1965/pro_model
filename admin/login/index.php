@@ -2,8 +2,8 @@
 // session_start();
 require_once '../app/start.php';
 
-use CodeCourse\Repositories\User as User;
 use CodeCourse\Repositories\Session as Session;
+use CodeCourse\Repositories\User as User;
 
 Session::init();
 $user_login = new User();
@@ -47,7 +47,7 @@ if (isset($_POST['btn-login'])) {
             <p class="login-box-msg">Sign in to start your session</p>
             <?php
             if (isset($_GET['inactive'])) {
-            ?>
+                ?>
                 <div class='alert alert-error'>
                     <button class='close' data-dismiss='alert'>&times;</button>
                     <strong>SORRY!!</strong> This Account is not Activated Go to your Inbox and Activate it.
@@ -56,28 +56,28 @@ if (isset($_POST['btn-login'])) {
             }
             ?>
             <form method="post">
-                <?php
-                if (isset($_GET['error'])) {
+            <?php
+            if (isset($_GET['error'])) {
                 ?>
-                    <div class='alert alert-success'>
-                        <button class='close' data-dismiss='alert'>&times;</button>
-                        <strong>Wrong Details!</strong>
-                    </div>
-                <?php
-                }
-                ?>
-                <div class="form-group has-feedback">
-                    <input type="email" name="txtemail" class="form-control" placeholder="Email address">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <div class='alert alert-success'>
+                    <button class='close' data-dismiss='alert'>&times;</button>
+                    <strong>Wrong Details!</strong>
                 </div>
-                <div class="form-group has-feedback">
-                    <input type="password" name="txtupass" class="form-control" placeholder="Password" required="required">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <button type="submit" class="btn btn-sm btn-primary" name="btn-login">
-                    <span class="glyphicon glyphicon-log-in"></span> Login</button>
-                <a href="signup.php" class="btn btn-sm btn-success pull-right">
-                    <span class="glyphicon glyphicon-plus"></span> Signup</a>
+            <?php
+            }
+            ?>
+            <div class="form-group has-feedback">
+                <input type="email" name="txtemail" class="form-control" placeholder="Email address">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" name="txtupass" class="form-control" placeholder="Password" required="required">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary" name="btn-login">
+                <span class="glyphicon glyphicon-log-in"></span> Login</button>
+            <a href="signup.php" class="btn btn-sm btn-success pull-right">
+                <span class="glyphicon glyphicon-plus"></span> Signup</a>
             </form>
 
             <div class="social-auth-links text-center">

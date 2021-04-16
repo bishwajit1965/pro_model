@@ -77,9 +77,10 @@ if (isset($_POST['btn-submit'])) {
                 <div class='alert alert-info'>
                     Please enter your email address. You will receive a link to create a new password via email.!
                 </div>
-                <?php if (isset($msg)) {
-    echo $msg;
-}  ?>
+                <?php
+                if (isset($msg)) {
+                    echo $msg;
+                }  ?>
                 <form class="form-signin" method="post">
                     <div class="form-group has-feedback">
                         <input type="email" class="form-control" placeholder="Email address" name="txtemail" required />

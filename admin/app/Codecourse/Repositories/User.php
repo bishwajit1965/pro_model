@@ -6,29 +6,54 @@ use CodeCourse\Repositories\Database as Database;
 use PDO;
 use PDOException;
 
+/**
+ * User class
+ */
 class User
 {
     private $conn;
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $database = new Database();
         $db = $database->dbConnection();
         $this->conn = $db;
     }
-
+    /**
+     * Prepare a query
+     *
+     * @param string $sql
+     *
+     * @return void
+     */
     public function runQuery($sql)
     {
         $stmt = $this->conn->prepare($sql);
         return $stmt;
     }
-
+    /**
+     * Will fetch the last inserted Id
+     *
+     * @return void
+     */
     public function lasdID()
     {
         $stmt = $this->conn->lastInsertId();
         return $stmt;
     }
-
+    /**
+     * Will register a user
+     *
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $email
+     * @param string $upass
+     * @param string $code
+     *
+     * @return void
+     */
     public function register($firstName, $lastName, $email, $upass, $code)
     {
         try {
@@ -40,13 +65,19 @@ class User
             $stmt->bindParam(':user_pass', $password);
             $stmt->bindParam(':active_code', $code);
             $stmt->execute();
-
             return $stmt;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }
     }
-
+    /**
+     * Login method
+     *
+     * @param string $email
+     * @param string $upass
+     *
+     * @return void
+     */
     public function login($email, $upass)
     {
         try {
@@ -74,25 +105,47 @@ class User
             echo $ex->getMessage();
         }
     }
-
+    /**
+     * Will check if a user is logged in
+     *
+     * @return boolean
+     */
     public function is_logged_in()
     {
         if (isset($_SESSION['userSession'])) {
             return true;
         }
     }
-
+    /**
+     * Will redirect a user
+     *
+     * @param string $url
+     *
+     * @return void
+     */
     public function redirect($url)
     {
         header("Location: $url");
     }
-
+    /**
+     * Will log out a user
+     *
+     * @return void
+     */
     public function logout()
     {
         session_destroy();
         $_SESSION['userSession'] = false;
     }
-
+    /**
+     * Email verification
+     *
+     * @param string $email
+     * @param string $message
+     * @param string $subject
+     *
+     * @return void
+     */
     public function send_mail($email, $message, $subject)
     {
         //require_once 'mailer/class.phpMailer.php';
