@@ -1,10 +1,10 @@
-<?php include_once('../partials/_head.php'); ?>
+<?php require_once '../partials/_head.php' ; ?>
 <!-- Site wrapper -->
 <div class="wrapper">
-    <?php include_once('../partials/_header.php'); ?>
+    <?php require_once '../partials/_header.php' ; ?>
     <!-- =============================================== -->
     <!-- Left side column. contains the sidebar -->
-    <?php include_once '../partials/_leftSidebar.php'; ?>
+    <?php require_once '../partials/_leftSidebar.php'; ?>
     <!-- =============================================== -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -28,10 +28,12 @@
                     <!-- <h3 class="box-title">Category index</h3> -->
                     <a href="createRole.php" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Create Role</a>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
                             <i class="fa fa-minus"></i>
                         </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
+                            title="Remove">
                             <i class="fa fa-times"></i>
                         </button>
                     </div>
@@ -60,8 +62,8 @@
                         Session::set('message', null);
                     }
                     ?>
-                        <table id="example1" class="table table-bordered table-striped">
                     <div class="table-responsive">
+                        <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th width="3%">Id</th>
@@ -104,59 +106,64 @@
                                 if (!empty($userRoleData)) {
                                     $i = 1;
                                     foreach ($userRoleData as $user) { ?>
-                                        <tr>
-                                            <td><?php echo $i++; ?></td>
-                                            <td><?php echo $user->firstName.$user->lastName; ?></td>
-                                            <td><?php echo $user->userEmail; ?></td>
-                                            <td>
-                                            <?php
-                                            foreach ($rolesData as $role) {
-                                                foreach ($assignedRoles as $assigned) {
-                                                    if ($user->userID == $assigned->userID && $role->role_id == $assigned->role_id) {
-                                                        echo $role->role_name. ','.'<br>';
-                                                    }
+                                <tr>
+                                    <td><?php echo $i++; ?></td>
+                                    <td><?php echo $user->firstName.$user->lastName; ?></td>
+                                    <td><?php echo $user->userEmail; ?></td>
+                                    <td>
+                                        <?php
+                                        foreach ($rolesData as $role) {
+                                            foreach ($assignedRoles as $assigned) {
+                                                if ($user->userID == $assigned->userID && $role->role_id == $assigned->role_id) {
+                                                    echo $role->role_name. ','. '<br>';
                                                 }
                                             }
-                                            ?>
-                                            </td>
-                                            <td>
-                                            <?php
-                                            if ($user->userStatus == 'Y') {
-                                                echo 'Active';
-                                            } else {
-                                                if ($user->userStatus == 'N') {
-                                                    echo 'Inactive';
-                                                }
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if ($user->userStatus == 'Y') {
+                                            echo 'Active';
+                                        } else {
+                                            if ($user->userStatus == 'N') {
+                                                echo 'Inactive';
                                             }
+                                        }
+                                        ?>
+                                    </td>
+                                    <td><?php echo $helpers->dateFormat($user->created_at); ?></td>
+                                    <td><?php echo $helpers->dateFormat($user->updated_at); ?></td>
+                                    <td>
+                                        <?php
+                                        if ($_SESSION['userSession'] == 1) {
                                             ?>
-                                            </td>
-                                            <td><?= $helpers->dateFormat($user->created_at); ?></td>
-                                            <td><?= $helpers->dateFormat($user->updated_at); ?></td>
-                                            <td>
-                                                <?php 
-                                                if ( $_SESSION['userSession'] == 1) {
-                                                    ?>
-                                                    <div class="d-inline">
-                                                    <a href="editAssignedRoles.php?edit_id=<?php echo $user->userID; ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>
+                                        <div class="d-inline">
+                                            <a href="editAssignedRoles.php?edit_id=<?php echo $user->userID; ?>"
+                                                class="btn btn-xs btn-success"><i class="fa fa-edit"></i> Edit</a>
 
-                                                    <a class="btn btn-xs btn-primary"
-                                                    href="assignRole.php?edit_id=<?php echo $user->userID; ?>"
-                                                    onClick="return confirm('Do you really want to assign role to this user ? Then click OK !!!');"> <i class="fa fa-user"></i> Assign Role</a>
+                                            <a class="btn btn-xs btn-primary"
+                                                href="assignRole.php?edit_id=<?php echo $user->userID; ?>"
+                                                onClick="return confirm('Do you really want to assign role to this user ? Then click OK !!!');">
+                                                <i class="fa fa-user"></i> Assign Role</a>
 
-                                                    <form style="display:inline;" action="processAssignRole.php" method="post" accept-charset="utf-8">
-                                                        <input type="hidden" name="action" value="verify">
-                                                        <input type="hidden" name="userID" value="<?php echo $user->userID; ?>">
+                                            <form style="display:inline;" action="processAssignRole.php" method="post"
+                                                accept-charset="utf-8">
+                                                <input type="hidden" name="action" value="verify">
+                                                <input type="hidden" name="userID" value="<?php echo $user->userID; ?>">
 
-                                                        <button type="submit" name="submit" value="delete" class="btn btn-xs btn-danger" onClick="return confirm('Do you really want to delete this data ?');"><i class="fa fa-trash"></i> Delete</button>
-                                                        
-                                                    </div>
+                                                <button type="submit" name="submit" value="delete"
+                                                    class="btn btn-xs btn-danger"
+                                                    onClick="return confirm('Do you really want to delete this data ?');"><i
+                                                        class="fa fa-trash"></i> Delete</button>
 
-                                                    <?php  
-                                                }
-                                                ?>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                        </div>
+                                            <?php
+                                        }
+                                        ?>
+                                        </form>
+                                    </td>
+                                </tr>
                                 <?php }
                                 } ?>
                             </tbody>
@@ -185,10 +192,10 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <?php include_once('../partials/_footer.php'); ?>
+    <?php require_once '../partials/_footer.php'; ?>
 </div>
 <!-- ./wrapper -->
-<?php include_once('../partials/_scripts.php'); ?>
+<?php require_once '../partials/_scripts.php'; ?>
 </body>
 
 </html>
