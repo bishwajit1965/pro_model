@@ -508,11 +508,11 @@ class Core
     }
 
     /**
-     * [preverntDuplicateUserRole description]
-     * @param  string $table
-     * @param  int $userID
-     * @param  int $role_id
-     * @return mixed
+     * Prevent Duplicate UserRole description
+     * @param  string  $table
+     * @param  int  $userID
+     * @param  int  $role_id
+     * @return  mixed
      */
     public function preventDuplicateAdminRole($table)
     {

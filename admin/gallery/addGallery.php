@@ -45,6 +45,7 @@
 
                     use CodeCourse\Repositories\Session as Session;
                     use CodeCourse\Repositories\Gallery as Gallery;
+
                     // Instantiate classes
                     $gallery = new Gallery();
                     // Tables will be dealt with
@@ -96,7 +97,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title">Photo Dscription</label>
+                            <label for="title">Photo Description</label>
                             <textarea id="editor1" name="description" rows="5" cols=""></textarea>
                         </div>
                         <input type="hidden" name="action" value="verify">

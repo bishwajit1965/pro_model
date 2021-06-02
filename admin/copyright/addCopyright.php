@@ -40,7 +40,7 @@
                     <!-- Code below -->
                     <div class="col-sm-6 col-sm-offset-3">
                         <?php
-                        // Will load vendor autoloader
+                        // Will load vendor auto-loader
                         require_once '../app/start.php';
 
                         use CodeCourse\Repositories\Session as Session;

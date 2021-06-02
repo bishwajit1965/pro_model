@@ -8,7 +8,7 @@ ob_start();
  */
 $path = $_SERVER['SCRIPT_FILENAME'];
 if (isset($path)) {
-    $current_page = basename($path,'.php');
+    $current_page = basename($path, '.php');
     if ($current_page = 'index.php') {
         $current_page = 'home';
         ucfirst($current_page);
@@ -167,37 +167,37 @@ $tableLikes = 'tbl_likes';
                             <span style="color:#999;font-weight:500;"><strong>Category :</strong>
                                 <?php
                                 $categoryData = $category->select($table_category);
-                                if (!empty($categoryData)) {
-                                    foreach ($categoryData as $categoryResult) {
-                                        if ($categoryResult->category_id == $article->category_id) {
-                                            ?>
-                                            <a href="#" class="badge badge-secondary">
-                                                <?php echo $categoryResult->category_name; ?></a>
-                                            <?php
-                                        }
-                                    }
-                                } ?>
+                    if (!empty($categoryData)) {
+                        foreach ($categoryData as $categoryResult) {
+                            if ($categoryResult->category_id == $article->category_id) {
+                                ?>
+                                                        <a href="#" class="badge badge-secondary">
+                                                            <?php echo $categoryResult->category_name; ?></a>
+                                                        <?php
+                            }
+                        }
+                    } ?>
                             </span>
                             <span style="color:#999;font-weight:500;"><strong> || Tag :</strong>
                                 <?php
                                 $tagData = $tag->select($table_tag);
-                                if (!empty($tagData)) {
-                                    foreach ($tagData as $tagResult) {
-                                        if ($tagResult->tag_id == $article->tag_id) {
-                                            ?>
+                    if (!empty($tagData)) {
+                        foreach ($tagData as $tagResult) {
+                            if ($tagResult->tag_id == $article->tag_id) {
+                                ?>
                                             <a href="#" class="badge badge-secondary"><?php echo $tagResult->tag_name; ?></a>
                                             <?php
-                                        }
-                                    }
-                                } ?>
+                            }
+                        }
+                    } ?>
                             </span>
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
                                 <?php
-                            // Checks if the viewer is logged in
-                            if (Session::checkLogin()) {
-                                ?>
+                                // Checks if the viewer is logged in
+                                if (Session::checkLogin()) {
+                                    ?>
                                 <!-- Like button -->
                                 <div class="col-sm-4 like">
                                     <a href="singlePost.php?post_id=<?php echo $article->id; ?>">
@@ -211,10 +211,10 @@ $tableLikes = 'tbl_likes';
                                                 <span class="badge badge-danger" style="border:1px solid#FFF;">
                                                     <?php
                                                     $articleId = $article->id;
-                                                    $likeData = $like->countPostLikes($tableLikes, $articleId);
-                                                    if (isset($likeData)) {
-                                                        echo count($likeData);
-                                                    } else { ?>
+                                    $likeData = $like->countPostLikes($tableLikes, $articleId);
+                                    if (isset($likeData)) {
+                                        echo count($likeData);
+                                    } else { ?>
                                                     <span style="color:#FFF;"><?php echo '0' ; ?></span>
                                                     <?php
                                                     } ?>
@@ -224,42 +224,42 @@ $tableLikes = 'tbl_likes';
                                     </a>
                                 </div>
                                 <?php
-                            } else {
-                                ?>
+                                } else {
+                                    ?>
                                 <!-- If not logged in this like button will be shown with likes counted -->
                                 <div class="col-sm-5">
                                     <a href="login.php?post_id=<?php echo $article->id; ?>">
                                         <i class="fas fa-thumbs-up"></i>
                                         <?php
                                         $articleId = $article->id;
-                                        $likeData = $like->countPostLikes($tableLikes, $articleId);
-                                        if (isset($likeData)) {
-                                            ?>
+                                    $likeData = $like->countPostLikes($tableLikes, $articleId);
+                                    if (isset($likeData)) {
+                                        ?>
                                         <sup style="color:#bf0000;font-weight:900;">
                                             <?php echo count($likeData); ?>
                                         </sup>
                                         <?php
-                                        } else {
-                                            ?>
+                                    } else {
+                                        ?>
                                                 <span style="color:#bf0000;font-weight:900;"><?php echo 0 ; ?></span>
                                                 <?php
-                                        } ?>
+                                    } ?>
                                     </a>
                                 </div>
                                 <?php
-                            } ?>
+                                } ?>
                                 <!-- / Like button ends -->
 
                                 <!-- Dislike button begins-->
                                 <?php
                                 if (Session::checkLogin()) {
-                                // Dislike button will be displayed to the person who has liked the post only
-                                $likeData = $like->select($tableLikes);
-                                if (!empty($likeData)) {
-                                    foreach ($likeData as $likeValue) {
-                                        if ($likeValue->email == Session::get('login') && $likeValue->article_id == $article->id
+                                    // Dislike button will be displayed to the person who has liked the post only
+                                    $likeData = $like->select($tableLikes);
+                                    if (!empty($likeData)) {
+                                        foreach ($likeData as $likeValue) {
+                                            if ($likeValue->email == Session::get('login') && $likeValue->article_id == $article->id
                                     && $likeValue->session == session_id() && $likeValue->viewers_id == Session::get('id')) {
-                                            ?>
+                                                ?>
                                 <div class="col-sm-3 dislike">
                                     <form action="processFrontEnd.php" method="post">
                                         <input type="hidden" name="action" value="verify">

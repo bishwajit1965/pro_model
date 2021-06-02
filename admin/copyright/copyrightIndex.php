@@ -39,7 +39,7 @@
                 <div class="box-body">
                     <!-- Code below -->
                     <?php
-                    // Will load vendor autoloader
+                    // Will load vendor auto-loader
                     require_once '../app/start.php';
 
                     use CodeCourse\Repositories\Session as Session;

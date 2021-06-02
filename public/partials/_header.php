@@ -28,7 +28,7 @@ $tableSession = 'tbl_session';
 $limit = ['limit' => '1'];
 ?>
 <div class="container-fluid text-white header-area">
-    <div class="row" style='min-height:330px;background-repeat:no-repeat;background-size:cover;
+    <div class="row" style='min-height:250px;background-repeat:no-repeat;background-size:cover;
         <?php
         $headerData = $header->select($table, $limit);
         if (!empty($headerData)) {
@@ -96,7 +96,7 @@ $limit = ['limit' => '1'];
         </div>
         <!-- /Header top area ends -->
 
-        <div class="col-sm-2" style='background-repeat:no-repeat;with:100px;height: 100px;
+        <div class="col-sm-2 align-middle" style='background-repeat:no-repeat;with:150px;height: 150px;margin-left:auto;
         <?php
         $logoData = $logo->select($tableLogo, $limit);
         if (!empty($logoData)) {
